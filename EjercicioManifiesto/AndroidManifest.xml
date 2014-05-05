@@ -7,6 +7,7 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
+    
     <uses-permission android:name="android.permission.READ_CONTACTS" android:maxSdkVersion="19"/>
     <uses-permission android:name="android.permission.WRITE_CONTACTS" android:maxSdkVersion="19"/>
     <uses-permission android:name="android.permission.VIBRATE" android:maxSdkVersion="19"/>
@@ -18,6 +19,7 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS" android:maxSdkVersion="19"/>
     <uses-permission android:name="android.permission.NFC" android:maxSdkVersion="19"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO" android:maxSdkVersion="19"/>
+    
     <permission 
         android:name="com.jon.ejemploPermiso"
         android:label="Permiso personalizado" >
