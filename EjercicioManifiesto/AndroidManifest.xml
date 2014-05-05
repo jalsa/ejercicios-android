@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.jon.ejerciciomanifiesto"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" android:maxSdkVersion="19"/>
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" android:maxSdkVersion="19"/>
+    <uses-permission android:name="android.permission.VIBRATE" android:maxSdkVersion="19"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" android:maxSdkVersion="19"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" android:maxSdkVersion="19"/>
+    <uses-permission android:name="android.permission.INTERNET" android:maxSdkVersion="19"/>
+    <uses-permission android:name="android.permission.SET_WALLPAPER" android:maxSdkVersion="19"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="19"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS" android:maxSdkVersion="19"/>
+    <uses-permission android:name="android.permission.NFC" android:maxSdkVersion="19"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" android:maxSdkVersion="19"/>
+    <permission 
+        android:name="com.jon.ejemploPermiso"
+        android:label="Permiso personalizado" >
+    </permission>
+    
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"
+    	android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.flash"/>
+    <uses-feature android:name="android.hardware.location.gps"/>
+    <uses-feature android:name="android.hardware.sensor.accelerometer"/>
+    <uses-feature android:name="android.software.sip"/>
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.jon.ejerciciomanifiesto.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.jon.ejercicioManifiesto.EjemploActividad"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:permission="com.jon.ejemploPermiso" >
+        </activity>
+        <service
+            android:name="com.jon.ejercicioManifiesto.EjemploServicio"
+            android:permission="com.jon.ejemploPermiso" >
+        </service>
+        <provider
+            android:name="com.jon.ejercicioManifiesto.EjemploProveedor"
+            android:permission="com.jon.ejemploPermiso"
+            android:authorities="com.jon.ejercicioManifiesto.dataprovider">
+        </provider>
+        <receiver
+            android:name="com.jon.ejercicioManifiesto.EjemploRecividor">
+            <intent-filter>
+                <action android:name="android.intent.action.AIRPLANE_MODE"/>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+                <action android:name="android.intent.action.MEDIA_EJECT"/>
+                <action android:name="android.net.wifi.STATE_CHANGE"/>
+            </intent-filter>
+        </receiver> 
+    </application>
+
+</manifest>
