@@ -38,31 +38,31 @@ public class ActivityA extends Activity {
 	}
 	
 	@Override
-	public void onStart() {
+	protected void onStart() {
 		super.onStart();
 		Log.d("ActivityA", "SE HA EJECUTADO ONSTART DE A");
 	}
 	
 	@Override
-	public void onResume() {
+	protected void onResume() {
 		super.onResume();
 		Log.d("ActivityA", "SE HA EJECUTADO ONRESUME DE A");
 	}
 	
 	@Override
-	public void onPause() {
+	protected void onPause() {
 		Log.d("ActivityA", "SE HA EJECUTADO ONPAUSE DE A");
 		super.onPause();
 	}
 	
 	@Override
-	public void onStop() {
+	protected void onStop() {
 		Log.d("ActivityA", "SE HA EJECUTADO ONSTOP DE A");
 		super.onStop();
 	}
 	
 	@Override
-	public void onDestroy() {
+	protected void onDestroy() {
 		Log.d("ActivityA", "SE HA EJECUTADO ONDESTROY DE A");
 		super.onDestroy();
 	}
@@ -77,7 +77,7 @@ public class ActivityA extends Activity {
 		startActivity(intent);
 	}
 	
-	public void cerrar() {
+	public void cerrar(View v) {
 		finish();
 	}
 

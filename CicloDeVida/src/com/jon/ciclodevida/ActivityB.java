@@ -38,31 +38,31 @@ public class ActivityB extends Activity {
 	}
 	
 	@Override
-	public void onStart() {
+	protected void onStart() {
 		super.onStart();
 		Log.d("ActivityB", "SE HA EJECUTADO ONSTART DE B");
 	}
 	
 	@Override
-	public void onResume() {
+	protected void onResume() {
 		super.onResume();
 		Log.d("ActivityB", "SE HA EJECUTADO ONRESUME DE B");
 	}
 	
 	@Override
-	public void onPause() {
+	protected void onPause() {
 		Log.d("ActivityB", "SE HA EJECUTADO ONPAUSE DE B");
 		super.onPause();
 	}
 	
 	@Override
-	public void onStop() {
+	protected void onStop() {
 		Log.d("ActivityB", "SE HA EJECUTADO ONSTOP DE B");
 		super.onStop();
 	}
 	
 	@Override
-	public void onDestroy() {
+	protected void onDestroy() {
 		Log.d("ActivityB", "SE HA EJECUTADO ONDESTROY DE B");
 		super.onDestroy();
 	}

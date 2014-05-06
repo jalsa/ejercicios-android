@@ -38,19 +38,19 @@ public class ActivityC extends Activity {
 	}
 	
 	@Override
-	public void onStart() {
+	protected void onStart() {
 		super.onStart();
 		Log.d("ActivityC", "SE HA EJECUTADO ONSTART DE C");
 	}
 	
 	@Override
-	public void onResume() {
+	protected void onResume() {
 		super.onResume();
 		Log.d("ActivityC", "SE HA EJECUTADO ONRESUME DE C");
 	}
 	
 	@Override
-	public void onPause() {
+	protected void onPause() {
 		Log.d("ActivityC", "SE HA EJECUTADO ONPAUSE DE C");
 		super.onPause();
 	}
@@ -62,7 +62,7 @@ public class ActivityC extends Activity {
 	}
 	
 	@Override
-	public void onDestroy() {
+	protected void onDestroy() {
 		Log.d("ActivityC", "SE HA EJECUTADO ONDESTROY DE C");
 		super.onDestroy();
 	}
