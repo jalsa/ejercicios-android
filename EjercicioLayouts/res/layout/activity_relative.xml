@@ -19,14 +19,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="A" />
+            android:text="@string/botonA" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="B" />
+            android:text="@string/botonB" />
     </LinearLayout>
 
     <Button
@@ -36,7 +36,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/linearLayout1"
-        android:text="C" />
+        android:text="@string/botonC" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -51,14 +51,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="D" />
+            android:text="@string/botonD" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="E" />
+            android:text="@string/botonE" />
     </LinearLayout>
 
     <LinearLayout
@@ -81,14 +81,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
-                android:text="F" />
+                android:text="@string/botonF" />
 
             <Button
                 android:id="@+id/button7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="15"
-                android:text="G" />
+                android:text="@string/botonG" />
         </LinearLayout>
 
         <LinearLayout
@@ -102,14 +102,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="15"
-                android:text="H" />
+                android:text="@string/botonH" />
 
             <Button
                 android:id="@+id/button9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
-                android:text="I" />
+                android:text="@string/botonI" />
         </LinearLayout>
 
     </LinearLayout>

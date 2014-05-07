@@ -19,14 +19,14 @@
                 android:id="@+id/button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="A"
+                android:text="@string/botonA"
                 android:layout_weight="1"/>
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="B"
+                android:text="@string/botonB"
                 android:layout_weight="1"/>
 
         </LinearLayout>
@@ -39,7 +39,7 @@
                 android:id="@+id/button3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="C"
+                android:text="@string/botonC"
                 android:layout_weight="1"/>
 
         </LinearLayout>
@@ -52,14 +52,14 @@
                 android:id="@+id/button4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="D"
+                android:text="@string/botonD"
                 android:layout_weight="1"/>
 
             <Button
                 android:id="@+id/button5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="E"
+                android:text="@string/botonE"
                 android:layout_weight="1"/>
 
         </LinearLayout>
@@ -79,14 +79,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
-                android:text="F" />
+                android:text="@string/botonF" />
 
             	<Button
                 android:id="@+id/button7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="15"
-                android:text="G" />
+                android:text="@string/botonG" />
             
             </LinearLayout>
 
@@ -101,14 +101,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="15"
-                    android:text="H" />
+                    android:text="@string/botonH" />
 
                 <Button
                     android:id="@+id/button9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.2"
-                    android:text="I" />
+                    android:text="@string/botonI" />
 
             </LinearLayout>
 
