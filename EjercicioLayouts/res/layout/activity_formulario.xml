@@ -46,7 +46,8 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/editText2"
         android:ems="10"
-        android:inputType="textMultiLine"
-        android:hint="@string/mensaje" />
+        android:gravity="center_vertical|top"
+        android:hint="@string/mensaje"
+        android:inputType="textMultiLine" />
 
 </RelativeLayout>
