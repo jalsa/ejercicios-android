@@ -6,18 +6,23 @@
     tools:context="com.example.ejerciciolayouts.ActivityFormulario"
     tools:ignore="MergeRootFrame" >
 
-   <EditText
+    <EditText
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
         android:ems="10"
-        android:hint="@string/para" >
+        android:inputType="textEmailAddress"
+        android:hint="@string/para" />
 
-
-    </EditText>
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/enviar" />
 
     <EditText
         android:id="@+id/editText2"
@@ -28,14 +33,6 @@
         android:layout_below="@+id/editText1"
         android:ems="10"
         android:hint="@string/asunto" />
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="@string/enviar" />
 
     <EditText
         android:id="@+id/editText3"
