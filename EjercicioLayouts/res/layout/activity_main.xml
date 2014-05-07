@@ -19,14 +19,14 @@
                 android:id="@+id/button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button"
+                android:text="A"
                 android:layout_weight="1"/>
 
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button"
+                android:text="B"
                 android:layout_weight="1"/>
 
         </LinearLayout>
@@ -39,7 +39,7 @@
                 android:id="@+id/button3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button"
+                android:text="C"
                 android:layout_weight="1"/>
 
         </LinearLayout>
@@ -52,14 +52,14 @@
                 android:id="@+id/button4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button"
+                android:text="D"
                 android:layout_weight="1"/>
 
             <Button
                 android:id="@+id/button5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button"
+                android:text="E"
                 android:layout_weight="1"/>
 
         </LinearLayout>
@@ -79,14 +79,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
-                android:text="Button" />
+                android:text="F" />
 
             <Button
                 android:id="@+id/button7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="15"
-                android:text="Button" />
+                android:text="G" />
             
             </LinearLayout>
 
@@ -101,14 +101,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="15"
-                    android:text="Button" />
+                    android:text="H" />
 
                 <Button
                     android:id="@+id/button9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.2"
-                    android:text="Button" />
+                    android:text="I" />
 
             </LinearLayout>
 
