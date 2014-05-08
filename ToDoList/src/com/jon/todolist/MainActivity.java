@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -31,6 +32,20 @@ public class MainActivity extends Activity {
 		vistaListado = (ListView) findViewById(R.id.lista);
 		
 		vistaListado.setAdapter(adaptador);
+		
+		textoEditable.setOnKeyListener(new View.OnKeyListener() {
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if (event.getAction() == KeyEvent.ACTION_DOWN) {
+					if ((keyCode == KeyEvent.KEYCODE_DPAD_CENTER) || (keyCode == KeyEvent.KEYCODE_ENTER)) {
+						listado.add(0, textoEditable.getText().toString());
+						adaptador.notifyDataSetChanged();
+						textoEditable.setText("");
+						return true;
+					}
+				}
+				return false;
+			}
+		});
 	}
 	
 	@Override
