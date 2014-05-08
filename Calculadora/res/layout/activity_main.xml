@@ -17,12 +17,27 @@
 
     </EditText>
 
-    <Button
-        android:id="@+id/borrar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/borrar"
-        android:onClick="pulsarBorrar" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_weight="3"
+            android:clickable="false" />
+
+        <Button
+            android:id="@+id/borrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="pulsarBorrar"
+            android:text="@string/borrar"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
