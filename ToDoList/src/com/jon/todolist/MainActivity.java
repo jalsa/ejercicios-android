@@ -31,7 +31,24 @@ public class MainActivity extends Activity {
 		vistaListado = (ListView) findViewById(R.id.lista);
 		
 		vistaListado.setAdapter(adaptador);
-		
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		adaptador.notifyDataSetChanged();
+	}
+	
+	@Override
+	public void onRestoreInstanceState(Bundle savedInstanceState) {
+	     super.onRestoreInstanceState(savedInstanceState);
+		 listado.addAll(savedInstanceState.getStringArrayList("listado"));
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		savedInstanceState.putStringArrayList("listado", listado);
+	    super.onSaveInstanceState(savedInstanceState);
 	}
 	
 	public void nuevoElemento(View v) {
@@ -39,4 +56,5 @@ public class MainActivity extends Activity {
 		listado.add(cadena);
 		adaptador.notifyDataSetChanged();
 	}
+	
 }
