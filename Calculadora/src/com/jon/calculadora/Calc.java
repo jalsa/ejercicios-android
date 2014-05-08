@@ -1,33 +1,37 @@
 package com.jon.calculadora;
 
-import android.view.View;
-import android.widget.Button;
+import android.util.Log;
 
 public class Calc {
 	
-	private double primero, segundo;
-	private double resultado;
+	private static double primero, segundo;
+	private static double resultado;
+	private static String operacionGuardada;
 	
-	public void guardarNumero(String c, View v) {
-		Button btn = (Button) v;
-		String operacion = String.valueOf(btn.getText());
-		if (operacion == "+" || operacion == "-" || operacion == "*" || operacion == "/") {
+	public static double guardarNumero(String c, String operacion) {
+		if (operacion.equals("+") || operacion.equals("-") || operacion.equals("X") || operacion.equals("/")) {
 			primero = Double.parseDouble(c);
+			operacionGuardada = operacion;
+			resultado = 0;
 		}
-		else if (operacion == "=") {
+		else if (operacion.equals("=")) {
+			Log.d("Calculadora", " " + primero);
 			segundo = Double.parseDouble(c);
-			if(operacion == "+") {
+			Log.d("Calculadora", " " + segundo);
+			if (operacionGuardada.equals("+")) {
 				resultado = primero + segundo;
 			}
-			else if (operacion == "-") {
+			else if (operacionGuardada.equals("-")) {
 				resultado = primero - segundo;
 			}
-			else if (operacion == "*") {
+			else if (operacionGuardada.equals("X")) {
 				resultado = primero * segundo;		
 						}
-			else if (operacion == "/") {
+			else if (operacionGuardada.equals("/")) {
 				resultado = primero / segundo;
 			}
 		}
+		Log.d("Calculadora", " " + resultado);
+		return resultado;
 	}
 }
