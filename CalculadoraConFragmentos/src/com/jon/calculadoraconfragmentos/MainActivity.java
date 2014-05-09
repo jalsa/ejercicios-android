@@ -6,7 +6,7 @@ import com.jon.calculadoraconfragmentos.R;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class MainActivity extends Activity implements FragmentoBotonesSimples.IActividad, FragmentoDisplay.IActividad {
+public class MainActivity extends Activity implements FragmentoBotonesSimples.IActividad, FragmentoDisplay.IActividad, FragmentoBotonesAvanzados.IActividad {
 
 	String cadena, operacion;
 	Double resultado;

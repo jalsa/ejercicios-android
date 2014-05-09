@@ -9,7 +9,7 @@ public class Calc {
 	private static String operacionGuardada;
 	
 	public static double guardarNumero(String c, String operacion) {
-		if (operacion.equals("+") || operacion.equals("-") || operacion.equals("X") || operacion.equals("/")) {
+		if (operacion.equals("+") || operacion.equals("-") || operacion.equals("X") || operacion.equals("/") || operacion.equals("%")) {
 			primero = Double.parseDouble(c);
 			operacionGuardada = operacion;
 			resultado = 0;
@@ -29,6 +29,9 @@ public class Calc {
 						}
 			else if (operacionGuardada.equals("/")) {
 				resultado = primero / segundo;
+			}
+			else if (operacionGuardada.equals("%")) {
+				resultado = (primero / 100) * segundo;
 			}
 		}
 		Log.d("Calculadora", " " + resultado);

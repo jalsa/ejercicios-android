@@ -40,7 +40,6 @@ public class FragmentoBotonesSimples extends Fragment {
 		View v = inflater.inflate(R.layout.botones_simples_fragment, container, false);
 		
 		OnClickListener numero = new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				String valor = ((Button)v).getText().toString();
@@ -51,7 +50,6 @@ public class FragmentoBotonesSimples extends Fragment {
 		};
 		
 		OnClickListener operacion = new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				String valor = ((Button)v).getText().toString();
