@@ -43,7 +43,6 @@ public class FragmentoBotonesSimples extends Fragment {
 			@Override
 			public void onClick(View v) {
 				String valor = ((Button)v).getText().toString();
-		    	Log.d("Boton", ""+valor);
 		    	actividad.pulsarNumero(valor);
 				
 			}
@@ -53,7 +52,6 @@ public class FragmentoBotonesSimples extends Fragment {
 			@Override
 			public void onClick(View v) {
 				String valor = ((Button)v).getText().toString();
-		    	Log.d("Boton", ""+valor);
 		    	actividad.pulsarOperacion(valor);
 			}
 		};

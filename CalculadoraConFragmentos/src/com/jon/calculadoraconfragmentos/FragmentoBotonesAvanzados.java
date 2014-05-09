@@ -42,7 +42,6 @@ public class FragmentoBotonesAvanzados extends Fragment {
 			@Override
 			public void onClick(View v) {
 				String valor = ((Button)v).getText().toString();
-		    	Log.d("Boton", ""+valor);
 		    	actividad.pulsarOperacion(valor);
 			}
 		};
