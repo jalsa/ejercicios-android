@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.jon.calculadoraconfragmentos.MainActivity"
+    tools:ignore="MergeRootFrame" >
+    
+    <fragment
+        android:id="@+id/displayFragmento"
+        android:name="com.jon.calculadoraconfragmentos.FragmentoDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        
+        <fragment android:name="com.jon.calculadoraconfragmentos.FragmentoBotonesSimples"
+	      android:id="@+id/botonesSimples"
+	      android:layout_width="match_parent"
+	      android:layout_height="match_parent"
+	      android:layout_weight="1" />
+
+    </LinearLayout>
+
+</LinearLayout>
