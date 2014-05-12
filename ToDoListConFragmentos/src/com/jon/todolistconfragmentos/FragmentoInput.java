@@ -3,7 +3,6 @@ package com.jon.todolistconfragmentos;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,8 +38,6 @@ public class FragmentoInput extends Fragment {
 			
 			@Override
 			public void onClick(View v) {
-				Log.d("LIST", "onClick()");
-				
 				editor = (TextView)FragmentoInput.this.v.findViewById(R.id.texto);
 				String valor = editor.getText().toString();
 		    	actividad.nuevoElemento(valor);
