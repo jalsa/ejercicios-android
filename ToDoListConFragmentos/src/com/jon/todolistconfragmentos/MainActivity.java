@@ -27,8 +27,7 @@ public class MainActivity extends Activity implements FragmentoInput.IActividad 
 
 //		if (savedInstanceState == null) {
 			FragmentManager fragmentManager = getFragmentManager();
-			FragmentTransaction fragmentTransaction = fragmentManager
-					.beginTransaction();
+			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 			fragmentTransaction.replace(R.id.input, new FragmentoInput());
 			fragmentTransaction.replace(R.id.lista, fragmentoLista);
 			fragmentTransaction.commit();
