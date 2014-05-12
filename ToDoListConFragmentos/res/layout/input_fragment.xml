@@ -15,6 +15,6 @@
         android:id="@+id/boton"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="@string/nuevo" />
+        android:text="@string/nuevoElemento" />
 
 </LinearLayout>
