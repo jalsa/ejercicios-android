@@ -3,6 +3,7 @@ package com.jon.todolistconfragmentos;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -41,11 +42,27 @@ public class FragmentoInput extends Fragment {
 				editor = (TextView)FragmentoInput.this.v.findViewById(R.id.texto);
 				String valor = editor.getText().toString();
 		    	actividad.nuevoElemento(valor);
+		    	editor.setText("");
 			}
 		};
 		
 		boton = (Button)v.findViewById(R.id.boton);
 		boton.setOnClickListener(nuevo);
+		
+		editor = (TextView)v.findViewById(R.id.texto);
+		editor.setOnKeyListener(new View.OnKeyListener() {
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if (event.getAction() == KeyEvent.ACTION_DOWN) {
+					if ((keyCode == KeyEvent.KEYCODE_DPAD_CENTER) || (keyCode == KeyEvent.KEYCODE_ENTER)) {
+						String valor = editor.getText().toString();
+						actividad.nuevoElemento(valor);
+						editor.setText("");
+						return true;
+					}
+				}
+				return false;
+			}
+		});
 		
 		return v;
 	}
