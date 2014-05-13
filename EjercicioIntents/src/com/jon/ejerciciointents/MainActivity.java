@@ -105,6 +105,7 @@ public class MainActivity extends Activity {
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == CODIGO_FOTO && resultCode == RESULT_OK) {
+			// La foto en baja calidad
 			// Bitmap photo = (Bitmap) data.getExtras().get("data");
 			// imagen = (ImageView)findViewById(R.id.imagen);
 			// imagen.setImageBitmap(photo);
