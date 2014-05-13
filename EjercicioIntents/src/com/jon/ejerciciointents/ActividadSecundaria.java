@@ -21,7 +21,7 @@ public class ActividadSecundaria extends Activity {
 		
 		Intent intent = getIntent();
 		valor = intent.getStringExtra("cadena");
-		label = (TextView)findViewById(R.id.label1);
+		label = (TextView)findViewById(R.id.labelSecundario);
 		label.setText(valor);
 		
 	}
@@ -34,7 +34,7 @@ public class ActividadSecundaria extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				editor = (TextView)findViewById(R.id.editor1);
+				editor = (TextView)findViewById(R.id.editorSecundario);
 				String valor = editor.getText().toString();
 				Intent intent = new Intent(ActividadSecundaria.this, MainActivity.class);
 				intent.putExtra("cadena1", valor);
