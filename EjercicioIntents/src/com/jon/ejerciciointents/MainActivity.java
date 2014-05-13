@@ -7,11 +7,13 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,6 +27,7 @@ public class MainActivity extends Activity {
 	private TextView editor, label;
 	private String valorDeVuelta;
 	private static final int CODIGO_FOTO = 1;
+	private static final int CODIGO_CONTACTO = 2;
 	private ImageView imagen;
 	static String mCurrentPhotoPath;
 	private File photoFile;
@@ -79,7 +82,8 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-
+				Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+	            startActivityForResult(intent, CODIGO_CONTACTO);
 			}
 		};
 
@@ -104,16 +108,32 @@ public class MainActivity extends Activity {
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == CODIGO_FOTO && resultCode == RESULT_OK) {
-			// La foto en baja calidad
-			// Bitmap photo = (Bitmap) data.getExtras().get("data");
-			// imagen = (ImageView)findViewById(R.id.imagen);
-			// imagen.setImageBitmap(photo);
+		if (resultCode == RESULT_OK) {
+			if (requestCode == CODIGO_FOTO) {
+				// La foto en baja calidad
+				// Bitmap photo = (Bitmap) data.getExtras().get("data");
+				// imagen = (ImageView)findViewById(R.id.imagen);
+				// imagen.setImageBitmap(photo);
 
-			imagen = (ImageView) findViewById(R.id.imagen);
-			if (photoFile.exists()) {
-				Bitmap bmp = decodeFile(photoFile, imagen.getWidth(), imagen.getHeight());
-				imagen.setImageBitmap(bmp);
+				imagen = (ImageView) findViewById(R.id.imagen);
+				if (photoFile.exists()) {
+					Bitmap bmp = decodeFile(photoFile, imagen.getWidth(), imagen.getHeight());
+					imagen.setImageBitmap(bmp);
+				}
+			}
+			else if (requestCode == CODIGO_CONTACTO) {
+				Uri uriContact = data.getData();
+				String contactName = null;
+		        // querying contact data store
+		        Cursor cursor = getContentResolver().query(uriContact, null, null, null, null);
+		        if (cursor.moveToFirst()) {
+		            // DISPLAY_NAME = The display name for the contact.
+		            // HAS_PHONE_NUMBER =   An indicator of whether this contact has at least one phone number.
+		            contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+		        }
+		        cursor.close();
+		        label = (TextView) findViewById(R.id.labelMain);
+				label.setText(contactName);
 			}
 		}
 	}
