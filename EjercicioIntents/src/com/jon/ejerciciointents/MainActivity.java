@@ -114,7 +114,6 @@ public class MainActivity extends Activity {
 				// Bitmap photo = (Bitmap) data.getExtras().get("data");
 				// imagen = (ImageView)findViewById(R.id.imagen);
 				// imagen.setImageBitmap(photo);
-
 				imagen = (ImageView) findViewById(R.id.imagen);
 				if (photoFile.exists()) {
 					Bitmap bmp = decodeFile(photoFile, imagen.getWidth(), imagen.getHeight());
