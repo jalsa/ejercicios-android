@@ -28,12 +28,6 @@ public class ActividadSecundaria extends Activity {
 			label.setText(valor);
 		}
 		
-	}
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-		
 		OnClickListener okey = new OnClickListener() {
 			
 			@Override
