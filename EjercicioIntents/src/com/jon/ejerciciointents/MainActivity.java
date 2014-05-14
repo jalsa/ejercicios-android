@@ -93,9 +93,11 @@ public class MainActivity extends Activity {
 		botonContact.setOnClickListener(contacto);
 
 		Intent intent = getIntent();
-		valorDeVuelta = intent.getStringExtra(CADENA1);
-		label = (TextView) findViewById(R.id.labelMain);
-		label.setText(valorDeVuelta);
+		if (intent != null) {
+			valorDeVuelta = intent.getStringExtra(CADENA1);
+			label = (TextView) findViewById(R.id.labelMain);
+			label.setText(valorDeVuelta);
+		}
 
 	}
 

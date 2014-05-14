@@ -22,9 +22,11 @@ public class ActividadSecundaria extends Activity {
 		setContentView(R.layout.activity_secundario);
 		
 		Intent intent = getIntent();
-		valor = intent.getStringExtra(CADENA);
-		label = (TextView)findViewById(R.id.labelSecundario);
-		label.setText(valor);
+		if (intent != null) {
+			valor = intent.getStringExtra(CADENA);
+			label = (TextView)findViewById(R.id.labelSecundario);
+			label.setText(valor);
+		}
 		
 	}
 	
