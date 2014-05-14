@@ -32,6 +32,7 @@ public class MainActivity extends Activity {
 	static String mCurrentPhotoPath;
 	private File photoFile;
 	private static final String CADENA = "cadena";
+	private static final String CADENA1 = "cadena1";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +93,7 @@ public class MainActivity extends Activity {
 		botonContact.setOnClickListener(contacto);
 
 		Intent intent = getIntent();
-		valorDeVuelta = intent.getStringExtra("cadena1");
+		valorDeVuelta = intent.getStringExtra(CADENA1);
 		label = (TextView) findViewById(R.id.labelMain);
 		label.setText(valorDeVuelta);
 

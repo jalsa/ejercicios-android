@@ -13,7 +13,8 @@ public class ActividadSecundaria extends Activity {
 	private String valor;
 	private TextView label, editor;
 	private Button botonOk, botonBack;
-	private static final String CADENA = "cadena1";
+	private static final String CADENA = "cadena";
+	private static final String CADENA1 = "cadena1";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +22,7 @@ public class ActividadSecundaria extends Activity {
 		setContentView(R.layout.activity_secundario);
 		
 		Intent intent = getIntent();
-		valor = intent.getStringExtra("cadena");
+		valor = intent.getStringExtra(CADENA);
 		label = (TextView)findViewById(R.id.labelSecundario);
 		label.setText(valor);
 		
@@ -38,7 +39,7 @@ public class ActividadSecundaria extends Activity {
 				editor = (TextView)findViewById(R.id.editorSecundario);
 				String valor = editor.getText().toString();
 				Intent intent = new Intent(ActividadSecundaria.this, MainActivity.class);
-				intent.putExtra(CADENA, valor);
+				intent.putExtra(CADENA1, valor);
 				startActivity(intent);
 			}
 		};
