@@ -15,15 +15,13 @@ public class RecibidorEventos extends BroadcastReceiver {
 	public void onReceive(Context context, Intent intent) {
 		Bundle extras = intent.getExtras();
 		
-		Log.d("SMS", intent.getAction());
-		
 		if (extras != null) {
 			if (intent.getAction().equals("android.intent.action.PHONE_STATE")) {
 				String state = extras.getString(TelephonyManager.EXTRA_STATE);
-				
 				if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)) {
 					String number = extras.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
-					Log.d("LLAMADA", number);
+					Toast t = Toast.makeText(context, number, Toast.LENGTH_LONG);
+				    t.show();
 				}
 			}
 			else if (intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")) {
