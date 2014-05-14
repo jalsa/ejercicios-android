@@ -8,7 +8,8 @@
         android:id="@+id/editorSecundario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" >
+        android:ems="10"
+        android:hint="@string/escribir" >
 
         <requestFocus />
     </EditText>
@@ -16,7 +17,8 @@
     <TextView
         android:id="@+id/labelSecundario"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:hint="@string/mensaje" />
 
     <RelativeLayout
         android:id="@+id/RelativeLayout1"

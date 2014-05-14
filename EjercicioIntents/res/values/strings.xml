@@ -6,8 +6,10 @@
     <string name="formulario">Form</string>
     <string name="camara">Camera</string>
     <string name="contacto">Contact</string>
-    <string name="okey">Ok</string>
+    <string name="okey">OK</string>
     <string name="volver">Back</string>
     <string name="title_activity_actividad_secundaria">ActividadSecundaria</string>
+    <string name="escribir">Escribe aquí</string>
+    <string name="mensaje">Mensaje de vuelta</string>
 
 </resources>

@@ -10,7 +10,8 @@
         android:id="@+id/editorMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" >
+        android:ems="10"
+        android:hint="@string/escribir" >
 
         <requestFocus />
     </EditText>
@@ -18,7 +19,8 @@
     <TextView
         android:id="@+id/labelMain"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:hint="@string/mensaje" />
 
     <ImageView
         android:id="@+id/imagen"
