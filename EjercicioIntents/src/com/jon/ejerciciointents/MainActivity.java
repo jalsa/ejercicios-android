@@ -31,6 +31,7 @@ public class MainActivity extends Activity {
 	private ImageView imagen;
 	static String mCurrentPhotoPath;
 	private File photoFile;
+	private static final String CADENA = "cadena";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class MainActivity extends Activity {
 				editor = (TextView) findViewById(R.id.editorMain);
 				String valor = editor.getText().toString();
 				Intent intent = new Intent(MainActivity.this, ActividadSecundaria.class);
-				intent.putExtra("cadena", valor);
+				intent.putExtra(CADENA, valor);
 				startActivity(intent);
 			}
 		};

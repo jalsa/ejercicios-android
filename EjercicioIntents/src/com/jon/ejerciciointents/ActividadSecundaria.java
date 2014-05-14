@@ -13,6 +13,7 @@ public class ActividadSecundaria extends Activity {
 	private String valor;
 	private TextView label, editor;
 	private Button botonOk, botonBack;
+	private static final String CADENA = "cadena1";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class ActividadSecundaria extends Activity {
 				editor = (TextView)findViewById(R.id.editorSecundario);
 				String valor = editor.getText().toString();
 				Intent intent = new Intent(ActividadSecundaria.this, MainActivity.class);
-				intent.putExtra("cadena1", valor);
+				intent.putExtra(CADENA, valor);
 				startActivity(intent);
 			}
 		};
