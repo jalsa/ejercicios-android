@@ -3,6 +3,7 @@ package com.jon.ejerciciointents;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.telephony.SmsMessage;
@@ -10,11 +11,9 @@ import android.telephony.TelephonyManager;
 import android.widget.Toast;
 
 public class RecibidorEventos extends BroadcastReceiver {
-	
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		Bundle extras = intent.getExtras();
-		
 		if (extras != null) {
 			if (intent.getAction().equals("android.intent.action.PHONE_STATE")) {
 				String state = extras.getString(TelephonyManager.EXTRA_STATE);
@@ -41,10 +40,11 @@ public class RecibidorEventos extends BroadcastReceiver {
 				}
 			}
 			else if (intent.getAction().equals("android.net.conn.CONNECTIVITY_CHANGE")) {
-				Toast t = Toast.makeText(context, "Est‡s sin conexi—n", Toast.LENGTH_LONG);
-			    t.show();
+				if (ConnectivityManager.EXTRA_NO_CONNECTIVITY != null) {
+					Toast t = Toast.makeText(context, "Est‡s sin conexi—n", Toast.LENGTH_LONG);
+				    t.show();
+				}
 			}
 		}
 	}
-
 }
