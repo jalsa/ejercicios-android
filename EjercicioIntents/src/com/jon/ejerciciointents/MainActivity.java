@@ -110,33 +110,45 @@ public class MainActivity extends Activity {
 		mCurrentPhotoPath = "file:" + image.getAbsolutePath();
 		return image;
 	}
+	
+	private void mostrarFoto(Intent data) {
+		// La foto en baja calidad
+		// Bitmap photo = (Bitmap) data.getExtras().get("data");
+		// imagen = (ImageView)findViewById(R.id.imagen);
+		// imagen.setImageBitmap(photo);
+		imagen = (ImageView) findViewById(R.id.imagen);
+		if (photoFile.exists()) {
+			Bitmap bmp = decodeFile(photoFile, imagen.getWidth(), imagen.getHeight());
+			imagen.setImageBitmap(bmp);
+		}
+	}
+	
+	private void mostrarContacto(Intent data) {
+		Uri uriContact = data.getData();
+		String contactName = null;
+        // querying contact data store
+        Cursor cursor = getContentResolver().query(uriContact, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            // DISPLAY_NAME = The display name for the contact.
+            // HAS_PHONE_NUMBER =   An indicator of whether this contact has at least one phone number.
+            contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
+        }
+        cursor.close();
+        label = (TextView) findViewById(R.id.labelMain);
+		label.setText(contactName);
+	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode == RESULT_OK) {
-			if (requestCode == CODIGO_FOTO) {
-				// La foto en baja calidad
-				// Bitmap photo = (Bitmap) data.getExtras().get("data");
-				// imagen = (ImageView)findViewById(R.id.imagen);
-				// imagen.setImageBitmap(photo);
-				imagen = (ImageView) findViewById(R.id.imagen);
-				if (photoFile.exists()) {
-					Bitmap bmp = decodeFile(photoFile, imagen.getWidth(), imagen.getHeight());
-					imagen.setImageBitmap(bmp);
-				}
-			}
-			else if (requestCode == CODIGO_CONTACTO) {
-				Uri uriContact = data.getData();
-				String contactName = null;
-		        // querying contact data store
-		        Cursor cursor = getContentResolver().query(uriContact, null, null, null, null);
-		        if (cursor.moveToFirst()) {
-		            // DISPLAY_NAME = The display name for the contact.
-		            // HAS_PHONE_NUMBER =   An indicator of whether this contact has at least one phone number.
-		            contactName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-		        }
-		        cursor.close();
-		        label = (TextView) findViewById(R.id.labelMain);
-				label.setText(contactName);
+			switch (requestCode) {
+				case CODIGO_FOTO:
+					mostrarFoto(data);
+					break;
+				case CODIGO_CONTACTO:
+					mostrarContacto(data);
+					break;
+				default:
+					break;
 			}
 		}
 	}
