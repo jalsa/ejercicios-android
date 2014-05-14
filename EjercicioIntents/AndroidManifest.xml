@@ -10,6 +10,10 @@
 	<uses-permission android:name="android.permission.CAMERA"/>
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<uses-permission android:name="android.permission.READ_CONTACTS"/>
+	<uses-permission android:name="android.permission.READ_SMS"/>
+	<uses-permission android:name="android.permission.WRITE_SMS" /> 
+	<uses-permission android:name="android.permission.RECEIVE_SMS" />
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-feature android:name="android.hardware.camera" android:required="true"></uses-feature>
     
     <application
@@ -30,6 +34,14 @@
             android:name="com.jon.ejerciciointents.ActividadSecundaria"
             android:label="@string/title_activity_actividad_secundaria" >
         </activity>
+        <receiver
+   			android:name="com.jon.ejerciciointents.RecibidorEventos">
+			<intent-filter>
+				<action android:name="android.intent.action.PHONE_STATE" />
+				<action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+				<action android:name="android.intent.action.AIRPLANE_MODE"/>
+			</intent-filter>
+		</receiver>
     </application>
 
 </manifest>
