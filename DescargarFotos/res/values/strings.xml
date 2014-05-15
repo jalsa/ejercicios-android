@@ -4,5 +4,8 @@
     <string name="app_name">DescargarFotos</string>
     <string name="hello_world">Hello world!</string>
     <string name="descarga">Descargar fotos</string>
+    <string name="descargaZip">Descargar ZIP</string>
+    <string name="nombre">Nombre del archivo</string>
+    <string name="tamano">Tamaño del archivo</string>
 
 </resources>

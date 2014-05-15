@@ -1,6 +1,7 @@
 package com.jon.descargarfotos;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -8,11 +9,21 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.app.Activity;
+import android.app.DownloadManager;
+import android.app.DownloadManager.Request;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,8 +31,9 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
-	private Button boton;
+	private Button botonFotos, botonZip;
 	private String enlace = "http://www.arkaitzgarro.com/android/photos.json";
+	private long reference;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +52,41 @@ public class MainActivity extends Activity {
 			}
 		};
 		
-		boton = (Button) findViewById(R.id.botonDescarga);
-		boton.setOnClickListener(descargar);
+		botonFotos = (Button) findViewById(R.id.botonDescarga);
+		botonFotos.setOnClickListener(descargar);
 		
+		OnClickListener descargarZip = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				descargarArchivoZip();
+			}
+		};
+		
+		botonZip = (Button) findViewById(R.id.botonZip);
+		botonZip.setOnClickListener(descargarZip);
+		
+		IntentFilter filter	= new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
+		BroadcastReceiver receiver = new BroadcastReceiver() {
+			@Override
+			public void	onReceive(Context context, Intent intent) {
+				long thisReference = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
+				if (reference == thisReference){
+					
+				}
+			}
+		};
+		registerReceiver(receiver, filter);
+	}
+	
+	public void descargarArchivoZip() {
+		String	serviceString =	Context.DOWNLOAD_SERVICE;
+		DownloadManager	downloadManager;
+		downloadManager	= (DownloadManager)getSystemService(serviceString);
+		Uri	uri	= Uri.parse("http://developer.android.com/shareables/icon_templates-v4.0.zip");
+		DownloadManager.Request	request	= new Request(uri);
+		request.setNotificationVisibility(Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+		request.setDestinationInExternalFilesDir(this, Environment.DIRECTORY_DOWNLOADS, "icon_templates.zip");
+		reference = downloadManager.enqueue(request);
 	}
 	
 	public void descargarFotos() {

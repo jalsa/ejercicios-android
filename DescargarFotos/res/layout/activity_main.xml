@@ -8,8 +8,36 @@
         android:id="@+id/botonDescarga"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="94dp"
         android:text="@string/descarga" />
+
+    <Button
+        android:id="@+id/botonZip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/botonDescarga"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"
+        android:text="@string/descargaZip" />
+
+    <TextView
+        android:id="@+id/labelNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/botonZip"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="@string/nombre" />
+
+    <TextView
+        android:id="@+id/labelTamano"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/labelNombre"
+        android:layout_below="@+id/labelNombre"
+        android:layout_marginTop="26dp"
+        android:text="@string/tamano" />
 
 </RelativeLayout>
