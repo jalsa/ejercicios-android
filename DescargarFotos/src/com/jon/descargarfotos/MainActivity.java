@@ -60,19 +60,7 @@ public class MainActivity extends Activity {
 					builder.append(input);
 					input = br.readLine();
 				}
-				try {
-					JSONObject json = new JSONObject(builder.toString());
-					JSONArray arrayPhotos = json.getJSONArray("photos");
-					for (int i=0; i<arrayPhotos.length(); i++) {
-						JSONObject photo = arrayPhotos.getJSONObject(i);
-						String urlPhoto = photo.getString("image_url");
-						String id = photo.getString("id");
-						String name = photo.getString("name");
-						Log.d("FOTO" + i + ": ", "Id: " + id + "\nNombre: " + name + "\nURL: " + urlPhoto + "\n");
-					}
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
+				mostrarDatos(builder);
 			}
 		}
 		catch(MalformedURLException	e) {
@@ -80,6 +68,22 @@ public class MainActivity extends Activity {
 		}
 		catch(IOException e) {
 			Log.d("ERROR", "IO	Exception.", e);
+		}
+	}
+	
+	public void mostrarDatos(StringBuilder builder) {
+		try {
+			JSONObject json = new JSONObject(builder.toString());
+			JSONArray arrayPhotos = json.getJSONArray("photos");
+			for (int i=0; i<arrayPhotos.length(); i++) {
+				JSONObject photo = arrayPhotos.getJSONObject(i);
+				String urlPhoto = photo.getString("image_url");
+				String id = photo.getString("id");
+				String name = photo.getString("name");
+				Log.d("FOTO" + i + ": ", "Id: " + id + "\nNombre: " + name + "\nURL: " + urlPhoto + "\n");
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 }
