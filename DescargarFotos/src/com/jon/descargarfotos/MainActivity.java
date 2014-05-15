@@ -1,7 +1,6 @@
 package com.jon.descargarfotos;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -9,18 +8,18 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.DownloadManager;
+import android.app.DownloadManager.Query;
 import android.app.DownloadManager.Request;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -28,6 +27,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
@@ -71,7 +71,25 @@ public class MainActivity extends Activity {
 			public void	onReceive(Context context, Intent intent) {
 				long thisReference = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
 				if (reference == thisReference){
-					
+					String serviceString = Context.DOWNLOAD_SERVICE;
+					DownloadManager	downloadManager;
+					downloadManager	= (DownloadManager)getSystemService(serviceString);
+					Query downloadQuery = new Query();
+					downloadQuery.setFilterById();
+					Cursor downloads = downloadManager.query(downloadQuery);
+					int	reasonIdx =	downloads.getColumnIndex(DownloadManager.COLUMN_TITLE);
+					while (downloads.moveToNext()) {
+						int	reason = downloads.getInt(reasonIdx);
+						switch (reason)	{
+							case DownloadManager.STATUS_SUCCESSFUL:
+								TextView label = (TextView) findViewById(R.id.labelNombre);
+								label.setText(downloads.getString(reason));
+								break;
+							default	:
+								break;
+						}
+					}
+					downloads.close();
 				}
 			}
 		};
