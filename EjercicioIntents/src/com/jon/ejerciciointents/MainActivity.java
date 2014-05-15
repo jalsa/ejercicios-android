@@ -7,7 +7,6 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

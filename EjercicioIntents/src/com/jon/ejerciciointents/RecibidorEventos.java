@@ -14,8 +14,9 @@ public class RecibidorEventos extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		Bundle extras = intent.getExtras();
+		String action = intent.getAction();
 		if (extras != null) {
-			if (intent.getAction().equals("android.intent.action.PHONE_STATE")) {
+			if (action.equals("android.intent.action.PHONE_STATE")) {
 				String state = extras.getString(TelephonyManager.EXTRA_STATE);
 				if (state.equals(TelephonyManager.EXTRA_STATE_RINGING)) {
 					String number = extras.getString(TelephonyManager.EXTRA_INCOMING_NUMBER);
@@ -23,13 +24,13 @@ public class RecibidorEventos extends BroadcastReceiver {
 				    t.show();
 				}
 			}
-			else if (intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")) {
+			else if (action.equals("android.provider.Telephony.SMS_RECEIVED")) {
 				Object[] pdus = (Object[]) extras.get("pdus");
 			    SmsMessage messages = SmsMessage.createFromPdu((byte[]) pdus[0]);
 			    Toast t = Toast.makeText(context, messages.getDisplayMessageBody(), Toast.LENGTH_LONG);
 			    t.show();	   
 			}
-			else if (intent.getAction().equals("android.intent.action.AIRPLANE_MODE")) {
+			else if (action.equals("android.intent.action.AIRPLANE_MODE")) {
 				if (Settings.System.getInt(context.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0) != 0) {
 					Toast t = Toast.makeText(context, "Est‡s en modo avi—n", Toast.LENGTH_LONG);
 				    t.show();
@@ -39,7 +40,7 @@ public class RecibidorEventos extends BroadcastReceiver {
 				    t.show();
 				}
 			}
-			else if (intent.getAction().equals("android.net.conn.CONNECTIVITY_CHANGE")) {
+			else if (action.equals("android.net.conn.CONNECTIVITY_CHANGE")) {
 				if (ConnectivityManager.EXTRA_NO_CONNECTIVITY != null) {
 					Toast t = Toast.makeText(context, "Est‡s sin conexi—n", Toast.LENGTH_LONG);
 				    t.show();
