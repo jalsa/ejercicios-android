@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -64,7 +65,14 @@ public class MainActivity extends Activity {
 				}
 				try {
 					JSONObject json = new JSONObject(builder.toString());
-					Log.d("FOTOS: ", "" + json);
+					JSONArray arrayPhotos = json.getJSONArray("photos");
+					for (int i=0; i<arrayPhotos.length(); i++) {
+						JSONObject photo = arrayPhotos.getJSONObject(i);
+						String urlPhoto = photo.getString("image_url");
+						String id = photo.getString("id");
+						String name = photo.getString("name");
+						Log.d("FOTO" + i + ": ", "Id: " + id + "\nNombre: " + name + "\nURL: " + urlPhoto + "\n");
+					}
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
