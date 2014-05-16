@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jon.preferencias.MainActivity"
+    tools:ignore="MergeRootFrame" >
+    
+    <TextView
+        android:id="@+id/labelAuto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="89dp"
+        android:text="@string/refresh" />
+
+    <TextView
+        android:id="@+id/valorAuto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/labelAuto"
+        android:layout_alignBottom="@+id/labelAuto"
+        android:layout_marginLeft="43dp"
+        android:layout_toRightOf="@+id/labelAuto"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/valorIntervalo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/labelIntervalo"
+        android:layout_alignBottom="@+id/labelIntervalo"
+        android:layout_alignLeft="@+id/valorAuto"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/labelIntervalo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/labelAuto"
+        android:layout_below="@+id/labelAuto"
+        android:layout_marginTop="30dp"
+        android:text="@string/intervalo" />
+
+</RelativeLayout>
