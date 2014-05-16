@@ -7,7 +7,7 @@
     tools:ignore="MergeRootFrame" >
     
     <TextView
-        android:id="@+id/labelRefresh"
+        android:id="@+id/labelAuto1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -20,8 +20,8 @@
         android:id="@+id/labelIntervalo1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/labelRefresh"
-        android:layout_below="@+id/labelRefresh"
+        android:layout_alignLeft="@+id/labelAuto1"
+        android:layout_below="@+id/labelAuto1"
         android:layout_marginTop="47dp"
         android:text="@string/intervalo" />
 
@@ -29,8 +29,8 @@
         android:id="@+id/toggleBoton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/labelRefresh"
-        android:layout_alignBottom="@+id/labelRefresh"
+        android:layout_alignBaseline="@+id/labelAuto1"
+        android:layout_alignBottom="@+id/labelAuto1"
         android:layout_alignParentRight="true"
         android:layout_marginRight="59dp"
         android:text="ToggleButton" />
