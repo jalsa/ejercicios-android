@@ -30,6 +30,7 @@ public class SettingsActivity extends Activity {
 		spinner.setAdapter(adapter);	
 	}
 	
+	@Override
 	public void onResume() {
 		super.onResume();
 		mySharedPreferences = getSharedPreferences(MY_PREFS, Activity.MODE_PRIVATE);
