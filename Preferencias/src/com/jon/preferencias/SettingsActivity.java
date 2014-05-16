@@ -9,11 +9,14 @@ import android.widget.ToggleButton;
 
 public class SettingsActivity extends Activity {
 
-	ToggleButton boton;
-	Spinner spinner;
+	public static final String MY_PREFS = "PREFERENCIAS";
+	public static final String VALORREFRESH = "valorRefresh";
+	public static final String VALORINTERVALO = "valorIntervalo";
+	private ToggleButton boton;
+	private Spinner spinner;
 	private SharedPreferences mySharedPreferences;
-	boolean boolRefresh;
-	int indiceIntervalo;
+	private boolean boolRefresh;
+	private int indiceIntervalo;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +32,9 @@ public class SettingsActivity extends Activity {
 	
 	public void onResume() {
 		super.onResume();
-		mySharedPreferences = getSharedPreferences(MainActivity.MY_PREFS, Activity.MODE_PRIVATE);
-		boolRefresh = mySharedPreferences.getBoolean(MainActivity.VALORREFRESH, true);
-		indiceIntervalo = mySharedPreferences.getInt(MainActivity.VALORINTERVALO, 0);
+		mySharedPreferences = getSharedPreferences(MY_PREFS, Activity.MODE_PRIVATE);
+		boolRefresh = mySharedPreferences.getBoolean(VALORREFRESH, true);
+		indiceIntervalo = mySharedPreferences.getInt(VALORINTERVALO, 0);
 		boton.setChecked(boolRefresh);
 		spinner.setSelection(indiceIntervalo);
 	}
@@ -39,10 +42,10 @@ public class SettingsActivity extends Activity {
 	@Override
 	public void onPause() {
 		super.onPause();
-		mySharedPreferences = getSharedPreferences(MainActivity.MY_PREFS, Activity.MODE_PRIVATE);
+		mySharedPreferences = getSharedPreferences(MY_PREFS, Activity.MODE_PRIVATE);
 		SharedPreferences.Editor editor = mySharedPreferences.edit();
-		editor.putBoolean(MainActivity.VALORREFRESH,boton.isChecked());
-		editor.putInt(MainActivity.VALORINTERVALO, spinner.getSelectedItemPosition());
+		editor.putBoolean(VALORREFRESH,boton.isChecked());
+		editor.putInt(VALORINTERVALO, spinner.getSelectedItemPosition());
 		editor.apply();
 	}
 }

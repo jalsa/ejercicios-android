@@ -11,12 +11,9 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
 	private SharedPreferences mySharedPreferences;
-	public static final String MY_PREFS = "PREFERENCIAS";
-	public static final String VALORREFRESH = "valorRefresh";
-	public static final String VALORINTERVALO = "valorIntervalo";
-	TextView refresh, intervalo;
-	boolean boolRefresh;
-	int indiceIntervalo;
+	private TextView refresh, intervalo;
+	private boolean boolRefresh;
+	private int indiceIntervalo;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +26,9 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		mySharedPreferences = getSharedPreferences(MY_PREFS, Activity.MODE_PRIVATE);
-		boolRefresh = mySharedPreferences.getBoolean(VALORREFRESH, true);
-		indiceIntervalo = mySharedPreferences.getInt(VALORINTERVALO, 0);
+		mySharedPreferences = getSharedPreferences(SettingsActivity.MY_PREFS, Activity.MODE_PRIVATE);
+		boolRefresh = mySharedPreferences.getBoolean(SettingsActivity.VALORREFRESH, true);
+		indiceIntervalo = mySharedPreferences.getInt(SettingsActivity.VALORINTERVALO, 0);
 		refresh.setText(String.valueOf(boolRefresh));
 		intervalo.setText(String.valueOf(indiceIntervalo));
 	}
