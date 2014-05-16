@@ -7,6 +7,7 @@
     <string name="refresh">Autorefresh:</string>
     <string name="intervalo">Intervalo:</string>
     <string name="title_activity_settings">SettingsActivity</string>
+
     <string-array name="intervalos_array_valores">
         <item>5</item>
         <item>15</item>
@@ -17,5 +18,7 @@
         <item>15 min</item>
         <item>30 min</item>
     </string-array>
+
+    <string name="title_activity_preferences">PreferencesActivity</string>
 
 </resources>

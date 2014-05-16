@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
+	public static final int PREFERENCES = 0;
 	private SharedPreferences mySharedPreferences;
 	private TextView refresh, intervalo;
 	private boolean boolRefresh;
@@ -50,8 +51,10 @@ public class MainActivity extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
-			Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-			startActivity(intent);
+			//Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+			//startActivity(intent);
+			Intent i = new Intent(this, PreferencesActivity.class);
+			startActivityForResult(i, PREFERENCES);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

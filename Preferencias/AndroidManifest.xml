@@ -26,6 +26,10 @@
             android:name="com.jon.preferencias.SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
+        <activity
+            android:name="com.jon.preferencias.PreferencesActivity"
+            android:label="@string/title_activity_preferences" >
+        </activity>
     </application>
 
 </manifest>
