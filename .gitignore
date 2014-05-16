@@ -27,3 +27,4 @@ proguard/
 
 # Metadata
 .metadata/
+.settings/
