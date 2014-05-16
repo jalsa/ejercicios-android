@@ -71,19 +71,25 @@ public class MainActivity extends Activity {
 			public void	onReceive(Context context, Intent intent) {
 				long thisReference = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
 				if (reference == thisReference){
-					String serviceString = Context.DOWNLOAD_SERVICE;
-					DownloadManager	downloadManager;
-					downloadManager	= (DownloadManager)getSystemService(serviceString);
 					Query downloadQuery = new Query();
-					downloadQuery.setFilterById();
+					downloadQuery.setFilterById(thisReference);					
+					DownloadManager	downloadManager;
+					String serviceString = Context.DOWNLOAD_SERVICE;
+					downloadManager	= (DownloadManager)getSystemService(serviceString);
 					Cursor downloads = downloadManager.query(downloadQuery);
-					int	reasonIdx =	downloads.getColumnIndex(DownloadManager.COLUMN_TITLE);
+					int	filenameIdx = downloads.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME);
+					int	sizeIdx = downloads.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
+					int	statusIdx = downloads.getColumnIndex(DownloadManager.COLUMN_STATUS);					
 					while (downloads.moveToNext()) {
-						int	reason = downloads.getInt(reasonIdx);
-						switch (reason)	{
+						String filename = downloads.getString(filenameIdx);
+						long size = downloads.getLong(sizeIdx);
+						int	status = downloads.getInt(statusIdx);
+						switch (status)	{
 							case DownloadManager.STATUS_SUCCESSFUL:
-								TextView label = (TextView) findViewById(R.id.labelNombre);
-								label.setText(downloads.getString(reason));
+								TextView labelNombre = (TextView) findViewById(R.id.labelNombre);
+								TextView labelTamano = (TextView) findViewById(R.id.labelTamano);
+								labelNombre.setText(filename);
+								labelTamano.setText(String.valueOf(size));
 								break;
 							default	:
 								break;
