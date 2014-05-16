@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -29,8 +30,10 @@ public class MainActivity extends Activity {
 		mySharedPreferences = getSharedPreferences(SettingsActivity.MY_PREFS, Activity.MODE_PRIVATE);
 		boolRefresh = mySharedPreferences.getBoolean(SettingsActivity.VALORREFRESH, true);
 		indiceIntervalo = mySharedPreferences.getInt(SettingsActivity.VALORINTERVALO, 0);
+		ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.intervalos_array_valores, android.R.layout.simple_spinner_item);
+		String valorIntervalo = (String) adapter1.getItem(indiceIntervalo);
 		refresh.setText(String.valueOf(boolRefresh));
-		intervalo.setText(String.valueOf(indiceIntervalo));
+		intervalo.setText(valorIntervalo);
 	}
 
 	@Override
