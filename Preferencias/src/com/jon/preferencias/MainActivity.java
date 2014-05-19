@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -55,12 +54,11 @@ public class MainActivity extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
-			//Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-			//startActivity(intent);
 			Intent i = new Intent(this, SettingsActivity.class);
 			startActivityForResult(i, SETTINGS);
 			return true;
-		} else if(id == R.id.action_preferences) {
+		}
+		else if(id == R.id.action_preferences) {
 			Intent i = new Intent(this, PreferencesActivity.class);
 			startActivityForResult(i, PREFERENCES);
 			return true;

@@ -4,6 +4,7 @@
     <string name="app_name">Preferencias</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_preferences">Preferences Framework</string>
     <string name="refresh">Autorefresh:</string>
     <string name="intervalo">Intervalo:</string>
     <string name="title_activity_settings">SettingsActivity</string>
@@ -20,6 +21,5 @@
     </string-array>
 
     <string name="title_activity_preferences">PreferencesActivity</string>
-    <string name="action_preferences">Preferences Framework</string>
 
 </resources>
