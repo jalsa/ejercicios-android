@@ -10,6 +10,9 @@
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="valorPorDefecto">Default</string>
     <string name="magnitud">Magnitud</string>
+    <string name="PREF_CHECK_BOX">PREF_CHECK_BOX</string>
+    <string name="PREF_LIST_INTERVALOS">PREF_LIST_INTERVALOS</string>
+    <string name="PREF_LIST_MAGNITUDES">PREF_LIST_MAGNITUDES</string>
 
     <integer-array name="intervalos_array_valores">
         <item>1</item>

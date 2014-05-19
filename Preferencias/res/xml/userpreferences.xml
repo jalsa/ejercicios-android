@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+	<PreferenceCategory
+	    android:title="Preferencias de actualización">
+	    <CheckBoxPreference
+	        android:key="@string/PREF_CHECK_BOX"
+	        android:title="Autorefresh"
+	        android:summary="Actualización automática"
+	        android:defaultValue="true" />
+	    <ListPreference 
+	        android:key="@string/PREF_LIST_INTERVALOS"
+	        android:title="Intervalos"
+	        android:summary="Lista de diferentes intervalos"
+	        android:defaultValue="60"
+	        android:entries="@array/intervalos_array"
+	        android:entryValues="@array/intervalos_array" />
+	</PreferenceCategory>
+	
+	<PreferenceCategory
+	    android:title="Preferencias de magnitud">
+		<ListPreference 
+		        android:key="@string/PREF_LIST_MAGNITUDES"
+		        android:title="Magnitudes"
+		        android:summary="Lista de diferentes magnitudes"
+		        android:defaultValue="3"
+		        android:entries="@array/magnitudes_array"
+		        android:entryValues="@array/magnitudes_array" />
+	</PreferenceCategory>
+	
+	<PreferenceCategory
+	    android:title="Preferencias de conectividad">
+	    <Preference
+	        android:title="Opciones de conectividad"
+	        android:summary="Todas las opciones de conectividad">
+	        <intent android:action="android.settings.WIRELESS_SETTINGS"/>
+	    </Preference>
+	</PreferenceCategory>
+    
+</PreferenceScreen>
