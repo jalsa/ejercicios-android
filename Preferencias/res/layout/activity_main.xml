@@ -24,7 +24,7 @@
         android:layout_alignBottom="@+id/labelAuto"
         android:layout_marginLeft="43dp"
         android:layout_toRightOf="@+id/labelAuto"
-        android:text="TextView" />
+        android:text="@string/valorPorDefecto" />
 
     <TextView
         android:id="@+id/valorIntervalo"
@@ -33,7 +33,7 @@
         android:layout_alignBaseline="@+id/labelIntervalo"
         android:layout_alignBottom="@+id/labelIntervalo"
         android:layout_alignLeft="@+id/valorAuto"
-        android:text="TextView" />
+        android:text="@string/valorPorDefecto" />
 
     <TextView
         android:id="@+id/labelIntervalo"
@@ -43,5 +43,22 @@
         android:layout_below="@+id/labelAuto"
         android:layout_marginTop="30dp"
         android:text="@string/intervalo" />
+
+    <TextView
+        android:id="@+id/labelMagnitud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/labelIntervalo"
+        android:layout_below="@+id/labelIntervalo"
+        android:layout_marginTop="30dp"
+        android:text="@string/magnitud" />
+
+    <TextView
+        android:id="@+id/valorMagnitud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/labelMagnitud"
+        android:layout_alignLeft="@+id/valorIntervalo"
+        android:text="@string/valorPorDefecto" />
 
 </RelativeLayout>
