@@ -8,6 +8,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 /*public class PreferencesActivity extends PreferenceActivity {
 
@@ -33,8 +34,11 @@ public class PreferencesActivity extends Activity implements OnSharedPreferenceC
 	}
 
 	@Override
-	public void onSharedPreferenceChanged(SharedPreferences arg0, String arg1) {
-		System.out.println("HOLA");
+	public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+		boolean autorefresh = prefs.getBoolean(getString(R.string.PREF_CHECK_BOX), true);
+		if (autorefresh) {
+			Log.d("PREFERENCIAS", "Autorefresh cambiado");
+		}
 	}
 
 }

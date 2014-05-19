@@ -12,9 +12,6 @@ public class MainActivity extends Activity {
 
 	private static final int SETTINGS = 1;
 	private static final int PREFERENCES = 2;
-	private static final String PREF_CHECK_BOX = "PREF_CHECK_BOX";
-	private static final String PREF_LIST_INTERVALOS = "PREF_LIST_INTERVALOS";
-	private static final String PREF_LIST_MAGNITUDES = "PREF_LIST_MAGNITUDES";
 	
 	private SharedPreferences mySharedPreferences;
 	private TextView refresh, intervalo, magnitud;
@@ -39,10 +36,10 @@ public class MainActivity extends Activity {
 		boolRefresh = mySharedPreferences.getBoolean(SettingsActivity.VALORREFRESH, true);
 		indiceIntervalo = mySharedPreferences.getInt(SettingsActivity.VALORINTERVALO, 0);
 		
-		/*mySharedPreferences = getSharedPreferences("com.jon.preferencias_preferences", Activity.MODE_PRIVATE);
-		boolRefresh = mySharedPreferences.getBoolean(PREF_CHECK_BOX, true);
-		indiceIntervalo = mySharedPreferences.getInt(PREF_LIST_INTERVALOS, 0);
-		indiceMagnitud = mySharedPreferences.getInt(PREF_LIST_MAGNITUDES, 0);*/
+		/*mySharedPreferences = getSharedPreferences(SettingsActivity.MY_PREFS, Activity.MODE_PRIVATE);
+		boolRefresh = mySharedPreferences.getBoolean(getString(R.string.PREF_CHECK_BOX), true);
+		indiceIntervalo = mySharedPreferences.getInt(getString(R.string.PREF_LIST_INTERVALOS), 0);
+		indiceMagnitud = mySharedPreferences.getInt(getString(R.string.PREF_LIST_MAGNITUDES), 0);*/
 		
 		String valoresIntervalo[] = getResources().getStringArray(R.array.intervalos_array);
 		String valoresMagnitud[] = getResources().getStringArray(R.array.magnitudes_array);
