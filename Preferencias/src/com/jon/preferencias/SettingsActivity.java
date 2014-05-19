@@ -12,6 +12,7 @@ public class SettingsActivity extends Activity {
 	public static final String MY_PREFS = "PREFERENCIAS";
 	public static final String VALORREFRESH = "valorRefresh";
 	public static final String VALORINTERVALO = "valorIntervalo";
+	
 	private ToggleButton boton;
 	private Spinner spinner;
 	private SharedPreferences mySharedPreferences;
@@ -22,8 +23,10 @@ public class SettingsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
+		
 		boton = (ToggleButton) findViewById(R.id.toggleBoton);
 		spinner = (Spinner) findViewById(R.id.spinnerIntervalo);
+		
 		Spinner spinner = (Spinner) findViewById(R.id.spinnerIntervalo);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.intervalos_array, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -33,9 +36,11 @@ public class SettingsActivity extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
+		
 		mySharedPreferences = getSharedPreferences(MY_PREFS, Activity.MODE_PRIVATE);
 		boolRefresh = mySharedPreferences.getBoolean(VALORREFRESH, true);
 		indiceIntervalo = mySharedPreferences.getInt(VALORINTERVALO, 0);
+		
 		boton.setChecked(boolRefresh);
 		spinner.setSelection(indiceIntervalo);
 	}
@@ -43,9 +48,10 @@ public class SettingsActivity extends Activity {
 	@Override
 	public void onPause() {
 		super.onPause();
+		
 		mySharedPreferences = getSharedPreferences(MY_PREFS, Activity.MODE_PRIVATE);
 		SharedPreferences.Editor editor = mySharedPreferences.edit();
-		editor.putBoolean(VALORREFRESH,boton.isChecked());
+		editor.putBoolean(VALORREFRESH, boton.isChecked());
 		editor.putInt(VALORINTERVALO, spinner.getSelectedItemPosition());
 		editor.apply();
 	}

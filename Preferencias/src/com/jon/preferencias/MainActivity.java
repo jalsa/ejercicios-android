@@ -11,7 +11,9 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-	public static final int PREFERENCES = 0;
+	private static final int SETTINGS = 1;
+	private static final int PREFERENCES = 2;
+	
 	private SharedPreferences mySharedPreferences;
 	private TextView refresh, intervalo;
 	private boolean boolRefresh;
@@ -21,20 +23,22 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
 		refresh = (TextView) findViewById(R.id.valorAuto);
-		intervalo = (TextView) findViewById(R.id.valorIntervalo);	
+		intervalo = (TextView) findViewById(R.id.valorIntervalo);
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
 		mySharedPreferences = getSharedPreferences(SettingsActivity.MY_PREFS, Activity.MODE_PRIVATE);
 		boolRefresh = mySharedPreferences.getBoolean(SettingsActivity.VALORREFRESH, true);
 		indiceIntervalo = mySharedPreferences.getInt(SettingsActivity.VALORINTERVALO, 0);
-		ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.intervalos_array_valores, android.R.layout.simple_spinner_item);
-		String valorIntervalo = (String) adapter1.getItem(indiceIntervalo);
+		
+		String valores[] = getResources().getStringArray(R.array.intervalos_array);
 		refresh.setText(String.valueOf(boolRefresh));
-		intervalo.setText(valorIntervalo);
+		intervalo.setText(valores[indiceIntervalo]);
 	}
 
 	@Override
@@ -53,6 +57,10 @@ public class MainActivity extends Activity {
 		if (id == R.id.action_settings) {
 			//Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
 			//startActivity(intent);
+			Intent i = new Intent(this, SettingsActivity.class);
+			startActivityForResult(i, SETTINGS);
+			return true;
+		} else if(id == R.id.action_preferences) {
 			Intent i = new Intent(this, PreferencesActivity.class);
 			startActivityForResult(i, PREFERENCES);
 			return true;
