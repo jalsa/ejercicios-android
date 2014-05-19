@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -13,7 +14,7 @@ public class MainActivity extends Activity {
 	private static final int SETTINGS = 1;
 	private static final int PREFERENCES = 2;
 	
-	private SharedPreferences mySharedPreferences;
+	private SharedPreferences mySharedPreferences, fwSharedPreferences;
 	private TextView refresh, intervalo, magnitud;
 	private boolean boolRefresh;
 	private int indiceIntervalo, indiceMagnitud;
@@ -32,14 +33,15 @@ public class MainActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		
-		mySharedPreferences = getSharedPreferences(SettingsActivity.MY_PREFS, Activity.MODE_PRIVATE);
-		boolRefresh = mySharedPreferences.getBoolean(SettingsActivity.VALORREFRESH, true);
-		indiceIntervalo = mySharedPreferences.getInt(SettingsActivity.VALORINTERVALO, 0);
+		//mySharedPreferences = getSharedPreferences(SettingsActivity.MY_PREFS, Activity.MODE_PRIVATE);
+		fwSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		/*mySharedPreferences = getSharedPreferences(SettingsActivity.MY_PREFS, Activity.MODE_PRIVATE);
-		boolRefresh = mySharedPreferences.getBoolean(getString(R.string.PREF_CHECK_BOX), true);
-		indiceIntervalo = mySharedPreferences.getInt(getString(R.string.PREF_LIST_INTERVALOS), 0);
-		indiceMagnitud = mySharedPreferences.getInt(getString(R.string.PREF_LIST_MAGNITUDES), 0);*/
+		/*boolRefresh = mySharedPreferences.getBoolean(SettingsActivity.VALORREFRESH, true);
+		indiceIntervalo = mySharedPreferences.getInt(SettingsActivity.VALORINTERVALO, 0);*/
+		
+		boolRefresh = fwSharedPreferences.getBoolean(getResources().getString(R.string.PREF_CHECK_BOX), true);
+		indiceIntervalo = fwSharedPreferences.getInt(getResources().getString(R.string.PREF_LIST_INTERVALOS), 0);
+		indiceMagnitud = fwSharedPreferences.getInt(getResources().getString(R.string.PREF_LIST_MAGNITUDES), 0);
 		
 		String valoresIntervalo[] = getResources().getStringArray(R.array.intervalos_array);
 		String valoresMagnitud[] = getResources().getStringArray(R.array.magnitudes_array);
