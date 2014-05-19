@@ -8,18 +8,30 @@
     <string name="refresh">Autorefresh:</string>
     <string name="intervalo">Intervalo:</string>
     <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_preferences">PreferencesActivity</string>
     <string name="valorPorDefecto">Default</string>
     <string name="magnitud">Magnitud</string>
     <string name="PREF_CHECK_BOX">PREF_CHECK_BOX</string>
     <string name="PREF_LIST_INTERVALOS">PREF_LIST_INTERVALOS</string>
     <string name="PREF_LIST_MAGNITUDES">PREF_LIST_MAGNITUDES</string>
+    <string name="categoriaActualizacion">Preferencias de actualización</string>
+    <string name="tituloActualizaciones">Autorefresh</string>
+    <string name="descripcionActualizaciones">Actualización automática</string>
+    <string name="tituloIntervalos">Intervalos</string>
+    <string name="descripcionIntervalos">Lista de diferentes intervalos</string>
+    <string name="categoriaMagnitudes">Preferencias de magnitud</string>
+    <string name="tituloMagnitudes">Magnitudes</string>
+    <string name="descripcionMagnitudes">Lista de diferentes magnitudes</string>
+    <string name="categoriaConectividad">Preferencias de conectividad</string>
+    <string name="tituloConectividad">Opciones de conectividad</string>
+    <string name="descripcionConectividad">Todas las opciones de conectividad</string>
 
-    <integer-array name="intervalos_array_valores">
+    <string-array name="intervalos_array_valores">
         <item>1</item>
         <item>15</item>
         <item>30</item>
         <item>60</item>
-    </integer-array>
+    </string-array>
     <string-array name="intervalos_array">
         <item>1 min</item>
         <item>15 min</item>
@@ -51,7 +63,5 @@
         <item>8</item>
         <item>9</item>
     </string-array>
-
-    <string name="title_activity_preferences">PreferencesActivity</string>
 
 </resources>
