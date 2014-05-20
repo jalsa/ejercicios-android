@@ -17,6 +17,14 @@ public class Earthquake {
 		this.url = url;
 	}
 	
+	public long getId() {
+		return this.id;
+	}
+	
+	public void setId(long id) {
+		this.id = id;
+	}
+	
 	public String getIdStr() {
 		return this.idStr;
 	}

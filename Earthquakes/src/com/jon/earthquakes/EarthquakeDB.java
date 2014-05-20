@@ -23,10 +23,11 @@ public class EarthquakeDB {
 	}
 	
 	public static ArrayList<Earthquake> filtrarPorMagnitud(SQLiteDatabase db, float magnitud) {
+		long id;
 		String idStr, place, time, detail, url;
 		float magnitude, latitude, longitude;
 		
-		String[] result_columns = new String[]{DBOpenHelper.ID_COLUMN, DBOpenHelper.PLACE_COLUMN, DBOpenHelper.TIME_COLUMN, DBOpenHelper.DETAIL_COLUMN, 
+		String[] result_columns = new String[]{DBOpenHelper.ID_COLUMN, DBOpenHelper.ID_STR_COLUMN, DBOpenHelper.PLACE_COLUMN, DBOpenHelper.TIME_COLUMN, DBOpenHelper.DETAIL_COLUMN, 
 				DBOpenHelper.MAGNITUDE_COLUMN, DBOpenHelper.LAT_COLUMN, DBOpenHelper.LONG_COLUMN, DBOpenHelper.URL_COLUMN, DBOpenHelper.CREATED_AT_COLUMN, 
 				DBOpenHelper.UPDATED_AT_COLUMN};
 		String where = DBOpenHelper.MAGNITUDE_COLUMN + ">= ?";
@@ -36,6 +37,7 @@ public class EarthquakeDB {
 		String order= null;
 		Cursor cursor = query(db, result_columns, where, whereArgs, groupBy, having, order);
 		
+		int ID_COLUMN_INDEX = cursor.getColumnIndexOrThrow(DBOpenHelper.ID_COLUMN);
 		int ID_STR_COLUMN_INDEX = cursor.getColumnIndexOrThrow(DBOpenHelper.ID_STR_COLUMN);
 		int PLACE_COLUMN_INDEX = cursor.getColumnIndexOrThrow(DBOpenHelper.PLACE_COLUMN);
 		int TIME_COLUMN_INDEX = cursor.getColumnIndexOrThrow(DBOpenHelper.TIME_COLUMN);
@@ -46,6 +48,7 @@ public class EarthquakeDB {
 		int URL_COLUMN_INDEX = cursor.getColumnIndexOrThrow(DBOpenHelper.URL_COLUMN);
 		
 		while (cursor.moveToNext()) {
+			id = cursor.getLong(ID_COLUMN_INDEX);
 			idStr = cursor.getString(ID_STR_COLUMN_INDEX);
 			place = cursor.getString(PLACE_COLUMN_INDEX);
 			time = cursor.getString(TIME_COLUMN_INDEX);
@@ -55,6 +58,7 @@ public class EarthquakeDB {
 			longitude = cursor.getFloat(LONG_COLUMN_INDEX);
 			url = cursor.getString(URL_COLUMN_INDEX);
 			earthquake = new Earthquake(idStr, place, time, detail, magnitude, latitude, longitude, url);
+			earthquake.setId(id);
 			arrayTerremotos.add(earthquake);
 		}
 		cursor.close();
@@ -67,7 +71,7 @@ public class EarthquakeDB {
 		return cursor;
 	}
 	
-	public static void insert(SQLiteDatabase db, Earthquake earthquake) {
+	public static long insert(SQLiteDatabase db, Earthquake earthquake) {
 		Date date = new Date();
 		ContentValues newValues = new ContentValues();
 	    newValues.put(DBOpenHelper.ID_STR_COLUMN, earthquake.getIdStr());
@@ -80,14 +84,16 @@ public class EarthquakeDB {
 	    newValues.put(DBOpenHelper.URL_COLUMN, earthquake.getUrl());
 	    newValues.put(DBOpenHelper.CREATED_AT_COLUMN, String.valueOf(date.getTime()));
 	    newValues.put(DBOpenHelper.UPDATED_AT_COLUMN, String.valueOf(date.getTime())); 
-		db.insert(DBOpenHelper.DATABASE_TABLE, null, newValues);
+		return db.insert(DBOpenHelper.DATABASE_TABLE, null, newValues);
 	}
 
 	public static void update(SQLiteDatabase db, String[] nombreColumna, String[] valor, String clausulaWhere, String[] argsWhere) {
+		Date date = new Date();
 		ContentValues updatedValues = new ContentValues();
 		for (int i=0; i<nombreColumna.length; i++) {
 			updatedValues.put(nombreColumna[i], valor[i]);
 		}
+		updatedValues.put(DBOpenHelper.UPDATED_AT_COLUMN, String.valueOf(date.getTime()));
 		String where = clausulaWhere;
 		String whereArgs[] = argsWhere;
 		db.update(DBOpenHelper.DATABASE_TABLE, updatedValues, where, whereArgs);
