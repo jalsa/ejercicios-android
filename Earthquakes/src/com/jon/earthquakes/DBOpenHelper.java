@@ -11,7 +11,20 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	protected static final String DATABASE_TABLE = "Earthquakes";
 	protected static final int DATABASE_VERSION = 1;
 	
-	private static final String DATABASE_CREATE = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE + " (_id TEXT PRIMARY KEY, place TEXT, time DATETIME, detail TEXT, magnitude REAL, lat REAL, long REAL, url TEXT, created_at DATETIME, updated_at DATETIME);";
+	protected static final String ID_COLUMN = "_id";
+	protected static final String PLACE_COLUMN = "place";
+	protected static final String TIME_COLUMN = "time";
+	protected static final String DETAIL_COLUMN = "detail";
+	protected static final String MAGNITUDE_COLUMN = "magnitude";
+	protected static final String LAT_COLUMN = "lat";
+	protected static final String LONG_COLUMN = "long";
+	protected static final String URL_COLUMN = "url";
+	protected static final String CREATED_AT_COLUMN = "created_at";
+	protected static final String UPDATED_AT_COLUMN = "updated_at";
+	
+	private static final String DATABASE_CREATE = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE + " (" + ID_COLUMN + " TEXT PRIMARY KEY, "
+			+ PLACE_COLUMN + " TEXT, " + TIME_COLUMN + " DATETIME, " + DETAIL_COLUMN + " TEXT, " + MAGNITUDE_COLUMN + " REAL, " + LAT_COLUMN + " REAL, "
+			+ LONG_COLUMN + " REAL, " + URL_COLUMN + " TEXT, " + CREATED_AT_COLUMN + " DATETIME, " + UPDATED_AT_COLUMN + " DATETIME);";
 
 	public DBOpenHelper(Context context, String name, CursorFactory factory, int version) {
 		super(context, name, factory, version);
