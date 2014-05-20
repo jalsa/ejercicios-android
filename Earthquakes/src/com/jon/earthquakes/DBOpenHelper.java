@@ -7,11 +7,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
 	
-	private static final String DATABASE_NAME = "myDataBase.db";
-	private static final String DATABASE_TABLE = "Earthquakes";
-	private static final int DATABASE_VERSION = 1;
+	protected static final String DATABASE_NAME = "myDataBase.db";
+	protected static final String DATABASE_TABLE = "Earthquakes";
+	protected static final int DATABASE_VERSION = 1;
 	
-	private static final String DATABASE_CREATE = "CREATE TABLE IF NOT EXISTS Earthquakes (_id TEXT PRIMARY KEY, place TEXT, time TIMESTAMP, detail TEXT, magnitude REAL, lat REAL, long REAL, url TEXT, created_at TIMESTAMP, updated_at TIMESTAMP);";
+	private static final String DATABASE_CREATE = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE + " (_id TEXT PRIMARY KEY, place TEXT, time DATETIME, detail TEXT, magnitude REAL, lat REAL, long REAL, url TEXT, created_at DATETIME, updated_at DATETIME);";
 
 	public DBOpenHelper(Context context, String name, CursorFactory factory, int version) {
 		super(context, name, factory, version);
