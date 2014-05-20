@@ -84,12 +84,18 @@ public class EarthquakeDB {
 		db.insert(DBOpenHelper.DATABASE_TABLE, null, newValues);
 	}
 
-	public static void update() {
-		
+	public static void update(SQLiteDatabase db, String nombreColumna, String valor, String clausulaWhere, String[] argsWhere) {
+		ContentValues updatedValues = new ContentValues();
+	    updatedValues.put(nombreColumna, valor);
+		String where = clausulaWhere;
+		String whereArgs[] = argsWhere;
+		db.update(DBOpenHelper.DATABASE_TABLE, updatedValues, where, whereArgs);
 	}
 	
-	public static void delete() {
-		
+	public static void delete(SQLiteDatabase db, String clausulaWhere, String[] argsWhere) {
+		String where = clausulaWhere;
+	    String whereArgs[] = argsWhere;
+	    db.delete(DBOpenHelper.DATABASE_TABLE, where, whereArgs);
 	}
 	
 }
