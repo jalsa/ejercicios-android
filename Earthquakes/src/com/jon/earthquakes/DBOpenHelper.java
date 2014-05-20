@@ -12,6 +12,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	protected static final int DATABASE_VERSION = 1;
 	
 	protected static final String ID_COLUMN = "_id";
+	protected static final String ID_STR_COLUMN = "id_str";
 	protected static final String PLACE_COLUMN = "place";
 	protected static final String TIME_COLUMN = "time";
 	protected static final String DETAIL_COLUMN = "detail";
@@ -23,7 +24,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	protected static final String UPDATED_AT_COLUMN = "updated_at";
 	
 	private static final String DATABASE_CREATE = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE + " (" + ID_COLUMN + " TEXT PRIMARY KEY, "
-			+ PLACE_COLUMN + " TEXT, " + TIME_COLUMN + " DATETIME, " + DETAIL_COLUMN + " TEXT, " + MAGNITUDE_COLUMN + " REAL, " + LAT_COLUMN + " REAL, "
+			+ ID_STR_COLUMN + " TEXT UNIQUE, " + PLACE_COLUMN + " TEXT, " + TIME_COLUMN + " DATETIME, " + DETAIL_COLUMN + " TEXT, " + MAGNITUDE_COLUMN + " REAL, " + LAT_COLUMN + " REAL, "
 			+ LONG_COLUMN + " REAL, " + URL_COLUMN + " TEXT, " + CREATED_AT_COLUMN + " DATETIME, " + UPDATED_AT_COLUMN + " DATETIME);";
 
 	public DBOpenHelper(Context context, String name, CursorFactory factory, int version) {

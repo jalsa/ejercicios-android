@@ -2,11 +2,12 @@ package com.jon.earthquakes;
 
 public class Earthquake {
 	
-	private String id, place, time, detail, url, created_at, updated_at;
+	private long id;
+	private String idStr, place, time, detail, url;
 	private float magnitude, latitude, longitude;
 	
-	public Earthquake(String id, String place, String time, String detail, float magnitude, float latitude, float longitude, String url, String created_at, String updated_at) {
-		this.id = id;
+	public Earthquake(String idStr, String place, String time, String detail, float magnitude, float latitude, float longitude, String url) {
+		this.idStr = idStr;
 		this.place = place;
 		this.time = time;
 		this.detail = detail;
@@ -14,8 +15,38 @@ public class Earthquake {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.url = url;
-		this.created_at = created_at;
-		this.updated_at = updated_at;
+	}
+	
+	public String getIdStr() {
+		return this.idStr;
+	}
+	
+	public String getPlace() {
+		return this.place;
+	}
+	
+	public String getTime() {
+		return this.time;
+	}
+	
+	public String getDetail() {
+		return this.detail;
+	}
+	
+	public float getMagnitude() {
+		return this.magnitude;
+	}
+	
+	public float getLatitude() {
+		return this.latitude;
+	}
+	
+	public float getLongitude() {
+		return this.longitude;
+	}
+	
+	public String getUrl() {
+		return this.url;
 	}
 	
 }
