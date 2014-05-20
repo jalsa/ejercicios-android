@@ -26,6 +26,7 @@ public class EarthquakeDB {
 		long id;
 		String idStr, place, time, detail, url;
 		float magnitude, latitude, longitude;
+		arrayTerremotos = new ArrayList<Earthquake>();
 		
 		String[] result_columns = new String[]{DBOpenHelper.ID_COLUMN, DBOpenHelper.ID_STR_COLUMN, DBOpenHelper.PLACE_COLUMN, DBOpenHelper.TIME_COLUMN, DBOpenHelper.DETAIL_COLUMN, 
 				DBOpenHelper.MAGNITUDE_COLUMN, DBOpenHelper.LAT_COLUMN, DBOpenHelper.LONG_COLUMN, DBOpenHelper.URL_COLUMN, DBOpenHelper.CREATED_AT_COLUMN, 

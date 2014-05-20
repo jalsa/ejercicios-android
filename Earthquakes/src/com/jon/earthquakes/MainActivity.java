@@ -24,8 +24,10 @@ public class MainActivity extends Activity {
 	private DBOpenHelper dbOpenHelper;
 	private SQLiteDatabase db;
 	private ArrayList<Earthquake> arrayTerremotos;
+	private ArrayList<Long> arrayIds;
 	long idErrenteria, idBilbao;
 	private String enlace = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
+	private Earthquake earthquake;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class MainActivity extends Activity {
 		dbOpenHelper = new DBOpenHelper(this, DBOpenHelper.DATABASE_NAME, null, DBOpenHelper.DATABASE_VERSION);
 		db = EarthquakeDB.open(dbOpenHelper);
 		descargarTerremotos();
+		//arrayTerremotos = new ArrayList<Earthquake>();
 		//Earthquake earthquakeErrenteria = new Earthquake("50", "Errenteria", "12:00", "Menudo terremoto!", Float.valueOf("7.9"), Float.valueOf("43.312527"), Float.valueOf("-1.898613"), "http://es.wikipedia.org/wiki/Renter%C3%ADa");
 		//Earthquake earthquakeBilbao = new Earthquake("60", "Bilbao", "13:00", "El terremoto m‡s grande del mundo!", Float.valueOf("10"), Float.valueOf("43.256944"), Float.valueOf("-2.923611"), "http://es.wikipedia.org/wiki/Bilbao");
 		//idErrenteria = EarthquakeDB.insert(db, earthquakeErrenteria);
@@ -59,7 +62,7 @@ public class MainActivity extends Activity {
 					builder.append(input);
 					input = br.readLine();
 				}
-				mostrarDatos(builder);
+				guardarTerremotos(builder);
 			}
 		}
 		catch(MalformedURLException	e) {
@@ -70,20 +73,27 @@ public class MainActivity extends Activity {
 		}
 	}
 	
-	public void mostrarDatos(StringBuilder builder) {
+	public void guardarTerremotos(StringBuilder builder) {
+		arrayIds = new ArrayList<Long>();
 		try {
 			JSONObject json = new JSONObject(builder.toString());
-			JSONArray arrayTerremotos = json.getJSONArray("features");
-			for (int i=0; i<arrayTerremotos.length(); i++) {
-				JSONObject terremoto = arrayTerremotos.getJSONObject(i);
-				String id = terremoto.getString("id");
-				String place = terremoto.getJSONObject("properties").getString("place");
+			JSONArray array = json.getJSONArray("features");
+			for (int i=0; i<array.length(); i++) {
 				// Obtener todos los datos
-				
+				JSONObject terremoto = array.getJSONObject(i);
+				String idStr = terremoto.getString("id");
+				String place = terremoto.getJSONObject("properties").getString("place");
+				String time = String.valueOf(terremoto.getJSONObject("properties").getLong("time"));
+				String detail = terremoto.getJSONObject("properties").getString("detail");
+				float magnitude = (float) terremoto.getJSONObject("properties").getDouble("mag");
+				float latitude = (float) terremoto.getJSONObject("geometry").getJSONArray("coordinates").getDouble(1);
+				float longitude = (float) terremoto.getJSONObject("geometry").getJSONArray("coordinates").getDouble(0);
+				String url = terremoto.getJSONObject("properties").getString("url");
 				// Crear los terremotos
-				
+				earthquake = new Earthquake(idStr, place, time, detail, magnitude, latitude, longitude, url);
 				// Insertarlos en la base de datos
-				
+				long id = EarthquakeDB.insert(db, earthquake);
+				arrayIds.add(id);
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
