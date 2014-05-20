@@ -14,7 +14,7 @@
 	        android:summary="@string/descripcionIntervalos"
 	        android:defaultValue="60"
 	        android:entries="@array/intervalos_array"
-	        android:entryValues="@array/intervalos_array_valores" />
+	        android:entryValues="@array/intervalos_array" />
 	</PreferenceCategory>
 	
 	<PreferenceCategory
@@ -25,7 +25,7 @@
 		        android:summary="@string/descripcionMagnitudes"
 		        android:defaultValue="3"
 		        android:entries="@array/magnitudes_array"
-		        android:entryValues="@array/magnitudes_array_valores" />
+		        android:entryValues="@array/magnitudes_array" />
 	</PreferenceCategory>
 	
 	<PreferenceCategory

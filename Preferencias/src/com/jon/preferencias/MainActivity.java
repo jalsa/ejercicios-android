@@ -33,15 +33,15 @@ public class MainActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		
-		//mySharedPreferences = getSharedPreferences(SettingsActivity.MY_PREFS, Activity.MODE_PRIVATE);
+		mySharedPreferences = getSharedPreferences(SettingsActivity.MY_PREFS, Activity.MODE_PRIVATE);
 		fwSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		/*boolRefresh = mySharedPreferences.getBoolean(SettingsActivity.VALORREFRESH, true);
-		indiceIntervalo = mySharedPreferences.getInt(SettingsActivity.VALORINTERVALO, 0);*/
+		boolRefresh = mySharedPreferences.getBoolean(SettingsActivity.VALORREFRESH, true);
+		indiceIntervalo = mySharedPreferences.getInt(SettingsActivity.VALORINTERVALO, 0);
 		
-		boolRefresh = fwSharedPreferences.getBoolean(getResources().getString(R.string.PREF_CHECK_BOX), true);
+		/*boolRefresh = fwSharedPreferences.getBoolean(getResources().getString(R.string.PREF_CHECK_BOX), true);
 		indiceIntervalo = fwSharedPreferences.getInt(getResources().getString(R.string.PREF_LIST_INTERVALOS), 0);
-		indiceMagnitud = fwSharedPreferences.getInt(getResources().getString(R.string.PREF_LIST_MAGNITUDES), 0);
+		indiceMagnitud = fwSharedPreferences.getInt(getResources().getString(R.string.PREF_LIST_MAGNITUDES), 0);*/
 		
 		String valoresIntervalo[] = getResources().getStringArray(R.array.intervalos_array);
 		String valoresMagnitud[] = getResources().getStringArray(R.array.magnitudes_array);
