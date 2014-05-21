@@ -2,7 +2,6 @@ package com.jon.earthquakes;
 
 import java.util.ArrayList;
 import java.util.Date;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -58,8 +57,7 @@ public class EarthquakeDB {
 			latitude = cursor.getFloat(LAT_COLUMN_INDEX);
 			longitude = cursor.getFloat(LONG_COLUMN_INDEX);
 			url = cursor.getString(URL_COLUMN_INDEX);
-			earthquake = new Earthquake(idStr, place, time, detail, magnitude, latitude, longitude, url);
-			earthquake.setId(id);
+			earthquake = new Earthquake(id, idStr, place, time, detail, magnitude, latitude, longitude, url);
 			arrayTerremotos.add(earthquake);
 		}
 		cursor.close();

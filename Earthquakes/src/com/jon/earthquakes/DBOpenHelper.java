@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
 	
-	protected static final String DATABASE_NAME = "myDataBase.db";
-	protected static final String DATABASE_TABLE = "Earthquakes";
+	protected static final String DATABASE_NAME = "earthquakes.db";
+	protected static final String DATABASE_TABLE = "earthquakes";
 	protected static final int DATABASE_VERSION = 1;
 	
 	protected static final String ID_COLUMN = "_id";
@@ -23,7 +23,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 	protected static final String CREATED_AT_COLUMN = "created_at";
 	protected static final String UPDATED_AT_COLUMN = "updated_at";
 	
-	private static final String DATABASE_CREATE = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE + " (" + ID_COLUMN + " TEXT PRIMARY KEY, "
+	private static final String DATABASE_CREATE = "CREATE TABLE IF NOT EXISTS " + DATABASE_TABLE + " (" + ID_COLUMN + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ ID_STR_COLUMN + " TEXT UNIQUE, " + PLACE_COLUMN + " TEXT, " + TIME_COLUMN + " DATETIME, " + DETAIL_COLUMN + " TEXT, " + MAGNITUDE_COLUMN + " REAL, " + LAT_COLUMN + " REAL, "
 			+ LONG_COLUMN + " REAL, " + URL_COLUMN + " TEXT, " + CREATED_AT_COLUMN + " DATETIME, " + UPDATED_AT_COLUMN + " DATETIME);";
 

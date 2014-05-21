@@ -25,7 +25,7 @@ public class MainActivity extends Activity {
 	private SQLiteDatabase db;
 	private ArrayList<Earthquake> arrayTerremotos;
 	private ArrayList<Long> arrayIds;
-	long idErrenteria, idBilbao;
+	private long idErrenteria, idBilbao;
 	private String enlace = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
 	private Earthquake earthquake;
 	
@@ -35,7 +35,12 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		dbOpenHelper = new DBOpenHelper(this, DBOpenHelper.DATABASE_NAME, null, DBOpenHelper.DATABASE_VERSION);
 		db = EarthquakeDB.open(dbOpenHelper);
-		descargarTerremotos();
+		Thread t = new Thread(new Runnable() {
+			public void run() {
+				descargarTerremotos();
+			}
+		});
+		t.start();
 		//arrayTerremotos = new ArrayList<Earthquake>();
 		//Earthquake earthquakeErrenteria = new Earthquake("50", "Errenteria", "12:00", "Menudo terremoto!", Float.valueOf("7.9"), Float.valueOf("43.312527"), Float.valueOf("-1.898613"), "http://es.wikipedia.org/wiki/Renter%C3%ADa");
 		//Earthquake earthquakeBilbao = new Earthquake("60", "Bilbao", "13:00", "El terremoto m‡s grande del mundo!", Float.valueOf("10"), Float.valueOf("43.256944"), Float.valueOf("-2.923611"), "http://es.wikipedia.org/wiki/Bilbao");
@@ -45,6 +50,7 @@ public class MainActivity extends Activity {
 		//arrayTerremotos = EarthquakeDB.filtrarPorMagnitud(db, (float) 8.0);
 		//Log.d("CONSULTA", "" + arrayTerremotos);
 		//EarthquakeDB.delete(db, DBOpenHelper.ID_STR_COLUMN + " = ?", new String[]{"50"});
+		//EarthquakeDB.close(dbOpenHelper);
 	}
 	
 	public void descargarTerremotos() {

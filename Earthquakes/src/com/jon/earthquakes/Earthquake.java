@@ -6,6 +6,11 @@ public class Earthquake {
 	private String idStr, place, time, detail, url;
 	private float magnitude, latitude, longitude;
 	
+	public Earthquake(long id, String idStr, String place, String time, String detail, float magnitude, float latitude, float longitude, String url) {
+		this(idStr, place, time, detail, magnitude, latitude, longitude, url);
+		this.id = id;
+	}
+	
 	public Earthquake(String idStr, String place, String time, String detail, float magnitude, float latitude, float longitude, String url) {
 		this.idStr = idStr;
 		this.place = place;
@@ -19,10 +24,6 @@ public class Earthquake {
 	
 	public long getId() {
 		return this.id;
-	}
-	
-	public void setId(long id) {
-		this.id = id;
 	}
 	
 	public String getIdStr() {
@@ -55,6 +56,11 @@ public class Earthquake {
 	
 	public String getUrl() {
 		return this.url;
+	}
+	
+	@Override
+	public String toString() {	
+		return this.place + this.magnitude;
 	}
 	
 }
