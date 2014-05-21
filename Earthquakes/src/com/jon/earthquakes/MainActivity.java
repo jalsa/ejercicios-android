@@ -39,10 +39,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		fragmentManager = getFragmentManager();
-		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
 		if (savedInstanceState == null) {
+			FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 			fragmentTransaction.add(R.id.lista, new FragmentoLista(), "list");
 			fragmentTransaction.commit();
 		}
@@ -60,11 +58,13 @@ public class MainActivity extends Activity {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
 		arrayTerremotos = new ArrayList<Earthquake>();
 		arrayTerremotos = db.filtrarPorMagnitud(0);
 		for (int i=0; i<arrayTerremotos.size(); i++) {
