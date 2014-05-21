@@ -52,13 +52,16 @@ public class MainActivity extends Activity {
 			}
 		});
 		t.start();
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		arrayTerremotos = new ArrayList<Earthquake>();
-		arrayTerremotos = EarthquakeDB.filtrarPorMagnitud(db, (float) 0);
 		for (int i=0; i<arrayTerremotos.size(); i++) {
 			// Insertarlos en la lista
 			Earthquake eq = arrayTerremotos.get(i);
@@ -99,6 +102,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void guardarTerremotos(StringBuilder builder) {
+		arrayTerremotos = new ArrayList<Earthquake>();
 		arrayIds = new ArrayList<Long>();
 		try {
 			JSONObject json = new JSONObject(builder.toString());
@@ -114,8 +118,9 @@ public class MainActivity extends Activity {
 				float latitude = (float) terremoto.getJSONObject("geometry").getJSONArray("coordinates").getDouble(1);
 				float longitude = (float) terremoto.getJSONObject("geometry").getJSONArray("coordinates").getDouble(0);
 				String url = terremoto.getJSONObject("properties").getString("url");
-				// Crear los terremotos
+				// Crear los terremotos y a–adirlos al array
 				earthquake = new Earthquake(idStr, place, time, detail, magnitude, latitude, longitude, url);
+				arrayTerremotos.add(earthquake);
 				// Insertarlos en la base de datos
 				long id = EarthquakeDB.insert(db, earthquake);
 				arrayIds.add(id);
