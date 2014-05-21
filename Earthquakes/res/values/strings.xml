@@ -3,5 +3,6 @@
 
     <string name="app_name">Earthquakes</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_fragmento_lista">FragmentoLista</string>
 
 </resources>

@@ -15,17 +15,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 
 public class MainActivity extends Activity {
 
+	FragmentManager fragmentManager;
 	private DBOpenHelper dbOpenHelper;
 	private SQLiteDatabase db;
 	private ArrayList<Earthquake> arrayTerremotos;
 	private ArrayList<Long> arrayIds;
-	private long idErrenteria, idBilbao;
 	private String enlace = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
 	private Earthquake earthquake;
 	
@@ -33,6 +35,15 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		fragmentManager = getFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+		if (savedInstanceState == null) {
+			fragmentTransaction.add(R.id.lista, new FragmentoLista(), "list");
+			fragmentTransaction.commit();
+		}
+		
 		dbOpenHelper = new DBOpenHelper(this, DBOpenHelper.DATABASE_NAME, null, DBOpenHelper.DATABASE_VERSION);
 		db = EarthquakeDB.open(dbOpenHelper);
 		Thread t = new Thread(new Runnable() {
@@ -41,16 +52,24 @@ public class MainActivity extends Activity {
 			}
 		});
 		t.start();
-		//arrayTerremotos = new ArrayList<Earthquake>();
-		//Earthquake earthquakeErrenteria = new Earthquake("50", "Errenteria", "12:00", "Menudo terremoto!", Float.valueOf("7.9"), Float.valueOf("43.312527"), Float.valueOf("-1.898613"), "http://es.wikipedia.org/wiki/Renter%C3%ADa");
-		//Earthquake earthquakeBilbao = new Earthquake("60", "Bilbao", "13:00", "El terremoto m‡s grande del mundo!", Float.valueOf("10"), Float.valueOf("43.256944"), Float.valueOf("-2.923611"), "http://es.wikipedia.org/wiki/Bilbao");
-		//idErrenteria = EarthquakeDB.insert(db, earthquakeErrenteria);
-		//idBilbao = EarthquakeDB.insert(db, earthquakeBilbao);
-		//EarthquakeDB.update(db, new String[]{DBOpenHelper.PLACE_COLUMN}, new String[]{"Donostia"}, DBOpenHelper.ID_STR_COLUMN + " = ?", new String[]{"50"});
-		//arrayTerremotos = EarthquakeDB.filtrarPorMagnitud(db, (float) 8.0);
-		//Log.d("CONSULTA", "" + arrayTerremotos);
-		//EarthquakeDB.delete(db, DBOpenHelper.ID_STR_COLUMN + " = ?", new String[]{"50"});
-		//EarthquakeDB.close(dbOpenHelper);
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		arrayTerremotos = new ArrayList<Earthquake>();
+		arrayTerremotos = EarthquakeDB.filtrarPorMagnitud(db, (float) 0);
+		for (int i=0; i<arrayTerremotos.size(); i++) {
+			// Insertarlos en la lista
+			Earthquake eq = arrayTerremotos.get(i);
+			((FragmentoLista)getFragmentManager().findFragmentByTag("list")).nuevoElemento(eq.toString());
+		}
+	}
+	
+	@Override
+	protected void onStop() {
+		EarthquakeDB.close(dbOpenHelper);
+		super.onStop();
 	}
 	
 	public void descargarTerremotos() {
