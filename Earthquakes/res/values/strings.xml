@@ -4,5 +4,64 @@
     <string name="app_name">Earthquakes</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_fragmento_lista">FragmentoLista</string>
+    <string name="title_activity_preferences">PreferencesActivity</string>
+    <string name="action_settings">Preferencias</string>
+    <string name="refresh">Autorefresh:</string>
+    <string name="intervalo">Intervalo:</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="valorPorDefecto">Default</string>
+    <string name="magnitud">Magnitud</string>
+    <string name="PREF_CHECK_BOX">PREF_CHECK_BOX</string>
+    <string name="PREF_LIST_INTERVALOS">PREF_LIST_INTERVALOS</string>
+    <string name="PREF_LIST_MAGNITUDES">PREF_LIST_MAGNITUDES</string>
+    <string name="categoriaActualizacion">Preferencias de actualización</string>
+    <string name="tituloActualizaciones">Autorefresh</string>
+    <string name="descripcionActualizaciones">Actualización automática</string>
+    <string name="tituloIntervalos">Intervalos</string>
+    <string name="descripcionIntervalos">Lista de diferentes intervalos</string>
+    <string name="categoriaMagnitudes">Preferencias de magnitud</string>
+    <string name="tituloMagnitudes">Magnitudes</string>
+    <string name="descripcionMagnitudes">Lista de diferentes magnitudes</string>
+    <string name="categoriaConectividad">Preferencias de conectividad</string>
+    <string name="tituloConectividad">Opciones de conectividad</string>
+    <string name="descripcionConectividad">Todas las opciones de conectividad</string>
+
+    <string-array name="intervalos_array_valores">
+        <item>1</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+    </string-array>
+    <string-array name="intervalos_array">
+        <item>1 min</item>
+        <item>15 min</item>
+        <item>30 min</item>
+        <item>60 min</item>
+    </string-array>
+    
+    <integer-array name="magnitudes_array_valores">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </integer-array>
+    <string-array name="magnitudes_array">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+    </string-array>
 
 </resources>

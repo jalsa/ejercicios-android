@@ -9,14 +9,19 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class MainActivity extends Activity {
 
@@ -27,6 +32,7 @@ public class MainActivity extends Activity {
 	private ArrayList<Long> arrayIds;
 	private String enlace = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
 	private Earthquake earthquake;
+	private static final int PREFERENCES = 1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -125,6 +131,23 @@ public class MainActivity extends Activity {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		if (id == R.id.action_settings) {
+			Intent i = new Intent(this, PreferencesActivity.class);
+			startActivityForResult(i, PREFERENCES);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 	
 }

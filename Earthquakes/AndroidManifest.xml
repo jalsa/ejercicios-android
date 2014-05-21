@@ -28,6 +28,10 @@
             android:name="com.jon.earthquakes.FragmentoLista"
             android:label="@string/title_activity_fragmento_lista" >
         </activity>
+        <activity
+            android:name="com.jon.earthquakes.PreferencesActivity"
+            android:label="@string/title_activity_preferences" >
+        </activity>
     </application>
 
 </manifest>
