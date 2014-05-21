@@ -24,18 +24,24 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		mySharedPreferences = getSharedPreferences(SettingsActivity.MY_PREFS, Activity.MODE_PRIVATE);
+		//fwSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+		
 		refresh = (TextView) findViewById(R.id.valorAuto);
 		intervalo = (TextView) findViewById(R.id.valorIntervalo);
 		magnitud = (TextView) findViewById(R.id.valorMagnitud);
+		
+		actualizar();
 	}
 	
 	@Override
-	protected void onResume() {
-		super.onResume();
-		
-		mySharedPreferences = getSharedPreferences(SettingsActivity.MY_PREFS, Activity.MODE_PRIVATE);
-		fwSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-		
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == SETTINGS | requestCode == PREFERENCES) {
+			actualizar();
+		}
+	}
+	public void actualizar() {
 		boolRefresh = mySharedPreferences.getBoolean(SettingsActivity.VALORREFRESH, true);
 		indiceIntervalo = mySharedPreferences.getInt(SettingsActivity.VALORINTERVALO, 0);
 		
