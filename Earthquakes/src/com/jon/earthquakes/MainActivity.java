@@ -9,15 +9,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -25,7 +22,7 @@ public class MainActivity extends Activity {
 
 	FragmentManager fragmentManager;
 	private DBOpenHelper dbOpenHelper;
-	private SQLiteDatabase db;
+	private EarthquakeDB db;
 	private ArrayList<Earthquake> arrayTerremotos;
 	private ArrayList<Long> arrayIds;
 	private String enlace = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
@@ -44,8 +41,8 @@ public class MainActivity extends Activity {
 			fragmentTransaction.commit();
 		}
 		
-		dbOpenHelper = new DBOpenHelper(this, DBOpenHelper.DATABASE_NAME, null, DBOpenHelper.DATABASE_VERSION);
-		db = EarthquakeDB.open(dbOpenHelper);
+		db = EarthquakeDB.getDB(this);
+		
 		Thread t = new Thread(new Runnable() {
 			public void run() {
 				descargarTerremotos();
@@ -63,7 +60,7 @@ public class MainActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		arrayTerremotos = new ArrayList<Earthquake>();
-		arrayTerremotos = EarthquakeDB.filtrarPorMagnitud(db, 0);
+		arrayTerremotos = db.filtrarPorMagnitud(0);
 		for (int i=0; i<arrayTerremotos.size(); i++) {
 			// Insertarlos en la lista
 			Earthquake eq = arrayTerremotos.get(i);
@@ -73,7 +70,7 @@ public class MainActivity extends Activity {
 	
 	@Override
 	protected void onStop() {
-		EarthquakeDB.close(dbOpenHelper);
+		db.close(dbOpenHelper);
 		super.onStop();
 	}
 	
@@ -122,7 +119,7 @@ public class MainActivity extends Activity {
 				// Crear los terremotos y a–adirlos al array
 				earthquake = new Earthquake(idStr, place, time, detail, magnitude, latitude, longitude, url);
 				// Insertarlos en la base de datos
-				long id = EarthquakeDB.insert(db, earthquake);
+				long id = db.insert(earthquake);
 				arrayIds.add(id);
 			}
 		} catch (JSONException e) {

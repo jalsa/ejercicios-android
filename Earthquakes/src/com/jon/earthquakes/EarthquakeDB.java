@@ -2,26 +2,43 @@ package com.jon.earthquakes;
 
 import java.util.ArrayList;
 import java.util.Date;
+
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 public class EarthquakeDB {
 
-	DBOpenHelper dbOpenHelper;
-	static ArrayList<Earthquake> arrayTerremotos;
-	static Earthquake earthquake;
+	private DBOpenHelper dbOpenHelper;
+	private ArrayList<Earthquake> arrayTerremotos;
+	private Earthquake earthquake;
+	private Context mContext;
+	private static EarthquakeDB INSTANCE = null;
+	private SQLiteDatabase db;
 	
-	public static SQLiteDatabase open(DBOpenHelper dbOpenHelper) {
-		SQLiteDatabase db = dbOpenHelper.getWritableDatabase();
-		return db;
+	private EarthquakeDB(Context context) {
+		mContext = context;
 	}
 	
-	public static void close(DBOpenHelper dbOpenHelper) {
+	public static EarthquakeDB getDB(Context context) {
+		if (INSTANCE == null) {
+			INSTANCE = new EarthquakeDB(context);
+			INSTANCE.open();
+		}
+		return INSTANCE;
+	}
+	
+	public void open() {
+		dbOpenHelper = new DBOpenHelper(mContext, DBOpenHelper.DATABASE_NAME, null, DBOpenHelper.DATABASE_VERSION);
+		db = dbOpenHelper.getWritableDatabase();
+	}
+	
+	public void close(DBOpenHelper dbOpenHelper) {
 		dbOpenHelper.close();
 	}
 	
-	public static ArrayList<Earthquake> filtrarPorMagnitud(SQLiteDatabase db, float magnitud) {
+	public ArrayList<Earthquake> filtrarPorMagnitud(float magnitud) {
 		long id;
 		String idStr, place, time, detail, url;
 		float magnitude, latitude, longitude;
@@ -35,7 +52,7 @@ public class EarthquakeDB {
 		String groupBy = null;
 		String having = null;
 		String order= null;
-		Cursor cursor = query(db, result_columns, where, whereArgs, groupBy, having, order);
+		Cursor cursor = query(result_columns, where, whereArgs, groupBy, having, order);
 		
 		int ID_COLUMN_INDEX = cursor.getColumnIndexOrThrow(DBOpenHelper.ID_COLUMN);
 		int ID_STR_COLUMN_INDEX = cursor.getColumnIndexOrThrow(DBOpenHelper.ID_STR_COLUMN);
@@ -65,12 +82,12 @@ public class EarthquakeDB {
 		return arrayTerremotos;
 	}
 
-	public static Cursor query(SQLiteDatabase db, String[] result_columns, String where, String[] whereArgs, String groupBy, String having, String order) {
+	public Cursor query(String[] result_columns, String where, String[] whereArgs, String groupBy, String having, String order) {
 		Cursor cursor = db.query(DBOpenHelper.DATABASE_TABLE, result_columns, where, whereArgs, groupBy, having, order);
 		return cursor;
 	}
 	
-	public static long insert(SQLiteDatabase db, Earthquake earthquake) {
+	public long insert(Earthquake earthquake) {
 		Date date = new Date();
 		ContentValues newValues = new ContentValues();
 	    newValues.put(DBOpenHelper.ID_STR_COLUMN, earthquake.getIdStr());
@@ -86,7 +103,7 @@ public class EarthquakeDB {
 		return db.insert(DBOpenHelper.DATABASE_TABLE, null, newValues);
 	}
 
-	public static void update(SQLiteDatabase db, String[] nombreColumna, String[] valor, String clausulaWhere, String[] argsWhere) {
+	public void update(String[] nombreColumna, String[] valor, String clausulaWhere, String[] argsWhere) {
 		Date date = new Date();
 		ContentValues updatedValues = new ContentValues();
 		for (int i=0; i<nombreColumna.length; i++) {
@@ -98,7 +115,7 @@ public class EarthquakeDB {
 		db.update(DBOpenHelper.DATABASE_TABLE, updatedValues, where, whereArgs);
 	}
 	
-	public static void delete(SQLiteDatabase db, String clausulaWhere, String[] argsWhere) {
+	public void delete(String clausulaWhere, String[] argsWhere) {
 		String where = clausulaWhere;
 	    String whereArgs[] = argsWhere;
 	    db.delete(DBOpenHelper.DATABASE_TABLE, where, whereArgs);
