@@ -1,19 +1,6 @@
 package com.jon.earthquakes;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.ListFragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,10 +15,8 @@ public class FragmentoLista extends ListFragment implements DownloadEarthquakes.
 
 	private ArrayList<Earthquake> listado;
 	private ArrayAdapter<Earthquake> adaptador;
-	private ArrayList<Long> arrayIds;
 	private String enlace = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
 	private EarthquakeDB db;
-	private Earthquake earthquake;
 	private static final String LISTA = "listado";
 	
 	@Override
@@ -62,10 +47,8 @@ public class FragmentoLista extends ListFragment implements DownloadEarthquakes.
 			listado.clear();
 			listado.addAll(db.filtrarPorMagnitud(mag));
 			adaptador.notifyDataSetChanged();
-		}
-		
-		new DownloadEarthquakes(getActivity()).execute(enlace);
-		
+		}	
+		new DownloadEarthquakes(getActivity(), this).execute(enlace);
 	}
 	
 	@Override
@@ -78,17 +61,6 @@ public class FragmentoLista extends ListFragment implements DownloadEarthquakes.
 		listado.addAll(db.filtrarPorMagnitud(mag));
 		adaptador.notifyDataSetChanged();
 	}
-
-//	@Override
-//	public void onSaveInstanceState(Bundle savedInstanceState) {
-//		savedInstanceState.putStringArrayList("listado", listado);
-//		super.onSaveInstanceState(savedInstanceState);
-//	}
-
-//	public void nuevoElemento(String valor) {
-//		listado.add(valor);
-//		adaptador.notifyDataSetChanged();
-//	}
 	
 	@Override
 	public void onDestroy() {
@@ -96,10 +68,13 @@ public class FragmentoLista extends ListFragment implements DownloadEarthquakes.
 		super.onDestroy();
 	}
 
-	@Override
-	public void insertarTerremoto(Earthquake eq) {
-		long id = db.insert(eq);
-		arrayIds.add(id);
+	public void mostrarLista() {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		int mag = Integer.parseInt(prefs.getString(getString(R.string.keyListaMagnitudes), "0"));
+		Log.d("MAG", "" + mag);
+		listado.clear();
+		listado.addAll(db.filtrarPorMagnitud(mag));
+		adaptador.notifyDataSetChanged();
 	}
 	
 }

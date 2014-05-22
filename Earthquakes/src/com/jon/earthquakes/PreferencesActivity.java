@@ -24,9 +24,10 @@ public class PreferencesActivity extends Activity implements OnSharedPreferenceC
 		int mag = Integer.parseInt(prefs.getString(getString(R.string.keyListaMagnitudes), "0"));
 		if (key.equals(R.string.PREF_CHECK_BOX)) {
 			Log.d("PREFERENCIAS", "Autorefresh cambiado");
+			Log.d("PREFERENCIAS", "" + autorefresh);
 		}
 		else if (key.equals(R.string.keyListaMagnitudes)) {
-			Toast toast = Toast.makeText(getApplicationContext(), "Magnitud cambiada", 2000);
+			Toast toast = Toast.makeText(getApplicationContext(), "Magnitud cambiada: " + mag, Toast.LENGTH_LONG);
 			toast.show();
 		}
 	}

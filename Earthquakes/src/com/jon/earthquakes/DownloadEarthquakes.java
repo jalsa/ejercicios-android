@@ -24,25 +24,27 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 	private ArrayList<Long> arrayIds;
 	private Context contexto;
 	private EarthquakeDB db;
+	private FragmentoLista fragmento;
 	
-	public DownloadEarthquakes(Context contexto) {
+	public DownloadEarthquakes(Context contexto, FragmentoLista fragmento) {
 		this.contexto = contexto;
+		this.fragmento = fragmento;
 	}
 	
 	@Override
-	protected ArrayList<Earthquake> doInBackground(String... urls) {
-		descargarTerremotos(urls[0]);
+	protected ArrayList<Earthquake> doInBackground(String... strings) {
+		descargarTerremotos(strings[0]);
 		return null;
 	}
 	
 	@Override
 	protected void onPostExecute(ArrayList<Earthquake> result) {
 		super.onPostExecute(result);
-		
+		((InterfazAdaptador) fragmento).mostrarLista();
 	}
 	
 	public interface InterfazAdaptador {
-		public void insertarTerremoto(Earthquake eq);
+		public void mostrarLista();
 	}
 	
 	public void descargarTerremotos(String enlace) {
