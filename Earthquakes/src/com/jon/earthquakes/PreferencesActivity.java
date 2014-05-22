@@ -20,12 +20,12 @@ public class PreferencesActivity extends Activity implements OnSharedPreferenceC
 
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-		boolean autorefresh = prefs.getBoolean(getString(R.string.PREF_CHECK_BOX), true);
-		String magnitud = prefs.getString(getString(R.string.PREF_LIST_MAGNITUDES), "0");
+		boolean autorefresh = prefs.getBoolean(getString(R.string.keyCheckbox), true);
+		int mag = Integer.parseInt(prefs.getString(getString(R.string.keyListaMagnitudes), "0"));
 		if (key.equals(R.string.PREF_CHECK_BOX)) {
 			Log.d("PREFERENCIAS", "Autorefresh cambiado");
 		}
-		else if (key.equals(R.string.PREF_LIST_MAGNITUDES)) {
+		else if (key.equals(R.string.keyListaMagnitudes)) {
 			Toast toast = Toast.makeText(getApplicationContext(), "Magnitud cambiada", 2000);
 			toast.show();
 		}

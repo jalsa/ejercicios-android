@@ -24,7 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-public class FragmentoLista extends ListFragment {
+public class FragmentoLista extends ListFragment implements DownloadEarthquakes.InterfazAdaptador {
 
 	private ArrayList<Earthquake> listado;
 	private ArrayAdapter<Earthquake> adaptador;
@@ -64,17 +64,8 @@ public class FragmentoLista extends ListFragment {
 			adaptador.notifyDataSetChanged();
 		}
 		
-		Thread t = new Thread(new Runnable() {
-			public void run() {
-				descargarTerremotos();
-			}
-		});
-		t.start();
-		try {
-			t.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		new DownloadEarthquakes(getActivity()).execute(enlace);
+		
 	}
 	
 	@Override
@@ -99,63 +90,16 @@ public class FragmentoLista extends ListFragment {
 //		adaptador.notifyDataSetChanged();
 //	}
 	
-	public void descargarTerremotos() {
-		try {
-			URL url = new URL(enlace);
-			URLConnection connection = url.openConnection();
-			HttpURLConnection httpConnection = (HttpURLConnection)connection;
-			int	responseCode = httpConnection.getResponseCode();
-			if (responseCode == HttpURLConnection.HTTP_OK)	{
-				InputStream	in = httpConnection.getInputStream();
-				BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
-				StringBuilder builder = new StringBuilder();
-				String input = br.readLine();
-				while (input != null) {
-					builder.append(input);
-					input = br.readLine();
-				}
-				guardarTerremotos(builder);
-			}
-		}
-		catch(MalformedURLException	e) {
-			Log.d("ERROR",	"Malformed	URL	Exception.", e);
-		}
-		catch(IOException e) {
-			Log.d("ERROR", "IO	Exception.", e);
-		}
-	}
-	
-	public void guardarTerremotos(StringBuilder builder) {
-		arrayIds = new ArrayList<Long>();
-		try {
-			JSONObject json = new JSONObject(builder.toString());
-			JSONArray array = json.getJSONArray("features");
-			for (int i=0; i<array.length(); i++) {
-				// Obtener todos los datos
-				JSONObject terremoto = array.getJSONObject(i);
-				String idStr = terremoto.getString("id");
-				String place = terremoto.getJSONObject("properties").getString("place");
-				String time = String.valueOf(terremoto.getJSONObject("properties").getLong("time"));
-				String detail = terremoto.getJSONObject("properties").getString("detail");
-				float magnitude = (float) terremoto.getJSONObject("properties").getDouble("mag");
-				float latitude = (float) terremoto.getJSONObject("geometry").getJSONArray("coordinates").getDouble(1);
-				float longitude = (float) terremoto.getJSONObject("geometry").getJSONArray("coordinates").getDouble(0);
-				String url = terremoto.getJSONObject("properties").getString("url");
-				// Crear los terremotos y a–adirlos al array
-				earthquake = new Earthquake(idStr, place, time, detail, magnitude, latitude, longitude, url);
-				// Insertarlos en la base de datos
-				long id = db.insert(earthquake);
-				arrayIds.add(id);
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	@Override
 	public void onDestroy() {
 		db.close();
 		super.onDestroy();
+	}
+
+	@Override
+	public void insertarTerremoto(Earthquake eq) {
+		long id = db.insert(eq);
+		arrayIds.add(id);
 	}
 	
 }
