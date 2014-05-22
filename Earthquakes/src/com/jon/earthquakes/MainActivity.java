@@ -23,7 +23,6 @@ public class MainActivity extends Activity {
 			fragmentTransaction.add(R.id.lista, new FragmentoLista(), "list");
 			fragmentTransaction.commit();
 		}
-		
 	}
 	
 //	@Override

@@ -51,18 +51,6 @@ public class FragmentoLista extends ListFragment {
 		
 		db = EarthquakeDB.getDB(getActivity());
 		
-		Thread t = new Thread(new Runnable() {
-			public void run() {
-				descargarTerremotos();
-			}
-		});
-		t.start();
-		try {
-			t.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
 		if (savedInstanceState != null) {
 			listado.addAll((ArrayList<Earthquake>) savedInstanceState.getSerializable(LISTA));
 			adaptador.notifyDataSetChanged();
@@ -74,6 +62,18 @@ public class FragmentoLista extends ListFragment {
 			listado.clear();
 			listado.addAll(db.filtrarPorMagnitud(mag));
 			adaptador.notifyDataSetChanged();
+		}
+		
+		Thread t = new Thread(new Runnable() {
+			public void run() {
+				descargarTerremotos();
+			}
+		});
+		t.start();
+		try {
+			t.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 	
