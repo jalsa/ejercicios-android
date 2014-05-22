@@ -14,6 +14,9 @@
     <string name="PREF_CHECK_BOX">PREF_CHECK_BOX</string>
     <string name="PREF_LIST_INTERVALOS">PREF_LIST_INTERVALOS</string>
     <string name="PREF_LIST_MAGNITUDES">PREF_LIST_MAGNITUDES</string>
+    <string name="keyCheckbox">keyCheckbox</string>
+    <string name="keyListaIntervalos">keyListaIntervalos</string>
+    <string name="keyListaMagnitudes">keyListaMagnitudes</string>
     <string name="categoriaActualizacion">Preferencias de actualización</string>
     <string name="tituloActualizaciones">Autorefresh</string>
     <string name="descripcionActualizaciones">Actualización automática</string>

@@ -15,7 +15,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ListFragment;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,10 +66,26 @@ public class FragmentoLista extends ListFragment {
 		if (savedInstanceState != null) {
 			listado.addAll((ArrayList<Earthquake>) savedInstanceState.getSerializable(LISTA));
 			adaptador.notifyDataSetChanged();
-		} else {
-			listado.addAll(db.filtrarPorMagnitud(0));
+		}
+		else {
+			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+			int mag = Integer.parseInt(prefs.getString(getString(R.string.keyListaMagnitudes), "0"));
+			Log.d("MAG", "" + mag);
+			listado.clear();
+			listado.addAll(db.filtrarPorMagnitud(mag));
 			adaptador.notifyDataSetChanged();
 		}
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		int mag = Integer.parseInt(prefs.getString(getString(R.string.keyListaMagnitudes), "0"));
+		Log.d("MAG", "" + mag);
+		listado.clear();
+		listado.addAll(db.filtrarPorMagnitud(mag));
+		adaptador.notifyDataSetChanged();
 	}
 
 //	@Override

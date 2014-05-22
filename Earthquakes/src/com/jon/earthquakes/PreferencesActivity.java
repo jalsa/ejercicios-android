@@ -6,6 +6,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 public class PreferencesActivity extends Activity implements OnSharedPreferenceChangeListener{
 
@@ -20,8 +21,13 @@ public class PreferencesActivity extends Activity implements OnSharedPreferenceC
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
 		boolean autorefresh = prefs.getBoolean(getString(R.string.PREF_CHECK_BOX), true);
-		if (autorefresh) {
+		String magnitud = prefs.getString(getString(R.string.PREF_LIST_MAGNITUDES), "0");
+		if (key.equals(R.string.PREF_CHECK_BOX)) {
 			Log.d("PREFERENCIAS", "Autorefresh cambiado");
+		}
+		else if (key.equals(R.string.PREF_LIST_MAGNITUDES)) {
+			Toast toast = Toast.makeText(getApplicationContext(), "Magnitud cambiada", 2000);
+			toast.show();
 		}
 	}
 

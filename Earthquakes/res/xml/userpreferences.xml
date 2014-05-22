@@ -4,12 +4,12 @@
 <PreferenceCategory
 	    android:title="@string/categoriaActualizacion">
 	    <CheckBoxPreference
-	        android:key="@string/PREF_CHECK_BOX"
+	        android:key="@string/keyCheckbox"
 	        android:title="@string/tituloActualizaciones"
 	        android:summary="@string/descripcionActualizaciones"
 	        android:defaultValue="true" />
 	    <ListPreference 
-	        android:key="@string/PREF_LIST_INTERVALOS"
+	        android:key="@string/keyListaIntervalos"
 	        android:title="@string/tituloIntervalos"
 	        android:summary="@string/descripcionIntervalos"
 	        android:defaultValue="60"
@@ -20,7 +20,7 @@
 	<PreferenceCategory
 	    android:title="@string/categoriaMagnitudes">
 		<ListPreference 
-		        android:key="@string/PREF_LIST_MAGNITUDES"
+		        android:key="@string/keyListaMagnitudes"
 		        android:title="@string/tituloMagnitudes"
 		        android:summary="@string/descripcionMagnitudes"
 		        android:defaultValue="3"
