@@ -68,12 +68,19 @@ public class FragmentoLista extends ListFragment implements DownloadEarthquakes.
 		super.onDestroy();
 	}
 
-	public void mostrarLista() {
+	public void mostrarLista(ArrayList<Earthquake> result) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		int mag = Integer.parseInt(prefs.getString(getString(R.string.keyListaMagnitudes), "0"));
 		Log.d("MAG", "" + mag);
-		listado.clear();
-		listado.addAll(db.filtrarPorMagnitud(mag));
+		
+		for (Earthquake earthquake : result) {
+			if (earthquake.getMagnitude() >= mag) {
+				listado.add(0, earthquake);
+			}
+		}
+		
+//		listado.clear();
+//		listado.addAll(db.filtrarPorMagnitud(mag));
 		adaptador.notifyDataSetChanged();
 	}
 	

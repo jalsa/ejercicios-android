@@ -22,6 +22,7 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 
 	private Earthquake earthquake;
 	private ArrayList<Long> arrayIds;
+	private ArrayList<Earthquake> arrayTerremotos;
 	private Context contexto;
 	private EarthquakeDB db;
 	private FragmentoLista fragmento;
@@ -33,21 +34,25 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 	
 	@Override
 	protected ArrayList<Earthquake> doInBackground(String... strings) {
-		descargarTerremotos(strings[0]);
-		return null;
+		ArrayList<Earthquake> result = new ArrayList<Earthquake>();
+		
+		result = descargarTerremotos(strings[0]);
+		
+		return result;
 	}
 	
 	@Override
 	protected void onPostExecute(ArrayList<Earthquake> result) {
 		super.onPostExecute(result);
-		((InterfazAdaptador) fragmento).mostrarLista();
+		((InterfazAdaptador) fragmento).mostrarLista(result);
 	}
 	
 	public interface InterfazAdaptador {
-		public void mostrarLista();
+		public void mostrarLista(ArrayList<Earthquake> result);
 	}
 	
-	public void descargarTerremotos(String enlace) {
+	public ArrayList<Earthquake> descargarTerremotos(String enlace) {
+		arrayTerremotos = new ArrayList<Earthquake>();
 		try {
 			URL url = new URL(enlace);
 			URLConnection connection = url.openConnection();
@@ -62,7 +67,7 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 					builder.append(input);
 					input = br.readLine();
 				}
-				guardarTerremotos(builder);
+				arrayTerremotos = guardarTerremotos(builder);
 			}
 		}
 		catch(MalformedURLException	e) {
@@ -71,9 +76,10 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 		catch(IOException e) {
 			Log.d("ERROR", "IO	Exception.", e);
 		}
+		return arrayTerremotos;
 	}
 	
-	public void guardarTerremotos(StringBuilder builder) {
+	public ArrayList<Earthquake> guardarTerremotos(StringBuilder builder) {
 		arrayIds = new ArrayList<Long>();
 		try {
 			JSONObject json = new JSONObject(builder.toString());
@@ -91,6 +97,7 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 				String url = terremoto.getJSONObject("properties").getString("url");
 				// Crear los terremotos y a–adirlos al array
 				earthquake = new Earthquake(idStr, place, time, detail, magnitude, latitude, longitude, url);
+				arrayTerremotos.add(earthquake);
 				// Insertarlos en la base de datos
 				db = EarthquakeDB.getDB(contexto);
 				long id = db.insert(earthquake);
@@ -99,6 +106,7 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		return arrayTerremotos;
 	}
 
 }
