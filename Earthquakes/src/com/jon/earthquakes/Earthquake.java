@@ -1,7 +1,10 @@
 package com.jon.earthquakes;
 
-public class Earthquake {
+import java.io.Serializable;
+
+public class Earthquake implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	private long id;
 	private String idStr, place, time, detail, url;
 	private float magnitude, latitude, longitude;

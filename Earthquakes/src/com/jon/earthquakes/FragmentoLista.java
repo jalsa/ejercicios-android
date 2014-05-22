@@ -30,6 +30,7 @@ public class FragmentoLista extends ListFragment {
 	private String enlace = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
 	private EarthquakeDB db;
 	private Earthquake earthquake;
+	private static final String LISTA = "listado";
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,10 +62,11 @@ public class FragmentoLista extends ListFragment {
 		}
 		
 		if (savedInstanceState != null) {
-//			listado.addAll(savedInstanceState.getStringArrayList("listado"));
-//			adaptador.notifyDataSetChanged();
+			listado.addAll((ArrayList<Earthquake>) savedInstanceState.getSerializable(LISTA));
+			adaptador.notifyDataSetChanged();
 		} else {
 			listado.addAll(db.filtrarPorMagnitud(0));
+			adaptador.notifyDataSetChanged();
 		}
 	}
 
@@ -130,6 +132,12 @@ public class FragmentoLista extends ListFragment {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void onDestroy() {
+		db.close();
+		super.onDestroy();
 	}
 	
 }

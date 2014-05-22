@@ -34,7 +34,7 @@ public class EarthquakeDB {
 		db = dbOpenHelper.getWritableDatabase();
 	}
 	
-	public void close(DBOpenHelper dbOpenHelper) {
+	public void close() {
 		dbOpenHelper.close();
 	}
 	
