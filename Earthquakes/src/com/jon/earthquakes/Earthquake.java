@@ -1,23 +1,27 @@
 package com.jon.earthquakes;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class Earthquake implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private long id;
-	private String idStr, place, time, detail, url;
+	private Date time;
+	private String idStr, place, detail, url;
 	private float magnitude, latitude, longitude;
 	
-	public Earthquake(long id, String idStr, String place, String time, String detail, float magnitude, float latitude, float longitude, String url) {
+	public Earthquake(long id, String idStr, String place, long time, String detail, float magnitude, float latitude, float longitude, String url) {
 		this(idStr, place, time, detail, magnitude, latitude, longitude, url);
 		this.id = id;
 	}
 	
-	public Earthquake(String idStr, String place, String time, String detail, float magnitude, float latitude, float longitude, String url) {
+	public Earthquake(String idStr, String place, long time, String detail, float magnitude, float latitude, float longitude, String url) {
 		this.idStr = idStr;
 		this.place = place;
-		this.time = time;
+		this.time = new Date(time);
 		this.detail = detail;
 		this.magnitude = magnitude;
 		this.latitude = latitude;
@@ -37,7 +41,7 @@ public class Earthquake implements Serializable {
 		return this.place;
 	}
 	
-	public String getTime() {
+	public Date getTime() {
 		return this.time;
 	}
 	
@@ -62,8 +66,11 @@ public class Earthquake implements Serializable {
 	}
 	
 	@Override
-	public String toString() {	
-		return this.place + this.magnitude;
+	public String toString() {
+		SimpleDateFormat df = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss", Locale.ENGLISH);
+		String fecha = df.format(this.time);
+		
+		return fecha + " " + this.place + this.magnitude;
 	}
 	
 }

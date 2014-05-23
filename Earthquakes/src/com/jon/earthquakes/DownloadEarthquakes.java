@@ -89,7 +89,7 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 				JSONObject terremoto = array.getJSONObject(i);
 				String idStr = terremoto.getString("id");
 				String place = terremoto.getJSONObject("properties").getString("place");
-				String time = String.valueOf(terremoto.getJSONObject("properties").getLong("time"));
+				long time = terremoto.getJSONObject("properties").getLong("time");
 				String detail = terremoto.getJSONObject("properties").getString("detail");
 				float magnitude = (float) terremoto.getJSONObject("properties").getDouble("mag");
 				float latitude = (float) terremoto.getJSONObject("geometry").getJSONArray("coordinates").getDouble(1);

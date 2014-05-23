@@ -1,6 +1,7 @@
 package com.jon.earthquakes;
 
 import java.util.ArrayList;
+
 import android.app.ListFragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class FragmentoLista extends ListFragment implements DownloadEarthquakes.InterfazAdaptador {
 
@@ -48,6 +50,10 @@ public class FragmentoLista extends ListFragment implements DownloadEarthquakes.
 			listado.addAll(db.filtrarPorMagnitud(mag));
 			adaptador.notifyDataSetChanged();
 		}	
+		refrescarTerremotos();
+	}
+	
+	public void refrescarTerremotos() {
 		new DownloadEarthquakes(getActivity(), this).execute(enlace);
 	}
 	
@@ -79,6 +85,11 @@ public class FragmentoLista extends ListFragment implements DownloadEarthquakes.
 			}
 		}
 		adaptador.notifyDataSetChanged();
+	}
+	
+	@Override
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		super.onListItemClick(l, v, position, id);
 	}
 	
 }

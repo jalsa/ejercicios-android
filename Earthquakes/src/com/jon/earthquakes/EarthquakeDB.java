@@ -39,8 +39,8 @@ public class EarthquakeDB {
 	}
 	
 	public ArrayList<Earthquake> filtrarPorMagnitud(float magnitud) {
-		long id;
-		String idStr, place, time, detail, url;
+		long id, time;
+		String idStr, place, detail, url;
 		float magnitude, latitude, longitude;
 		arrayTerremotos = new ArrayList<Earthquake>();
 		
@@ -51,7 +51,7 @@ public class EarthquakeDB {
 		String[] whereArgs = new String[]{String.valueOf(magnitud)};
 		String groupBy = null;
 		String having = null;
-		String order= null;
+		String order= DBOpenHelper.TIME_COLUMN + " DESC";
 		Cursor cursor = query(result_columns, where, whereArgs, groupBy, having, order);
 		
 		int ID_COLUMN_INDEX = cursor.getColumnIndexOrThrow(DBOpenHelper.ID_COLUMN);
@@ -68,7 +68,7 @@ public class EarthquakeDB {
 			id = cursor.getLong(ID_COLUMN_INDEX);
 			idStr = cursor.getString(ID_STR_COLUMN_INDEX);
 			place = cursor.getString(PLACE_COLUMN_INDEX);
-			time = cursor.getString(TIME_COLUMN_INDEX);
+			time = cursor.getLong(TIME_COLUMN_INDEX);
 			detail = cursor.getString(DETAIL_COLUMN_INDEX);
 			magnitude = cursor.getFloat(MAGNITUDE_COLUMN_INDEX);
 			latitude = cursor.getFloat(LAT_COLUMN_INDEX);
@@ -92,7 +92,7 @@ public class EarthquakeDB {
 		ContentValues newValues = new ContentValues();
 	    newValues.put(DBOpenHelper.ID_STR_COLUMN, earthquake.getIdStr());
 	    newValues.put(DBOpenHelper.PLACE_COLUMN, earthquake.getPlace());
-	    newValues.put(DBOpenHelper.TIME_COLUMN, earthquake.getTime());
+	    newValues.put(DBOpenHelper.TIME_COLUMN, earthquake.getTime().getTime());
 	    newValues.put(DBOpenHelper.DETAIL_COLUMN, earthquake.getDetail());
 	    newValues.put(DBOpenHelper.MAGNITUDE_COLUMN, earthquake.getMagnitude());
 	    newValues.put(DBOpenHelper.LAT_COLUMN, earthquake.getLatitude());
