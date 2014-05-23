@@ -3,6 +3,7 @@ package com.jon.earthquakes;
 import java.util.ArrayList;
 
 import android.app.ListFragment;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -20,6 +21,7 @@ public class FragmentoLista extends ListFragment implements DownloadEarthquakes.
 	private String enlace = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
 	private EarthquakeDB db;
 	private static final String LISTA = "listado";
+	private static final int DETALLE = 2;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -90,6 +92,9 @@ public class FragmentoLista extends ListFragment implements DownloadEarthquakes.
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
+		Intent intent = new Intent(getActivity(), DetalleActivity.class);
+		intent.putExtra("id", id);
+		startActivityForResult(intent, DETALLE);
 	}
 	
 }

@@ -29,6 +29,7 @@
     <string name="categoriaConectividad">Preferencias de conectividad</string>
     <string name="tituloConectividad">Opciones de conectividad</string>
     <string name="descripcionConectividad">Todas las opciones de conectividad</string>
+    <string name="title_activity_detalle">DetalleActivity</string>
 
     <string-array name="intervalos_array_valores">
         <item>1</item>
@@ -42,7 +43,7 @@
         <item>30 min</item>
         <item>60 min</item>
     </string-array>
-    
+
     <integer-array name="magnitudes_array_valores">
         <item>0</item>
         <item>1</item>
@@ -55,6 +56,7 @@
         <item>8</item>
         <item>9</item>
     </integer-array>
+
     <string-array name="magnitudes_array">
         <item>0</item>
         <item>1</item>

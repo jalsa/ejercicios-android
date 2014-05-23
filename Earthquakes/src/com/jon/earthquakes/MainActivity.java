@@ -25,19 +25,6 @@ public class MainActivity extends Activity {
 		}
 	}
 	
-//	@Override
-//	protected void onResume() {
-//		super.onResume();
-//		
-//		arrayTerremotos = new ArrayList<Earthquake>();
-//		arrayTerremotos = db.filtrarPorMagnitud(0);
-//		for (int i=0; i<arrayTerremotos.size(); i++) {
-//			// Insertarlos en la lista
-//			Earthquake eq = arrayTerremotos.get(i);
-//			((FragmentoLista)getFragmentManager().findFragmentByTag("list")).nuevoElemento(eq.toString());
-//		}
-//	}
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
@@ -48,8 +35,8 @@ public class MainActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == R.id.action_preferences) {
-			Intent i = new Intent(this, PreferencesActivity.class);
-			startActivityForResult(i, PREFERENCES);
+			Intent intent = new Intent(this, PreferencesActivity.class);
+			startActivityForResult(intent, PREFERENCES);
 			return true;
 		}
 		else if (id == R.id.action_refresh) {

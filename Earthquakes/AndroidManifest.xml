@@ -32,6 +32,10 @@
             android:name="com.jon.earthquakes.PreferencesActivity"
             android:label="@string/title_activity_preferences" >
         </activity>
+        <activity
+            android:name="com.jon.earthquakes.DetalleActivity"
+            android:label="@string/title_activity_detalle" >
+        </activity>
     </application>
 
 </manifest>
