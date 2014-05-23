@@ -97,10 +97,12 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 				String url = terremoto.getJSONObject("properties").getString("url");
 				// Crear los terremotos y a–adirlos al array
 				earthquake = new Earthquake(idStr, place, time, detail, magnitude, latitude, longitude, url);
-				arrayTerremotos.add(earthquake);
 				// Insertarlos en la base de datos
 				db = EarthquakeDB.getDB(contexto);
 				long id = db.insert(earthquake);
+				if (id >= 0) {
+					arrayTerremotos.add(earthquake);
+				}
 				arrayIds.add(id);
 			}
 		} catch (JSONException e) {

@@ -78,9 +78,6 @@ public class FragmentoLista extends ListFragment implements DownloadEarthquakes.
 				listado.add(0, earthquake);
 			}
 		}
-		
-//		listado.clear();
-//		listado.addAll(db.filtrarPorMagnitud(mag));
 		adaptador.notifyDataSetChanged();
 	}
 	
