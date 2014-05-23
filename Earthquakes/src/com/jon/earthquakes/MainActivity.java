@@ -52,6 +52,9 @@ public class MainActivity extends Activity {
 			startActivityForResult(i, PREFERENCES);
 			return true;
 		}
+		else if (id == R.id.action_refresh) {
+			((FragmentoLista)getFragmentManager().findFragmentByTag("list")).refrescarTerremotos();
+		}
 		return super.onOptionsItemSelected(item);
 	}
 	

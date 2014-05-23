@@ -51,7 +51,7 @@ public class EarthquakeDB {
 		String[] whereArgs = new String[]{String.valueOf(magnitud)};
 		String groupBy = null;
 		String having = null;
-		String order= DBOpenHelper.TIME_COLUMN + " DESC";
+		String order = DBOpenHelper.TIME_COLUMN + " DESC";
 		Cursor cursor = query(result_columns, where, whereArgs, groupBy, having, order);
 		
 		int ID_COLUMN_INDEX = cursor.getColumnIndexOrThrow(DBOpenHelper.ID_COLUMN);

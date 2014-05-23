@@ -21,7 +21,6 @@ import android.util.Log;
 public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earthquake>> {
 
 	private Earthquake earthquake;
-	private ArrayList<Long> arrayIds;
 	private ArrayList<Earthquake> arrayTerremotos;
 	private Context contexto;
 	private EarthquakeDB db;
@@ -80,7 +79,6 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 	}
 	
 	public ArrayList<Earthquake> guardarTerremotos(StringBuilder builder) {
-		arrayIds = new ArrayList<Long>();
 		try {
 			JSONObject json = new JSONObject(builder.toString());
 			JSONArray array = json.getJSONArray("features");
@@ -95,15 +93,15 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 				float latitude = (float) terremoto.getJSONObject("geometry").getJSONArray("coordinates").getDouble(1);
 				float longitude = (float) terremoto.getJSONObject("geometry").getJSONArray("coordinates").getDouble(0);
 				String url = terremoto.getJSONObject("properties").getString("url");
-				// Crear los terremotos y a–adirlos al array
+				// Crear los terremotos
 				earthquake = new Earthquake(idStr, place, time, detail, magnitude, latitude, longitude, url);
 				// Insertarlos en la base de datos
 				db = EarthquakeDB.getDB(contexto);
 				long id = db.insert(earthquake);
+				// A–adirlos al array si no estaban en la base de datos
 				if (id >= 0) {
 					arrayTerremotos.add(earthquake);
 				}
-				arrayIds.add(id);
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();

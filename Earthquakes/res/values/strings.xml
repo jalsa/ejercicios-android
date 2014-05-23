@@ -6,6 +6,7 @@
     <string name="title_activity_fragmento_lista">FragmentoLista</string>
     <string name="title_activity_preferences">PreferencesActivity</string>
     <string name="action_preferences">Preferencias</string>
+    <string name="action_refresh">Refrescar</string>
     <string name="refresh">Autorefresh:</string>
     <string name="intervalo">Intervalo:</string>
     <string name="title_activity_settings">SettingsActivity</string>
