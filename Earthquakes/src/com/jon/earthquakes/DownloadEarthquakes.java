@@ -100,7 +100,7 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 				long id = db.insert(earthquake);
 				// A–adirlos al array si no estaban en la base de datos
 				if (id >= 0) {
-					arrayTerremotos.add(earthquake);
+					arrayTerremotos.add(0, earthquake);
 				}
 			}
 		} catch (JSONException e) {
