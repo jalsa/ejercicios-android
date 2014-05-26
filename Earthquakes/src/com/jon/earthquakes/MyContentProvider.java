@@ -74,8 +74,7 @@ public class MyContentProvider extends ContentProvider {
 	public Uri insert(Uri uri, ContentValues values) {
 		SQLiteDatabase db = myOpenHelper.getWritableDatabase();
 	    String nullColumnHack = null;
-	    long id = db.insert(DBOpenHelper.DATABASE_TABLE,
-	        nullColumnHack, values);
+	    long id = db.insert(DBOpenHelper.DATABASE_TABLE, nullColumnHack, values);
 	    if (id > -1) {
 	      Uri insertedId = ContentUris.withAppendedId(CONTENT_URI, id);
 	      getContext().getContentResolver().notifyChange(insertedId, null);

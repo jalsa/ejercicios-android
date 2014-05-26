@@ -14,6 +14,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -98,6 +100,8 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 				// Insertarlos en la base de datos
 				db = EarthquakeDB.getDB(contexto);
 				long id = db.insert(earthquake);
+				//ContentResolver cr = contexto.getContentResolver();
+				//cr.insert(MyContentProvider.CONTENT_URI, earthquake);
 				// A–adirlos al array si no estaban en la base de datos
 				if (id >= 0) {
 					arrayTerremotos.add(0, earthquake);
