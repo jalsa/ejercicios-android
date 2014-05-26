@@ -23,13 +23,13 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		/*if (savedInstanceState == null) {
+		if (savedInstanceState == null) {
 			FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 			fragmentTransaction.add(R.id.lista, new FragmentoLista(), "list");
 			fragmentTransaction.commit();
-		}*/
+		}
 		
-		ContentResolver cr = getContentResolver();
+		/*ContentResolver cr = getContentResolver();
 		String[] result_columns = new String[] {};
 		Uri rowAddress = ContentUris.withAppendedId(MyContentProvider.CONTENT_URI, 1);
 		String where = null;
@@ -37,15 +37,15 @@ public class MainActivity extends Activity {
 		String order = null;
 		Cursor resultCursor = cr.query(rowAddress, result_columns, where, whereArgs, order);
 		
-		int ID_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(DBOpenHelper.ID_COLUMN);
-		int ID_STR_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(DBOpenHelper.ID_STR_COLUMN);
-		int PLACE_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(DBOpenHelper.PLACE_COLUMN);
-		int TIME_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(DBOpenHelper.TIME_COLUMN);
-		int DETAIL_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(DBOpenHelper.DETAIL_COLUMN);
-		int MAGNITUDE_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(DBOpenHelper.MAGNITUDE_COLUMN);
-		int LAT_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(DBOpenHelper.LAT_COLUMN);
-		int LONG_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(DBOpenHelper.LONG_COLUMN);
-		int URL_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(DBOpenHelper.URL_COLUMN);
+		int ID_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(MyContentProvider.ID_COLUMN);
+		int ID_STR_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(MyContentProvider.ID_STR_COLUMN);
+		int PLACE_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(MyContentProvider.PLACE_COLUMN);
+		int TIME_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(MyContentProvider.TIME_COLUMN);
+		int DETAIL_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(MyContentProvider.DETAIL_COLUMN);
+		int MAGNITUDE_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(MyContentProvider.MAGNITUDE_COLUMN);
+		int LAT_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(MyContentProvider.LAT_COLUMN);
+		int LONG_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(MyContentProvider.LONG_COLUMN);
+		int URL_COLUMN_INDEX = resultCursor.getColumnIndexOrThrow(MyContentProvider.URL_COLUMN);
 		
 		while (resultCursor.moveToNext()) {
 			long id = resultCursor.getLong(ID_COLUMN_INDEX);
@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
 			String url = resultCursor.getString(URL_COLUMN_INDEX);
 			Log.d("EARTHQUAKE", "Id: " + id + " IdStr: " + idStr + " Place: " + place + " Time: " + time + " Detail: " +  detail + " Magnitude: " + magnitude + " Latitude: " + latitude + " Longitude: " + longitude + " Url: " + url);
 		}
-		resultCursor.close();
+		resultCursor.close();*/
 	}
 	
 	@Override

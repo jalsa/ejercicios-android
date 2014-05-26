@@ -30,6 +30,9 @@
     <string name="tituloConectividad">Opciones de conectividad</string>
     <string name="descripcionConectividad">Todas las opciones de conectividad</string>
     <string name="title_activity_detalle">DetalleActivity</string>
+    <string name="region">Region</string>
+    <string name="hora">Hora</string>
+    
 
     <string-array name="intervalos_array_valores">
         <item>1</item>

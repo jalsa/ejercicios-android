@@ -3,8 +3,12 @@ package com.jon.earthquakes;
 import java.util.ArrayList;
 
 import android.app.ListFragment;
+import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -13,21 +17,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 
 public class FragmentoLista extends ListFragment implements DownloadEarthquakes.InterfazAdaptador {
 
-	private ArrayList<Earthquake> listado;
-	private ArrayAdapter<Earthquake> adaptador;
+//	private ArrayList<Earthquake> listado;
+	//private ArrayAdapter<Earthquake> adaptador;
+	private SimpleCursorAdapter adaptador;
 	private String enlace = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
-	private EarthquakeDB db;
-	private static final String LISTA = "listado";
+//	private EarthquakeDB db;
+//	private static final String LISTA = "listado";
 	private static final int DETALLE = 2;
+	
+	private String[] from = {MyContentProvider.MAGNITUDE_COLUMN, MyContentProvider.PLACE_COLUMN, MyContentProvider.TIME_COLUMN, MyContentProvider.ID_COLUMN};
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		
-		listado = new ArrayList<Earthquake>();
-		adaptador = new ArrayAdapter<Earthquake>(inflater.getContext(), android.R.layout.simple_list_item_1, listado);
+		int to[] = {R.id.textoMagnitud, R.id.textoRegion, R.id.textoHora};
+		
+//		listado = new ArrayList<Earthquake>();
+//		adaptador = new ArrayAdapter<Earthquake>(inflater.getContext(), android.R.layout.simple_list_item_1, listado);
+		adaptador = new SimpleCursorAdapter(getActivity(), R.layout.list_row, null, from, to, 0);
 		
 		setListAdapter(adaptador);
 		
@@ -38,20 +49,20 @@ public class FragmentoLista extends ListFragment implements DownloadEarthquakes.
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		
-		db = EarthquakeDB.getDB(getActivity());
-		
-		if (savedInstanceState != null) {
-			listado.addAll((ArrayList<Earthquake>) savedInstanceState.getSerializable(LISTA));
-			adaptador.notifyDataSetChanged();
-		}
-		else {
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-			int mag = Integer.parseInt(prefs.getString(getString(R.string.keyListaMagnitudes), "0"));
-			Log.d("MAG", "" + mag);
-			listado.clear();
-			listado.addAll(db.filtrarPorMagnitud(mag));
-			adaptador.notifyDataSetChanged();
-		}	
+//		db = EarthquakeDB.getDB(getActivity());
+//		
+//		if (savedInstanceState != null) {
+//			listado.addAll((ArrayList<Earthquake>) savedInstanceState.getSerializable(LISTA));
+//			adaptador.notifyDataSetChanged();
+//		}
+//		else {
+//			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//			int mag = Integer.parseInt(prefs.getString(getString(R.string.keyListaMagnitudes), "0"));
+//			Log.d("MAG", "" + mag);
+//			listado.clear();
+//			listado.addAll(db.filtrarPorMagnitud(mag));
+//			adaptador.notifyDataSetChanged();
+//		}	
 		refrescarTerremotos();
 	}
 	
@@ -64,27 +75,36 @@ public class FragmentoLista extends ListFragment implements DownloadEarthquakes.
 		super.onResume();
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		int mag = Integer.parseInt(prefs.getString(getString(R.string.keyListaMagnitudes), "0"));
-		listado.clear();
-		listado.addAll(db.filtrarPorMagnitud(mag));
-		adaptador.notifyDataSetChanged();
+//		listado.clear();
+//		listado.addAll(db.filtrarPorMagnitud(mag));
+//		adaptador.notifyDataSetChanged();
+		
+		ContentResolver cr = getActivity().getContentResolver();
+		String[] result_columns = new String[] {};
+		String where = null;
+		String whereArgs[] = null;
+		String order = null;
+		Cursor c = cr.query(MyContentProvider.CONTENT_URI, result_columns, where, whereArgs, order);
+		
+		adaptador.swapCursor(c);
 	}
 	
 	@Override
 	public void onDestroy() {
-		db.close();
+//		db.close();
 		super.onDestroy();
 	}
 
 	public void mostrarLista(ArrayList<Earthquake> result) {
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-		int mag = Integer.parseInt(prefs.getString(getString(R.string.keyListaMagnitudes), "0"));
-		
-		for (Earthquake earthquake : result) {
-			if (earthquake.getMagnitude() >= mag) {
-				listado.add(0, earthquake);
-			}
-		}
-		adaptador.notifyDataSetChanged();
+//		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+//		int mag = Integer.parseInt(prefs.getString(getString(R.string.keyListaMagnitudes), "0"));
+//		
+//		for (Earthquake earthquake : result) {
+//			if (earthquake.getMagnitude() >= mag) {
+//				listado.add(0, earthquake);
+//			}
+//		}
+//		adaptador.notifyDataSetChanged();
 	}
 	
 	@Override
