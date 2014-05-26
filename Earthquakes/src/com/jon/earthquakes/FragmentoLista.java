@@ -39,6 +39,7 @@ public class FragmentoLista extends ListFragment implements DownloadEarthquakes.
 //		listado = new ArrayList<Earthquake>();
 //		adaptador = new ArrayAdapter<Earthquake>(inflater.getContext(), android.R.layout.simple_list_item_1, listado);
 		adaptador = new SimpleCursorAdapter(getActivity(), R.layout.list_row, null, from, to, 0);
+		adaptador.setViewBinder(new EarthquakeViewBinder());
 		
 		setListAdapter(adaptador);
 		
