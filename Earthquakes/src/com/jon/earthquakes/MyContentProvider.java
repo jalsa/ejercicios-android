@@ -111,9 +111,7 @@ public class MyContentProvider extends ContentProvider {
 	    switch (uriMatcher.match(uri)) {
 	      case SINGLE_ROW :
 	        String rowID = uri.getPathSegments().get(1);
-	        where = DBOpenHelper.ID_COLUMN + "=" + rowID
-	            + (!TextUtils.isEmpty(where) ?
-	              " AND (" + where + ')' : "");
+	        where = DBOpenHelper.ID_COLUMN + "=" + rowID + (!TextUtils.isEmpty(where) ? " AND (" + where + ')' : "");
 	      default: break;
 	    }
 		int updateCount = db.update(DBOpenHelper.DATABASE_TABLE, values, where, whereArgs);
