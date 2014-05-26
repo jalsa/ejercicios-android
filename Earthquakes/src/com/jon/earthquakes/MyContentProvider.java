@@ -1,6 +1,7 @@
 package com.jon.earthquakes;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.UriMatcher;
@@ -11,6 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.text.TextUtils;
 
 public class MyContentProvider extends ContentProvider {
 
@@ -27,8 +29,20 @@ public class MyContentProvider extends ContentProvider {
 	}
 	
 	@Override
-	public int delete(Uri arg0, String arg1, String[] arg2) {
-		return 0;
+	public int delete(Uri uri, String where, String[] whereArgs) {
+		SQLiteDatabase db = myOpenHelper.getWritableDatabase();
+	    switch (uriMatcher.match(uri)) {
+	    	case SINGLE_ROW :
+	    		String rowID = uri.getPathSegments().get(1);
+	    		where = DBOpenHelper.ID_COLUMN + "=" + rowID + (!TextUtils.isEmpty(where) ? " AND (" + where + ')' : "");
+	    	default: break;
+	    }
+	    if (where == null) {
+	    	where = "1";
+	    }
+	    int deleteCount = db.delete(DBOpenHelper.DATABASE_TABLE, where, whereArgs);
+	    getContext().getContentResolver().notifyChange(uri, null);
+	    return deleteCount;
 	}
 
 	@Override
@@ -44,8 +58,18 @@ public class MyContentProvider extends ContentProvider {
 	}
 
 	@Override
-	public Uri insert(Uri arg0, ContentValues arg1) {
-		return null;
+	public Uri insert(Uri uri, ContentValues values) {
+		SQLiteDatabase db = myOpenHelper.getWritableDatabase();
+	    String nullColumnHack = null;
+	    long id = db.insert(DBOpenHelper.DATABASE_TABLE,
+	        nullColumnHack, values);
+	    if (id > -1) {
+	      Uri insertedId = ContentUris.withAppendedId(CONTENT_URI, id);
+	      getContext().getContentResolver().notifyChange(insertedId, null);
+	      return insertedId;
+	    }
+	    else
+	      return null;
 	}
 
 	@Override
@@ -82,8 +106,19 @@ public class MyContentProvider extends ContentProvider {
 	}
 
 	@Override
-	public int update(Uri arg0, ContentValues arg1, String arg2, String[] arg3) {
-		return 0;
+	public int update(Uri uri, ContentValues values, String where, String[] whereArgs) {
+		SQLiteDatabase db = myOpenHelper.getWritableDatabase();
+	    switch (uriMatcher.match(uri)) {
+	      case SINGLE_ROW :
+	        String rowID = uri.getPathSegments().get(1);
+	        where = DBOpenHelper.ID_COLUMN + "=" + rowID
+	            + (!TextUtils.isEmpty(where) ?
+	              " AND (" + where + ')' : "");
+	      default: break;
+	    }
+		int updateCount = db.update(DBOpenHelper.DATABASE_TABLE, values, where, whereArgs);
+		getContext().getContentResolver().notifyChange(uri, null);
+	    return updateCount;
 	}
 	
 	private class DBOpenHelper extends SQLiteOpenHelper {
@@ -122,7 +157,6 @@ public class MyContentProvider extends ContentProvider {
 			db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
 			onCreate(db);
 		}
-
 	}
 
 }
