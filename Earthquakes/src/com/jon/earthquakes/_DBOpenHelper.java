@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DBOpenHelper extends SQLiteOpenHelper {
+public class _DBOpenHelper extends SQLiteOpenHelper {
 	
 	public static final String DATABASE_NAME = "earthquakes.db";
 	public static final String DATABASE_TABLE = "earthquakes";
@@ -27,7 +27,7 @@ public class DBOpenHelper extends SQLiteOpenHelper {
 			+ ID_STR_COLUMN + " TEXT UNIQUE, " + PLACE_COLUMN + " TEXT, " + TIME_COLUMN + " DATETIME, " + DETAIL_COLUMN + " TEXT, " + MAGNITUDE_COLUMN + " REAL, " + LAT_COLUMN + " REAL, "
 			+ LONG_COLUMN + " REAL, " + URL_COLUMN + " TEXT, " + CREATED_AT_COLUMN + " DATETIME, " + UPDATED_AT_COLUMN + " DATETIME);";
 
-	public DBOpenHelper(Context context, String name, CursorFactory factory, int version) {
+	public _DBOpenHelper(Context context, String name, CursorFactory factory, int version) {
 		super(context, name, factory, version);
 	}
 

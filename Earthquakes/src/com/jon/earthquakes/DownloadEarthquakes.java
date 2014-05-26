@@ -9,6 +9,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,7 +26,7 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 	private Earthquake earthquake;
 	private ArrayList<Earthquake> arrayTerremotos;
 	private Context contexto;
-	private EarthquakeDB db;
+	//private EarthquakeDB db;
 	private FragmentoLista fragmento;
 	
 	public DownloadEarthquakes(Context contexto, FragmentoLista fragmento) {
@@ -98,19 +99,37 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 				// Crear los terremotos
 				earthquake = new Earthquake(idStr, place, time, detail, magnitude, latitude, longitude, url);
 				// Insertarlos en la base de datos
-				db = EarthquakeDB.getDB(contexto);
-				long id = db.insert(earthquake);
-				//ContentResolver cr = contexto.getContentResolver();
-				//cr.insert(MyContentProvider.CONTENT_URI, earthquake);
-				// A–adirlos al array si no estaban en la base de datos
-				if (id >= 0) {
-					arrayTerremotos.add(0, earthquake);
-				}
+				insertEarthQuake(earthquake);
+				//db = EarthquakeDB.getDB(contexto);
+				//long id = db.insert(earthquake);
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 		return arrayTerremotos;
+	}
+	
+	private void insertEarthQuake(Earthquake eq) {
+		Date date = new Date();
+		ContentValues newValues = new ContentValues();
+	    newValues.put(MyContentProvider.ID_STR_COLUMN, eq.getIdStr());
+	    newValues.put(MyContentProvider.PLACE_COLUMN, eq.getPlace());
+	    newValues.put(MyContentProvider.TIME_COLUMN, eq.getTime().getTime());
+	    newValues.put(MyContentProvider.DETAIL_COLUMN, eq.getDetail());
+	    newValues.put(MyContentProvider.MAGNITUDE_COLUMN, eq.getMagnitude());
+	    newValues.put(MyContentProvider.LAT_COLUMN, eq.getLatitude());
+	    newValues.put(MyContentProvider.LONG_COLUMN, eq.getLongitude());
+	    newValues.put(MyContentProvider.URL_COLUMN, eq.getUrl());
+	    newValues.put(MyContentProvider.CREATED_AT_COLUMN, String.valueOf(date.getTime()));
+	    newValues.put(MyContentProvider.UPDATED_AT_COLUMN, String.valueOf(date.getTime())); 
+	    
+		ContentResolver cr = contexto.getContentResolver();
+		cr.insert(MyContentProvider.CONTENT_URI, newValues);
+		
+		// A–adirlos al array si no estaban en la base de datos
+		//if (id >= 0) {
+			arrayTerremotos.add(0, earthquake);
+		//}
 	}
 
 }

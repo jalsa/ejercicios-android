@@ -83,7 +83,7 @@ public class FragmentoLista extends ListFragment implements DownloadEarthquakes.
 		String[] result_columns = new String[] {};
 		String where = MyContentProvider.MAGNITUDE_COLUMN + " >= ?";
 		String whereArgs[] = {String.valueOf(mag)};
-		String order = null;
+		String order = MyContentProvider.TIME_COLUMN + " DESC";
 		Cursor c = cr.query(MyContentProvider.CONTENT_URI, result_columns, where, whereArgs, order);
 		
 		adaptador.swapCursor(c);
