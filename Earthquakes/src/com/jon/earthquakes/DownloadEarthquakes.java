@@ -46,11 +46,7 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 	@Override
 	protected void onPostExecute(ArrayList<Earthquake> result) {
 		super.onPostExecute(result);
-		((InterfazAdaptador) fragmento).mostrarLista(result);
-	}
-	
-	public interface InterfazAdaptador {
-		public void mostrarLista(ArrayList<Earthquake> result);
+		//((InterfazAdaptador) fragmento).mostrarLista(result);
 	}
 	
 	public ArrayList<Earthquake> descargarTerremotos(String enlace) {
