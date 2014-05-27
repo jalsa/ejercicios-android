@@ -11,7 +11,8 @@
         android:layout_height="fill_parent"
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/magnitud"
-        android:layout_weight="4" />
+        android:layout_weight="4"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
