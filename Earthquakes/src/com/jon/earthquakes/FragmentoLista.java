@@ -94,6 +94,7 @@ public class FragmentoLista extends ListFragment implements LoaderManager.Loader
 		adaptador.swapCursor(c);*/
 		
 		getLoaderManager().restartLoader(ID_EARTHQUAKES, null, this);
+		
 	}
 	
 	@Override
