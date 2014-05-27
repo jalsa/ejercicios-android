@@ -20,9 +20,7 @@ public class EarthquakeViewBinder implements ViewBinder {
 		if (time_idx == idx) {
 			SimpleDateFormat s = new SimpleDateFormat("EEE, d MM yyyy HH:mm:ss aaa", Locale.ENGLISH);
 			String dateStr = s.format(c.getLong(time_idx));
-			
 			((TextView)view).setText(dateStr);
-			
 			return true;
 		}
 		else if (mag_idx == idx) {

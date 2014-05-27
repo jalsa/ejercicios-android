@@ -32,7 +32,10 @@
     <string name="title_activity_detalle">DetalleActivity</string>
     <string name="region">Region</string>
     <string name="hora">Hora</string>
-     <string name="detalle">></string>
+    <string name="detalle">></string>
+    <string name="labelLugar">Lugar</string>
+    <string name="labelMomento">Hora concreta</string>
+    <string name="labelGrados">Magnitud</string>
 
     <string-array name="intervalos_array_valores">
         <item>1</item>

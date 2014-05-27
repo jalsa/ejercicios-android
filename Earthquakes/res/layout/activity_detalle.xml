@@ -4,4 +4,32 @@
     android:layout_height="match_parent"
     tools:context="${packageName}.${activityClass}" >
 
+    <TextView
+        android:id="@+id/textoLugar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="39dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/labelLugar" />
+
+    <TextView
+        android:id="@+id/textoMomento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textoLugar"
+        android:layout_below="@+id/textoLugar"
+        android:layout_marginTop="20dp"
+        android:text="@string/labelMomento" />
+
+    <TextView
+        android:id="@+id/textoGrados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textoMomento"
+        android:layout_below="@+id/textoMomento"
+        android:layout_marginTop="20dp"
+        android:text="@string/labelGrados" />
+
 </RelativeLayout>
