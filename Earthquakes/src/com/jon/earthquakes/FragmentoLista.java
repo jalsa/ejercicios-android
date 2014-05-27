@@ -31,7 +31,7 @@ public class FragmentoLista extends ListFragment implements LoaderManager.Loader
 //	private EarthquakeDB db;
 //	private static final String LISTA = "listado";
 	private static final int DETALLE = 2;
-	private int id = 1;
+	private static final int ID_EARTHQUAKES = 1;
 	
 	private String[] from = {MyContentProvider.MAGNITUDE_COLUMN, MyContentProvider.PLACE_COLUMN, MyContentProvider.TIME_COLUMN, MyContentProvider.ID_COLUMN};
 	
@@ -46,7 +46,7 @@ public class FragmentoLista extends ListFragment implements LoaderManager.Loader
 		adaptador.setViewBinder(new EarthquakeViewBinder());
 		
 		setListAdapter(adaptador);
-		getLoaderManager().initLoader(id, null, this);
+		getLoaderManager().initLoader(ID_EARTHQUAKES, null, this);
 		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 	
@@ -92,24 +92,14 @@ public class FragmentoLista extends ListFragment implements LoaderManager.Loader
 		Cursor c = cr.query(MyContentProvider.CONTENT_URI, result_columns, where, whereArgs, order);
 		
 		adaptador.swapCursor(c);*/
+		
+		getLoaderManager().restartLoader(ID_EARTHQUAKES, null, this);
 	}
 	
 	@Override
 	public void onDestroy() {
 //		db.close();
 		super.onDestroy();
-	}
-
-	public void mostrarLista(ArrayList<Earthquake> result) {
-//		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-//		int mag = Integer.parseInt(prefs.getString(getString(R.string.keyListaMagnitudes), "0"));
-//		
-//		for (Earthquake earthquake : result) {
-//			if (earthquake.getMagnitude() >= mag) {
-//				listado.add(0, earthquake);
-//			}
-//		}
-//		adaptador.notifyDataSetChanged();
 	}
 	
 	@Override
@@ -125,7 +115,7 @@ public class FragmentoLista extends ListFragment implements LoaderManager.Loader
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		int mag = Integer.parseInt(prefs.getString(getString(R.string.keyListaMagnitudes), "0"));
 		
-		ContentResolver cr = getActivity().getContentResolver();
+		//ContentResolver cr = getActivity().getContentResolver();
 		String[] result_columns = new String[] {};
 		String where = MyContentProvider.MAGNITUDE_COLUMN + " >= ?";
 		String whereArgs[] = {String.valueOf(mag)};
