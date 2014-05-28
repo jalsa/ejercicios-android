@@ -5,7 +5,6 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.app.LoaderManager;
-import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -13,13 +12,11 @@ import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
-public class DetalleActivity extends Activity implements
-		LoaderManager.LoaderCallbacks<Cursor> {
+public class DetalleActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor> {
 
-	private long id;
+	private static long LOADER_ID;
 	private static final int ID_EARTHQUAKES = 1;
 
 	@Override
@@ -28,7 +25,7 @@ public class DetalleActivity extends Activity implements
 		setContentView(R.layout.activity_detalle);
 
 		Intent intent = getIntent();
-		id = intent.getLongExtra("id", 0);
+		LOADER_ID = intent.getLongExtra("id", 0);
 		
 		getLoaderManager().initLoader(ID_EARTHQUAKES, null, this);
 
@@ -37,30 +34,36 @@ public class DetalleActivity extends Activity implements
 	@Override
 	public Loader<Cursor> onCreateLoader(int iden, Bundle args) {
 		String[] result_columns = { MyContentProvider.MAGNITUDE_COLUMN, MyContentProvider.PLACE_COLUMN, MyContentProvider.TIME_COLUMN };
-
-		Uri rowURI = ContentUris.withAppendedId(
-				MyContentProvider.CONTENT_URI, id);
-		CursorLoader loader = new CursorLoader(this,
-				rowURI, result_columns, null, null, null);
+		Uri rowURI = ContentUris.withAppendedId(MyContentProvider.CONTENT_URI, LOADER_ID);
+		CursorLoader loader = new CursorLoader(this, rowURI, result_columns, null, null, null);
 		return loader;
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-		int PLACE_COLUMN_INDEX = cursor
-				.getColumnIndexOrThrow(MyContentProvider.PLACE_COLUMN);
-		int TIME_COLUMN_INDEX = cursor
-				.getColumnIndexOrThrow(MyContentProvider.TIME_COLUMN);
-		int MAGNITUDE_COLUMN_INDEX = cursor
-				.getColumnIndexOrThrow(MyContentProvider.MAGNITUDE_COLUMN);
-		
-		Log.d("EARTHQUAKE", String.valueOf(cursor.getCount()));
+		int PLACE_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.PLACE_COLUMN);
+		int TIME_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.TIME_COLUMN);
+		int MAGNITUDE_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.MAGNITUDE_COLUMN);
+		int ID_STR_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.ID_STR_COLUMN);
+		int DETAIL_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.DETAIL_COLUMN);
+		int LATITUDE_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.LAT_COLUMN);
+		int LONGITUDE_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.LONG_COLUMN);
+		int URL_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.URL_COLUMN);
+		int CREATED_AT_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.CREATED_AT_COLUMN);
+		int UPDATED_AT_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.UPDATED_AT_COLUMN);
 		
 		if (cursor.moveToFirst()) {
 			String lugar = cursor.getString(PLACE_COLUMN_INDEX);
 			long hora = cursor.getLong(TIME_COLUMN_INDEX);
-			String magnitud = String.valueOf(cursor
-					.getFloat(MAGNITUDE_COLUMN_INDEX));
+			String magnitud = String.valueOf(cursor.getFloat(MAGNITUDE_COLUMN_INDEX));
+			String idStr = cursor.getString(ID_STR_COLUMN_INDEX);
+			String detail = cursor.getString(DETAIL_COLUMN_INDEX);
+			float latitude = cursor.getFloat(LATITUDE_COLUMN_INDEX);
+			float longitude = cursor.getFloat(LONGITUDE_COLUMN_INDEX);
+			String url = cursor.getString(URL_COLUMN_INDEX);
+			long createdAt = cursor.getLong(CREATED_AT_COLUMN_INDEX);
+			long updatedAt = cursor.getLong(UPDATED_AT_COLUMN_INDEX);
+			
 			SimpleDateFormat s = new SimpleDateFormat("EEE, d MM yyyy HH:mm:ss aaa", Locale.ENGLISH);
 			String time = s.format(hora);
 			((TextView) findViewById(R.id.textoLugar)).setText(lugar);

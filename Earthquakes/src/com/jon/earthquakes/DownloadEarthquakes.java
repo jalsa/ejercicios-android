@@ -26,27 +26,21 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 	private Earthquake earthquake;
 	private ArrayList<Earthquake> arrayTerremotos;
 	private Context contexto;
-	//private EarthquakeDB db;
-	private FragmentoLista fragmento;
 	
 	public DownloadEarthquakes(Context contexto, FragmentoLista fragmento) {
 		this.contexto = contexto;
-		this.fragmento = fragmento;
 	}
 	
 	@Override
 	protected ArrayList<Earthquake> doInBackground(String... strings) {
-		ArrayList<Earthquake> result = new ArrayList<Earthquake>();
-		
+		ArrayList<Earthquake> result = new ArrayList<Earthquake>();	
 		result = descargarTerremotos(strings[0]);
-		
 		return result;
 	}
 	
 	@Override
 	protected void onPostExecute(ArrayList<Earthquake> result) {
 		super.onPostExecute(result);
-		//((InterfazAdaptador) fragmento).mostrarLista(result);
 	}
 	
 	public ArrayList<Earthquake> descargarTerremotos(String enlace) {
@@ -96,8 +90,6 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 				earthquake = new Earthquake(idStr, place, time, detail, magnitude, latitude, longitude, url);
 				// Insertarlos en la base de datos
 				insertEarthQuake(earthquake);
-				//db = EarthquakeDB.getDB(contexto);
-				//long id = db.insert(earthquake);
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -123,9 +115,7 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 		cr.insert(MyContentProvider.CONTENT_URI, newValues);
 		
 		// A–adirlos al array si no estaban en la base de datos
-		//if (id >= 0) {
-			arrayTerremotos.add(0, earthquake);
-		//}
+		arrayTerremotos.add(0, earthquake);
 	}
 
 }
