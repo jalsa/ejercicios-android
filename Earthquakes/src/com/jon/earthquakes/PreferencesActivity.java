@@ -38,7 +38,9 @@ public class PreferencesActivity extends Activity implements OnSharedPreferenceC
 				activarAlarma(interval);
 			}
 			else {
-				alarmManager.cancel(alarmIntent);
+				if (alarmIntent != null) {
+					alarmManager.cancel(alarmIntent);
+				}
 			}
 		}
 		else if (key.equals(getString(R.string.keyListaMagnitudes))) {
