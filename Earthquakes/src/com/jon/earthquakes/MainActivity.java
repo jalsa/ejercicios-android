@@ -41,7 +41,10 @@ public class MainActivity extends Activity {
 			return true;
 		}
 		else if (id == R.id.action_refresh) {
-			((FragmentoLista)getFragmentManager().findFragmentByTag("list")).refrescarTerremotos();
+			//((FragmentoLista)getFragmentManager().findFragmentByTag("list")).refrescarTerremotos();
+			Intent intent = new Intent(this, MyService.class);
+			intent.putExtra("Url", FragmentoLista.enlace);
+			startService(intent);
 		}
 		return super.onOptionsItemSelected(item);
 	}

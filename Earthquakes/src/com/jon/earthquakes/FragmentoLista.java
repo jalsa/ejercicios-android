@@ -18,7 +18,7 @@ import android.app.LoaderManager;
 public class FragmentoLista extends ListFragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
 	private SimpleCursorAdapter adaptador;
-	private String enlace = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
+	public static final String enlace = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson";
 	private static final int ID_EARTHQUAKES = 1;
 	
 	private String[] from = {MyContentProvider.MAGNITUDE_COLUMN, MyContentProvider.PLACE_COLUMN, MyContentProvider.TIME_COLUMN, MyContentProvider.ID_COLUMN};
@@ -64,11 +64,10 @@ public class FragmentoLista extends ListFragment implements LoaderManager.Loader
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
 		int mag = Integer.parseInt(prefs.getString(getString(R.string.keyListaMagnitudes), "0"));
 		
-		String[] result_columns = new String[] {};
 		String where = MyContentProvider.MAGNITUDE_COLUMN + " >= ?";
 		String whereArgs[] = {String.valueOf(mag)};
 		String order = MyContentProvider.TIME_COLUMN + " DESC";
-		CursorLoader loader = new CursorLoader(getActivity(), MyContentProvider.CONTENT_URI, result_columns, where, whereArgs, order);
+		CursorLoader loader = new CursorLoader(getActivity(), MyContentProvider.CONTENT_URI, from, where, whereArgs, order);
 		return loader;
 	}
 

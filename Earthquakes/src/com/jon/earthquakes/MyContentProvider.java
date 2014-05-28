@@ -41,6 +41,10 @@ public class MyContentProvider extends ContentProvider {
 		uriMatcher.addURI("com.jon.provider.earthquakes", "earthquakes/#", SINGLE_ROW);
 	}
 	
+	public static final String[] KEYS_ALL = { ID_COLUMN, ID_STR_COLUMN,
+		PLACE_COLUMN, TIME_COLUMN, DETAIL_COLUMN,
+		MAGNITUDE_COLUMN, LAT_COLUMN, LONG_COLUMN, URL_COLUMN, CREATED_AT_COLUMN, UPDATED_AT_COLUMN };
+	
 	@Override
 	public int delete(Uri uri, String where, String[] whereArgs) {
 		SQLiteDatabase db = myOpenHelper.getWritableDatabase();

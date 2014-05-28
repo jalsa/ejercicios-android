@@ -33,7 +33,7 @@ public class DetalleActivity extends Activity implements LoaderManager.LoaderCal
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int iden, Bundle args) {
-		String[] result_columns = { MyContentProvider.MAGNITUDE_COLUMN, MyContentProvider.PLACE_COLUMN, MyContentProvider.TIME_COLUMN };
+		String[] result_columns = MyContentProvider.KEYS_ALL;
 		Uri rowURI = ContentUris.withAppendedId(MyContentProvider.CONTENT_URI, LOADER_ID);
 		CursorLoader loader = new CursorLoader(this, rowURI, result_columns, null, null, null);
 		return loader;
