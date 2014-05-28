@@ -44,25 +44,25 @@ public class DetalleActivity extends Activity implements LoaderManager.LoaderCal
 		int PLACE_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.PLACE_COLUMN);
 		int TIME_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.TIME_COLUMN);
 		int MAGNITUDE_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.MAGNITUDE_COLUMN);
-		int ID_STR_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.ID_STR_COLUMN);
-		int DETAIL_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.DETAIL_COLUMN);
-		int LATITUDE_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.LAT_COLUMN);
-		int LONGITUDE_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.LONG_COLUMN);
-		int URL_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.URL_COLUMN);
-		int CREATED_AT_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.CREATED_AT_COLUMN);
-		int UPDATED_AT_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.UPDATED_AT_COLUMN);
+//		int ID_STR_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.ID_STR_COLUMN);
+//		int DETAIL_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.DETAIL_COLUMN);
+//		int LATITUDE_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.LAT_COLUMN);
+//		int LONGITUDE_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.LONG_COLUMN);
+//		int URL_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.URL_COLUMN);
+//		int CREATED_AT_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.CREATED_AT_COLUMN);
+//		int UPDATED_AT_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.UPDATED_AT_COLUMN);
 		
 		if (cursor.moveToFirst()) {
 			String lugar = cursor.getString(PLACE_COLUMN_INDEX);
 			long hora = cursor.getLong(TIME_COLUMN_INDEX);
 			String magnitud = String.valueOf(cursor.getFloat(MAGNITUDE_COLUMN_INDEX));
-			String idStr = cursor.getString(ID_STR_COLUMN_INDEX);
-			String detail = cursor.getString(DETAIL_COLUMN_INDEX);
-			float latitude = cursor.getFloat(LATITUDE_COLUMN_INDEX);
-			float longitude = cursor.getFloat(LONGITUDE_COLUMN_INDEX);
-			String url = cursor.getString(URL_COLUMN_INDEX);
-			long createdAt = cursor.getLong(CREATED_AT_COLUMN_INDEX);
-			long updatedAt = cursor.getLong(UPDATED_AT_COLUMN_INDEX);
+//			String idStr = cursor.getString(ID_STR_COLUMN_INDEX);
+//			String detail = cursor.getString(DETAIL_COLUMN_INDEX);
+//			float latitude = cursor.getFloat(LATITUDE_COLUMN_INDEX);
+//			float longitude = cursor.getFloat(LONGITUDE_COLUMN_INDEX);
+//			String url = cursor.getString(URL_COLUMN_INDEX);
+//			long createdAt = cursor.getLong(CREATED_AT_COLUMN_INDEX);
+//			long updatedAt = cursor.getLong(UPDATED_AT_COLUMN_INDEX);
 			
 			SimpleDateFormat s = new SimpleDateFormat("EEE, d MM yyyy HH:mm:ss aaa", Locale.ENGLISH);
 			String time = s.format(hora);

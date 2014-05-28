@@ -42,7 +42,7 @@ public class MyService extends Service {
 			}
 		});
 		t.start();
-		return	Service.START_NOT_STICKY;	
+		return Service.START_NOT_STICKY;
 	}
 	
 	@Override
