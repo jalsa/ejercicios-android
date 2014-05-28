@@ -43,8 +43,6 @@ public class FragmentoLista extends ListFragment implements LoaderManager.Loader
 	
 	public void refrescarTerremotos() {
 		//new DownloadEarthquakes(getActivity(), this).execute(enlace);
-		//SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
-		//int interval = Integer.parseInt(prefs.getString(getString(R.string.keyListaIntervalos), "0"));
 		Intent intent = new Intent(getActivity(), MyService.class);
 		intent.putExtra("Url", enlace);
 		getActivity().startService(intent);
