@@ -27,24 +27,16 @@ public class DetalleActivity extends Activity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detalle);
 
-		getLoaderManager().initLoader(ID_EARTHQUAKES, null, this);
-
 		Intent intent = getIntent();
 		id = intent.getLongExtra("id", 0);
-
-		// ContentResolver cr = getContentResolver();
-		// Uri rowAddress =
-		// ContentUris.withAppendedId(MyContentProvider.CONTENT_URI, id);
+		
+		getLoaderManager().initLoader(ID_EARTHQUAKES, null, this);
 
 	}
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int iden, Bundle args) {
-		String[] result_columns = { MyContentProvider.MAGNITUDE_COLUMN,
-				MyContentProvider.PLACE_COLUMN, MyContentProvider.TIME_COLUMN };
-		// String where = MyContentProvider.ID_COLUMN + " = ?";
-		// String whereArgs[] = {String.valueOf(id)};
-		// String order = null;
+		String[] result_columns = { MyContentProvider.MAGNITUDE_COLUMN, MyContentProvider.PLACE_COLUMN, MyContentProvider.TIME_COLUMN };
 
 		Uri rowURI = ContentUris.withAppendedId(
 				MyContentProvider.CONTENT_URI, id);
@@ -66,14 +58,13 @@ public class DetalleActivity extends Activity implements
 		
 		if (cursor.moveToFirst()) {
 			String lugar = cursor.getString(PLACE_COLUMN_INDEX);
-			String hora = cursor.getString(TIME_COLUMN_INDEX);
+			long hora = cursor.getLong(TIME_COLUMN_INDEX);
 			String magnitud = String.valueOf(cursor
 					.getFloat(MAGNITUDE_COLUMN_INDEX));
-			// SimpleDateFormat s = new
-			// SimpleDateFormat("EEE, d MM yyyy HH:mm:ss aaa", Locale.ENGLISH);
-			// String time = s.format(hora);
+			SimpleDateFormat s = new SimpleDateFormat("EEE, d MM yyyy HH:mm:ss aaa", Locale.ENGLISH);
+			String time = s.format(hora);
 			((TextView) findViewById(R.id.textoLugar)).setText(lugar);
-			((TextView) findViewById(R.id.textoMomento)).setText(hora);
+			((TextView) findViewById(R.id.textoMomento)).setText(time);
 			((TextView) findViewById(R.id.textoGrados)).setText(magnitud);
 		}
 	}
