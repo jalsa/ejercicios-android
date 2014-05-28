@@ -43,7 +43,7 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 		super.onPostExecute(result);
 	}
 	
-	public ArrayList<Earthquake> descargarTerremotos(String enlace) {
+	private ArrayList<Earthquake> descargarTerremotos(String enlace) {
 		arrayTerremotos = new ArrayList<Earthquake>();
 		try {
 			URL url = new URL(enlace);
@@ -71,7 +71,7 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 		return arrayTerremotos;
 	}
 	
-	public ArrayList<Earthquake> guardarTerremotos(StringBuilder builder) {
+	private ArrayList<Earthquake> guardarTerremotos(StringBuilder builder) {
 		try {
 			JSONObject json = new JSONObject(builder.toString());
 			JSONArray array = json.getJSONArray("features");
