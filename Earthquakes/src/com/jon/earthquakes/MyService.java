@@ -75,6 +75,7 @@ public class MyService extends Service {
 		catch(IOException e) {
 			Log.d("ERROR", "IO	Exception.", e);
 		}
+		stopSelf();
 		return arrayTerremotos;
 	}
 	

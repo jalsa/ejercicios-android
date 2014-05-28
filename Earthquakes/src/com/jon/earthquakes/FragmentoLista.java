@@ -38,7 +38,7 @@ public class FragmentoLista extends ListFragment implements LoaderManager.Loader
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		refrescarTerremotos();
+		//refrescarTerremotos();
 	}
 	
 	public void refrescarTerremotos() {

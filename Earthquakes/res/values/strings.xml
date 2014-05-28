@@ -39,11 +39,13 @@
 
     <string-array name="intervalos_array_valores">
         <item>1</item>
-        <item>15</item>
-        <item>30</item>
         <item>60</item>
+        <item>900</item>
+        <item>1800</item>
+        <item>3600</item>
     </string-array>
     <string-array name="intervalos_array">
+        <item>1 seg</item>
         <item>1 min</item>
         <item>15 min</item>
         <item>30 min</item>

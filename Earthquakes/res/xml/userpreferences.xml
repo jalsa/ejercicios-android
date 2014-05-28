@@ -7,14 +7,14 @@
 	        android:key="@string/keyCheckbox"
 	        android:title="@string/tituloActualizaciones"
 	        android:summary="@string/descripcionActualizaciones"
-	        android:defaultValue="true" />
+	        android:defaultValue="false" />
 	    <ListPreference 
 	        android:key="@string/keyListaIntervalos"
 	        android:title="@string/tituloIntervalos"
 	        android:summary="@string/descripcionIntervalos"
-	        android:defaultValue="60"
+	        android:defaultValue="1"
 	        android:entries="@array/intervalos_array"
-	        android:entryValues="@array/intervalos_array" />
+	        android:entryValues="@array/intervalos_array_valores" />
 	</PreferenceCategory>
 	
 	<PreferenceCategory
@@ -23,7 +23,7 @@
 		        android:key="@string/keyListaMagnitudes"
 		        android:title="@string/tituloMagnitudes"
 		        android:summary="@string/descripcionMagnitudes"
-		        android:defaultValue="3"
+		        android:defaultValue="0"
 		        android:entries="@array/magnitudes_array"
 		        android:entryValues="@array/magnitudes_array" />
 	</PreferenceCategory>
