@@ -1,4 +1,10 @@
-package com.jon.earthquakes;
+package com.jon.earthquakes.activity;
+
+import com.jon.earthquakes.R;
+import com.jon.earthquakes.R.id;
+import com.jon.earthquakes.R.layout;
+import com.jon.earthquakes.R.menu;
+import com.jon.earthquakes.fragment.FragmentoLista;
 
 import android.app.Activity;
 import android.app.FragmentManager;

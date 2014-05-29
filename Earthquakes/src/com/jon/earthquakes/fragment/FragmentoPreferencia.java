@@ -1,4 +1,7 @@
-package com.jon.earthquakes;
+package com.jon.earthquakes.fragment;
+
+import com.jon.earthquakes.R;
+import com.jon.earthquakes.R.xml;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;

@@ -1,4 +1,13 @@
-package com.jon.earthquakes;
+package com.jon.earthquakes.fragment;
+
+import com.jon.earthquakes.R;
+import com.jon.earthquakes.R.id;
+import com.jon.earthquakes.R.layout;
+import com.jon.earthquakes.R.string;
+import com.jon.earthquakes.activity.DetalleActivity;
+import com.jon.earthquakes.provider.MyContentProvider;
+import com.jon.earthquakes.service.MyService;
+import com.jon.earthquakes.viewbinder.EarthquakeViewBinder;
 
 import android.app.ListFragment;
 import android.content.CursorLoader;

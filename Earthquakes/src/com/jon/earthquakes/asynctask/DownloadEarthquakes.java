@@ -1,4 +1,4 @@
-package com.jon.earthquakes;
+package com.jon.earthquakes.asynctask;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,39 +15,36 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Service;
+import com.jon.earthquakes.fragment.FragmentoLista;
+import com.jon.earthquakes.model.Earthquake;
+import com.jon.earthquakes.provider.MyContentProvider;
+
 import android.content.ContentResolver;
 import android.content.ContentValues;
-import android.content.Intent;
-import android.os.IBinder;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.util.Log;
 
-public class MyService extends Service {
+public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earthquake>> {
 
-	private String enlace;
 	private Earthquake earthquake;
 	private ArrayList<Earthquake> arrayTerremotos;
+	private Context contexto;
 	
-	@Override	
-	public void	onCreate() {
-		super.onCreate();
-	}	
-	
-	@Override	
-	public int onStartCommand(Intent intent, int flags, int startId) {
-		enlace = intent.getStringExtra("Url");
-		Thread t = new Thread(new Runnable() {
-			public void run() {
-				descargarTerremotos(enlace);
-			}
-		});
-		t.start();
-		return Service.START_NOT_STICKY;
+	public DownloadEarthquakes(Context contexto, FragmentoLista fragmento) {
+		this.contexto = contexto;
 	}
 	
 	@Override
-	public IBinder onBind(Intent intent) {
-		return null;
+	protected ArrayList<Earthquake> doInBackground(String... strings) {
+		ArrayList<Earthquake> result = new ArrayList<Earthquake>();	
+		result = descargarTerremotos(strings[0]);
+		return result;
+	}
+	
+	@Override
+	protected void onPostExecute(ArrayList<Earthquake> result) {
+		super.onPostExecute(result);
 	}
 	
 	private ArrayList<Earthquake> descargarTerremotos(String enlace) {
@@ -75,7 +72,6 @@ public class MyService extends Service {
 		catch(IOException e) {
 			Log.d("ERROR", "IO	Exception.", e);
 		}
-		stopSelf();
 		return arrayTerremotos;
 	}
 	
@@ -119,7 +115,7 @@ public class MyService extends Service {
 	    newValues.put(MyContentProvider.CREATED_AT_COLUMN, String.valueOf(date.getTime()));
 	    newValues.put(MyContentProvider.UPDATED_AT_COLUMN, String.valueOf(date.getTime())); 
 	    
-		ContentResolver cr = MyService.this.getContentResolver();
+		ContentResolver cr = contexto.getContentResolver();
 		cr.insert(MyContentProvider.CONTENT_URI, newValues);
 		
 		// A–adirlos al array si no estaban en la base de datos

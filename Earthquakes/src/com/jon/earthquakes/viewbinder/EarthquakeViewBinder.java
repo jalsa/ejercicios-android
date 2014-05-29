@@ -1,7 +1,9 @@
-package com.jon.earthquakes;
+package com.jon.earthquakes.viewbinder;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+
+import com.jon.earthquakes.provider.MyContentProvider;
 
 import android.database.Cursor;
 import android.graphics.Color;

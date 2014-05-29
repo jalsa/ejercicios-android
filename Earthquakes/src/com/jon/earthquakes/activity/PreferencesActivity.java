@@ -1,4 +1,8 @@
-package com.jon.earthquakes;
+package com.jon.earthquakes.activity;
+
+import com.jon.earthquakes.R;
+import com.jon.earthquakes.R.string;
+import com.jon.earthquakes.fragment.FragmentoPreferencia;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -30,7 +34,7 @@ public class PreferencesActivity extends Activity implements OnSharedPreferenceC
 		boolean autorefresh = prefs.getBoolean(getString(R.string.keyCheckbox), true);
 		int mag = Integer.parseInt(prefs.getString(getString(R.string.keyListaMagnitudes), "0"));
 		int interval = Integer.parseInt(prefs.getString(getString(R.string.keyListaIntervalos), "0"));
-		
+
 		if (key.equals(getString(R.string.keyCheckbox))) {
 			Log.d("PREFERENCIAS", "Autorefresh cambiado");
 			Log.d("PREFERENCIAS", "" + autorefresh);
@@ -39,6 +43,7 @@ public class PreferencesActivity extends Activity implements OnSharedPreferenceC
 			}
 			else {
 				if (alarmIntent != null) {
+					Log.d("PREFERENCIAS", "alarm cancel()");
 					alarmManager.cancel(alarmIntent);
 				}
 			}
@@ -50,13 +55,9 @@ public class PreferencesActivity extends Activity implements OnSharedPreferenceC
 		else if (key.equals(getString(R.string.keyListaIntervalos))) {
 			Log.d("PREFERENCIAS", "Intervalo cambiado");
 			Log.d("PREFERENCIAS", "" + interval);
-			
-			alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-			int	tipoAlarma = AlarmManager.RTC;	
-			long tiempo = interval * 1000;
-			Intent intent = new Intent(MyBroadcastReceiver.ACTION);
-			alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-			alarmManager.setInexactRepeating(tipoAlarma, 0, tiempo, alarmIntent);
+			if (autorefresh) {
+				activarAlarma(interval);
+			}
 		}
 	}
 	
@@ -64,7 +65,7 @@ public class PreferencesActivity extends Activity implements OnSharedPreferenceC
 		alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
 		int	tipoAlarma = AlarmManager.RTC;	
 		long tiempo = interval * 1000;
-		Intent intent = new Intent(MyBroadcastReceiver.ACTION);
+		Intent intent = new Intent(getResources().getString(R.string.action));
 		alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 		alarmManager.setInexactRepeating(tipoAlarma, 0, tiempo, alarmIntent);
 	}

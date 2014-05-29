@@ -1,4 +1,4 @@
-package com.jon.earthquakes;
+package com.jon.earthquakes.model;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;

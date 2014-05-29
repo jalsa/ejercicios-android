@@ -1,4 +1,4 @@
-package com.jon.earthquakes;
+package com.jon.earthquakes.provider;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -120,7 +120,7 @@ public class MyContentProvider extends ContentProvider {
 		
 		queryBuilder.setTables(DBOpenHelper.DATABASE_TABLE);
 
-		Cursor cursor = queryBuilder.query(db, columns, where, whereArgs, groupBy, having, order);
+		Cursor cursor = queryBuilder.query(db, columns, where, whereArgs, groupBy, having, order, "100");
 		cursor.setNotificationUri(getContext().getContentResolver(), uri);
 		return cursor;
 	}

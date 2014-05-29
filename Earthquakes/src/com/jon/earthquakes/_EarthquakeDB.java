@@ -3,6 +3,8 @@ package com.jon.earthquakes;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.jon.earthquakes.model.Earthquake;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;

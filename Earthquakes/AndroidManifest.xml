@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.jon.earthquakes.MainActivity"
+            android:name="com.jon.earthquakes.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,24 +24,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.jon.earthquakes.FragmentoLista"
+            android:name="com.jon.earthquakes.fragment.FragmentoLista"
             android:label="@string/title_activity_fragmento_lista" >
         </activity>
         <activity
-            android:name="com.jon.earthquakes.PreferencesActivity"
+            android:name="com.jon.earthquakes.activity.PreferencesActivity"
             android:label="@string/title_activity_preferences" >
         </activity>
         <activity
-            android:name="com.jon.earthquakes.DetalleActivity"
-            android:label="@string/title_activity_detalle" >
+            android:name="com.jon.earthquakes.activity.DetalleActivity"
+            android:label="@string/title_activity_detalle"
+            android:parentActivityName="com.jon.earthquakes.activity.MainActivity" >
         </activity>
         <provider
-            android:name="com.jon.earthquakes.MyContentProvider" 
+            android:name="com.jon.earthquakes.provider.MyContentProvider" 
             android:authorities="com.jon.provider.earthquakes"
             android:exported="false" />
         
-        <service android:enabled="true" android:name="com.jon.earthquakes.MyService"/>
-        <receiver android:name="com.jon.earthquakes.MyBroadcastReceiver">
+        <service android:enabled="true" android:name="com.jon.earthquakes.service.MyService"/>
+        <receiver 
+            android:name="com.jon.earthquakes.receiver.MyBroadcastReceiver"
+            android:permission="com.yourpage.permission.YOUR_PERMISSION"
+    		android:enabled="true">
             <intent-filter>
                 <action android:name="com.jon.alarmaRefrescarTerremotos"></action>
             </intent-filter>

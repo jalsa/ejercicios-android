@@ -1,4 +1,4 @@
-package com.jon.earthquakes;
+package com.jon.earthquakes.service;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,32 +15,42 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.jon.earthquakes.model.Earthquake;
+import com.jon.earthquakes.provider.MyContentProvider;
+
+import android.app.Service;
 import android.content.ContentResolver;
 import android.content.ContentValues;
-import android.content.Context;
-import android.os.AsyncTask;
+import android.content.Intent;
+import android.os.IBinder;
 import android.util.Log;
 
-public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earthquake>> {
+public class MyService extends Service {
 
+	private String enlace;
 	private Earthquake earthquake;
 	private ArrayList<Earthquake> arrayTerremotos;
-	private Context contexto;
 	
-	public DownloadEarthquakes(Context contexto, FragmentoLista fragmento) {
-		this.contexto = contexto;
+	@Override	
+	public void	onCreate() {
+		super.onCreate();
+	}	
+	
+	@Override	
+	public int onStartCommand(Intent intent, int flags, int startId) {
+		enlace = intent.getStringExtra("Url");
+		Thread t = new Thread(new Runnable() {
+			public void run() {
+				descargarTerremotos(enlace);
+			}
+		});
+		t.start();
+		return Service.START_NOT_STICKY;
 	}
 	
 	@Override
-	protected ArrayList<Earthquake> doInBackground(String... strings) {
-		ArrayList<Earthquake> result = new ArrayList<Earthquake>();	
-		result = descargarTerremotos(strings[0]);
-		return result;
-	}
-	
-	@Override
-	protected void onPostExecute(ArrayList<Earthquake> result) {
-		super.onPostExecute(result);
+	public IBinder onBind(Intent intent) {
+		return null;
 	}
 	
 	private ArrayList<Earthquake> descargarTerremotos(String enlace) {
@@ -68,6 +78,7 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 		catch(IOException e) {
 			Log.d("ERROR", "IO	Exception.", e);
 		}
+		stopSelf();
 		return arrayTerremotos;
 	}
 	
@@ -111,7 +122,7 @@ public class DownloadEarthquakes extends AsyncTask<String, Void, ArrayList<Earth
 	    newValues.put(MyContentProvider.CREATED_AT_COLUMN, String.valueOf(date.getTime()));
 	    newValues.put(MyContentProvider.UPDATED_AT_COLUMN, String.valueOf(date.getTime())); 
 	    
-		ContentResolver cr = contexto.getContentResolver();
+		ContentResolver cr = MyService.this.getContentResolver();
 		cr.insert(MyContentProvider.CONTENT_URI, newValues);
 		
 		// A–adirlos al array si no estaban en la base de datos

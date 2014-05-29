@@ -36,6 +36,7 @@
     <string name="labelLugar">Lugar</string>
     <string name="labelMomento">Hora concreta</string>
     <string name="labelGrados">Magnitud</string>
+    <string name="action">com.jon.alarmaRefrescarTerremotos</string>
 
     <string-array name="intervalos_array_valores">
         <item>1</item>

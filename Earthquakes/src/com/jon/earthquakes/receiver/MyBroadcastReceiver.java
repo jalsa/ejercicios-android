@@ -1,12 +1,13 @@
-package com.jon.earthquakes;
+package com.jon.earthquakes.receiver;
+
+import com.jon.earthquakes.fragment.FragmentoLista;
+import com.jon.earthquakes.service.MyService;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
 public class MyBroadcastReceiver extends BroadcastReceiver {
-
-	public static final String ACTION = "com.jon.alarmaRefrescarTerremotos";
 	
 	@Override
 	public void onReceive(Context context, Intent intent) { 
