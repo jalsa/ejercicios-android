@@ -22,7 +22,8 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		//setContentView(R.layout.activity_main);
+		setContentView(R.layout.map_layout);
 		
 		textoLatitud = (TextView) findViewById(R.id.textoLatitud);
 		textoLongitud = (TextView) findViewById(R.id.textoLongitud);
