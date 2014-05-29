@@ -41,10 +41,8 @@ public class PreferencesActivity extends Activity implements OnSharedPreferenceC
 				activarAlarma(interval);
 			}
 			else {
-				if (alarmIntent != null) {
 					Log.d("PREFERENCIAS", "alarm cancel()");
-					alarmManager.cancel(alarmIntent);
-				}
+					cancelAlarm();
 			}
 		}
 		else if (key.equals(getString(R.string.keyListaMagnitudes))) {
@@ -67,6 +65,13 @@ public class PreferencesActivity extends Activity implements OnSharedPreferenceC
 		Intent intent = new Intent(getResources().getString(R.string.action));
 		alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
 		alarmManager.setInexactRepeating(tipoAlarma, 0, tiempo, alarmIntent);
+	}
+	
+	private void cancelAlarm() {
+		alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+		Intent intent = new Intent(getResources().getString(R.string.action));
+		alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+		alarmManager.cancel(alarmIntent);
 	}
 
 }

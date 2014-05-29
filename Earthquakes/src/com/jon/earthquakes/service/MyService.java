@@ -128,5 +128,10 @@ public class MyService extends Service {
 		// A–adirlos al array si no estaban en la base de datos
 		arrayTerremotos.add(0, earthquake);
 	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+	}
 
 }
