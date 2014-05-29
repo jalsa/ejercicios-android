@@ -1,7 +1,6 @@
 package com.jon.earthquakes.activity;
 
 import com.jon.earthquakes.R;
-import com.jon.earthquakes.R.string;
 import com.jon.earthquakes.fragment.FragmentoPreferencia;
 
 import android.app.Activity;

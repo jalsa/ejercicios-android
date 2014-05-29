@@ -4,8 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import com.jon.earthquakes.R;
-import com.jon.earthquakes.R.id;
-import com.jon.earthquakes.R.layout;
 import com.jon.earthquakes.provider.MyContentProvider;
 
 import android.app.Activity;
