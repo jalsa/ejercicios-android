@@ -7,5 +7,7 @@
     <string name="longitud">Longitud</string>
     <string name="altitud">Altitud</string>
     <string name="refresh">Refresh</string>
+    <string name="title_activity_detalle">DetalleActivity</string>
+    <string name="lugar">Lugar</string>
 
 </resources>

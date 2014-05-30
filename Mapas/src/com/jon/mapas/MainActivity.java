@@ -1,5 +1,14 @@
 package com.jon.mapas;
 
+import java.util.HashMap;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -18,6 +27,8 @@ public class MainActivity extends Activity {
 	private int t = 5000;
 	private int distance = 5;
 	private static final String provider = LocationManager.GPS_PROVIDER;
+	private HashMap <Marker, String> hashMap;
+	private Marker myMarkerLondres, myMarkerRenteria;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,27 +36,51 @@ public class MainActivity extends Activity {
 		//setContentView(R.layout.activity_main);
 		setContentView(R.layout.map_layout);
 		
-		textoLatitud = (TextView) findViewById(R.id.textoLatitud);
-		textoLongitud = (TextView) findViewById(R.id.textoLongitud);
-		textoAltitud = (TextView) findViewById(R.id.textoAltitud);
+		GoogleMap map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+		map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 		
-		String serviceString = LOCATION_SERVICE;
-		locationManager = (LocationManager)getSystemService (serviceString);
+		hashMap = new HashMap <Marker, String>();
 		
-		Criteria criteria = new Criteria();
-		criteria.setAccuracy(Criteria.ACCURACY_COARSE);
-		criteria.setPowerRequirement(Criteria.POWER_LOW);
-		criteria.setAltitudeRequired(false);
-		criteria.setSpeedRequired(false);
+		MarkerOptions markerRenteria = new MarkerOptions().position(new LatLng(43.312527, -1.898613)).title("Renteria");
+		myMarkerRenteria = map.addMarker(markerRenteria);
+		hashMap.put(myMarkerRenteria, "holaRenteria");
+		MarkerOptions markerLondres = new MarkerOptions().position(new LatLng(51.507222, -0.1275)).title("Londres");
+		myMarkerLondres = map.addMarker(markerLondres);
+		hashMap.put(myMarkerLondres, "holaLondres");
+		
+		map.setOnMarkerClickListener(new OnMarkerClickListener() {
+			@Override
+			public boolean onMarkerClick(Marker marker) {
+				Log.d("DATOS", ""+hashMap.get(marker));
+				Intent intent = new Intent(MainActivity.this, DetalleActivity.class);
+				intent.putExtra("nombre", marker.getTitle());
+				startActivity(intent);
+				return false;
+			}
+
+        });
+		
+//		textoLatitud = (TextView) findViewById(R.id.textoLatitud);
+//		textoLongitud = (TextView) findViewById(R.id.textoLongitud);
+//		textoAltitud = (TextView) findViewById(R.id.textoAltitud);
+//		
+//		String serviceString = LOCATION_SERVICE;
+//		locationManager = (LocationManager)getSystemService (serviceString);
+//		
+//		Criteria criteria = new Criteria();
+//		criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+//		criteria.setPowerRequirement(Criteria.POWER_LOW);
+//		criteria.setAltitudeRequired(false);
+//		criteria.setSpeedRequired(false);
 		//String bestProvider = locationManager.getBestProvider(criteria, true);	
 		//LocationProvider provider = locationManager.getProvider(bestProvider);
 		
 		//String provider = LocationManager.GPS_PROVIDER;
 		//Location location = locationManager.getLastKnownLocation(provider);
 		
-		obtenerUltimaLocalizacion();
+		//obtenerUltimaLocalizacion();
 		
-		obtenerPosicionActual();
+		//obtenerPosicionActual();
 		
 	}
 	
