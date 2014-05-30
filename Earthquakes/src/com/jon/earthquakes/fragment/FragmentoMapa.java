@@ -66,7 +66,7 @@ public class FragmentoMapa extends MapFragment implements LoaderManager.LoaderCa
 		int LAT_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.LAT_COLUMN);
 		int LONG_COLUMN_INDEX = cursor.getColumnIndexOrThrow(MyContentProvider.LONG_COLUMN);
 		
-		if ( map == null) {
+		if (map == null) {
 			map = this.getMap();
 		}
 		
