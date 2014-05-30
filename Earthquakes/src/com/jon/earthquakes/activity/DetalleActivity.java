@@ -4,9 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import com.jon.earthquakes.R;
+import com.jon.earthquakes.fragment.FragmentoMapa;
 import com.jon.earthquakes.provider.MyContentProvider;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.app.LoaderManager;
 import android.content.ContentUris;
 import android.content.CursorLoader;
@@ -26,6 +28,12 @@ public class DetalleActivity extends Activity implements LoaderManager.LoaderCal
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_detalle);
+		
+		/*if (savedInstanceState == null) {
+			FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+			fragmentTransaction.add(R.id.mapa, new FragmentoMapa(), "map");
+			fragmentTransaction.commit();
+		}*/
 
 		Intent intent = getIntent();
 		LOADER_ID = intent.getLongExtra("id", 0);
